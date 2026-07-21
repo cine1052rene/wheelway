@@ -1,0 +1,29 @@
+{
+  "functions": {
+    "source": "functions"
+  },
+  "hosting": {
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/api/facilities",
+        "function": {
+          "functionId": "facilities",
+          "region": "asia-northeast3"
+        }
+      },
+      {
+        "source": "/api/quickExit",
+        "function": {
+          "functionId": "quickExit",
+          "region": "asia-northeast3"
+        }
+      }
+    ]
+  }
+}
