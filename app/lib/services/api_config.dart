@@ -13,5 +13,8 @@ class ApiConfig {
   static const String facilities = '/api/facilities';
   static const String quickExit = '/api/quickExit';
 
-  static const Duration timeout = Duration(seconds: 12);
+  // 백엔드(facilities)가 서울 전역 데이터를 페이지네이션 후 서버측 필터링하는
+  // 구조라 escalator 조회가 실측 ~11.6s까지 걸린다(콜드스타트 시 더). 12s로는
+  // 부족해 타임아웃이 나므로 넉넉히 설정. (추후 백엔드 캐싱/역별 필터 최적화 필요.)
+  static const Duration timeout = Duration(seconds: 30);
 }
