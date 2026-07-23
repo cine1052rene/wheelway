@@ -113,7 +113,7 @@ class _CarChips extends StatelessWidget {
       spacing: AppSpacing.space8,
       runSpacing: AppSpacing.space8,
       children: [
-        for (final c in cars.take(6))
+        for (final c in cars.take(4))
           FacilityChip(
             icon: Icons.door_front_door,
             title: '${c.door}번 칸',

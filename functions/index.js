@@ -111,13 +111,19 @@ exports.quickExit = onRequest(
       }
       // Swagger 예시 문서는 {header,body} 최상위 구조로 보이지만, 실제 응답은 {response:{header,body}}로 감싸져 온다.
       const items = data.response?.body?.items?.item;
-      const rows = Array.isArray(items) ? items : items ? [items] : [];
+      let rows = Array.isArray(items) ? items : items ? [items] : [];
       const resultCode = data.response?.header?.resultCode;
       const isErrorCode = resultCode !== undefined && resultCode !== null && !['00', '0', 0].includes(resultCode);
       if (isErrorCode && rows.length === 0) {
         console.error('Fast exit non-normal result:', resultCode, data.response?.header?.resultMsg);
         return response.status(502).json({ error: '공공데이터 인증 또는 서비스 설정을 확인하세요.' });
       }
+      // 환승역(같은 역명을 여러 노선이 공유)은 이 API가 노선 구분 없이 전체를
+      // 섞어서 돌려준다 — 그대로 쓰면 "5호선 승차" 화면에 2호선 칸번호가
+      // 섞여 나오는 오류가 생긴다(실사용자 피드백으로 발견). lineNm이 오면
+      // 그 노선 것만 남긴다.
+      const lineNm = typeof request.query.lineNm === 'string' ? request.query.lineNm.trim() : '';
+      if (lineNm) rows = rows.filter(row => row.lineNm === lineNm);
       return response.json({ rows });
     } catch (error) {
       console.error('Fast exit request error:', error.message);

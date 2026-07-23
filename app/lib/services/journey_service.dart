@@ -27,10 +27,10 @@ class JourneyService {
     return (ground: ground, inner: inner);
   }
 
-  Future<List<CarCandidate>> _loadCars(String station) async {
+  Future<List<CarCandidate>> _loadCars(String station, String line) async {
     List<QuickExit> rows;
     try {
-      rows = await _api.fetchQuickExit(station);
+      rows = await _api.fetchQuickExit(station, lineNm: '$line호선');
     } catch (_) {
       rows = const [];
     }
@@ -54,8 +54,10 @@ class JourneyService {
     final elevatorFutures = {
       for (final name in stationNames) name: _loadElevators(name),
     };
+    // 칸번호는 "역+노선"이 키 — 환승역(같은 역명, 다른 노선)에서 서로
+    // 다른 노선 결과가 덮어써지지 않도록 station만이 아니라 line까지 묶는다.
     final carFutures = {
-      for (final l in legs) l.toName: _loadCars(l.toName),
+      for (final l in legs) '${l.toName}|${l.line}': _loadCars(l.toName, l.line),
     };
 
     // 모든 요청을 동시에 대기
@@ -78,7 +80,7 @@ class JourneyService {
             toName: l.toName,
             minutes: l.minutes,
             isTransfer: l.isTransfer,
-            cars: cars[l.toName] ?? const [],
+            cars: cars['${l.toName}|${l.line}'] ?? const [],
             arrivalElevators: l.isTransfer
                 ? (elevators[l.toName]?.inner ?? const [])
                 : (elevators[l.toName]?.ground ?? const []),

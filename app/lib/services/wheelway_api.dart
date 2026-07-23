@@ -48,9 +48,14 @@ class WheelwayApi {
     return [...results[0], ...results[1]];
   }
 
-  /// 도착역 기준 "가장 가까운 열차 칸" 조회.
-  Future<List<QuickExit>> fetchQuickExit(String stationName) async {
-    final rows = await _getRows(ApiConfig.quickExit, {'stnNm': stationName});
+  /// 도착역 기준 "가장 가까운 열차 칸" 조회. [lineNm]을 주면 그 노선(예: "5호선")
+  /// 것만 돌려준다 — 환승역은 여러 노선이 같은 역명을 공유해서, 노선을
+  /// 지정하지 않으면 다른 노선의 칸번호가 섞여 나온다(실사용 중 발견된 버그).
+  Future<List<QuickExit>> fetchQuickExit(String stationName, {String? lineNm}) async {
+    final rows = await _getRows(ApiConfig.quickExit, {
+      'stnNm': stationName,
+      if (lineNm != null && lineNm.isNotEmpty) 'lineNm': lineNm,
+    });
     return rows.map(QuickExit.fromRow).toList();
   }
 
