@@ -16,7 +16,15 @@ import '../widgets/station_picker.dart';
 /// 고정하고, 결과(요약+타임라인)만 독립적으로 스크롤되게 분리했다.
 /// 이전엔 결과를 본 뒤 입력을 바꾸려면 맨 위까지 다시 스크롤해야 했다.
 class RouteSearchScreen extends StatefulWidget {
-  const RouteSearchScreen({super.key});
+  // 노선도 화면에서 역을 탭해 넘어올 때 미리 채워 넣을 출발/도착역.
+  final Station? initialOrigin;
+  final Station? initialDestination;
+
+  const RouteSearchScreen({
+    super.key,
+    this.initialOrigin,
+    this.initialDestination,
+  });
 
   @override
   State<RouteSearchScreen> createState() => _RouteSearchScreenState();
@@ -28,8 +36,8 @@ class _RouteSearchScreenState extends State<RouteSearchScreen> {
   late final _journeyService = JourneyService(_api);
 
   MobilityProfile _profile = MobilityProfile.crutch;
-  Station? _origin;
-  Station? _destination;
+  late Station? _origin = widget.initialOrigin;
+  late Station? _destination = widget.initialDestination;
 
   bool _loading = false;
   String? _error;
@@ -260,6 +268,7 @@ class _ResultArea extends StatelessWidget {
           profileLabel: result!.profileLabel,
           totalMinutes: result!.totalMinutes,
           transferCount: result!.transferStations.length,
+          legs: journey!.legs,
         ),
         const SizedBox(height: AppSpacing.space20),
         JourneyTimeline(journey: journey!),

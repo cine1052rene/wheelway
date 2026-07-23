@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/facility.dart';
 import '../models/journey.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import 'journey/facility_chip.dart';
 import 'journey/step_card.dart';
@@ -20,12 +21,13 @@ class JourneyTimeline extends StatelessWidget {
   Widget build(BuildContext context) {
     // (배지, 제목, 소요분, 상세위젯) 튜플로 먼저 모은 뒤 마지막 항목에만
     // isLast를 매겨 TimelineStepCard를 한 번씩만 생성한다.
-    final steps = <(StepIconBadge, String, int?, Widget)>[
+    final steps = <(StepIconBadge, String, int?, Widget, Color?)>[
       (
         StepIconBadge.entrance(context, isExit: false),
         '${_stationLabel(journey.enterStation)} 진입 · 지상 → 지하',
         null,
         _ElevatorChips(journey.enterElevators),
+        null,
       ),
       for (final leg in journey.legs) ...[
         (
@@ -33,6 +35,9 @@ class JourneyTimeline extends StatelessWidget {
           '${leg.line}호선 승차 · ${leg.fromName} → ${leg.toName}',
           leg.minutes,
           _CarChips(leg.cars),
+          // 승차 구간 아래 연결선만 노선 색으로 — 네이버지도처럼 "지금 타고
+          // 있는 노선"이 세로선 색으로 바로 보이게 한다.
+          AppColors.lineColor(leg.line),
         ),
         (
           leg.isTransfer
@@ -43,6 +48,7 @@ class JourneyTimeline extends StatelessWidget {
               : '${_stationLabel(leg.toName)} 도착 · 지하 → 지상',
           null,
           _ElevatorChips(leg.arrivalElevators),
+          null,
         ),
       ],
     ];
@@ -57,6 +63,7 @@ class JourneyTimeline extends StatelessWidget {
             durationMinutes: steps[i].$3,
             detail: steps[i].$4,
             isLast: i == steps.length - 1,
+            lineColor: steps[i].$5,
           ),
       ],
     );

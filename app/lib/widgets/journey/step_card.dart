@@ -15,6 +15,7 @@ class TimelineStepCard extends StatelessWidget {
   final int? durationMinutes;
   final Widget detail;
   final bool isLast;
+  final Color? lineColor;
 
   const TimelineStepCard({
     super.key,
@@ -23,6 +24,7 @@ class TimelineStepCard extends StatelessWidget {
     this.durationMinutes,
     required this.detail,
     this.isLast = false,
+    this.lineColor,
   });
 
   @override
@@ -43,7 +45,9 @@ class TimelineStepCard extends StatelessWidget {
                   Positioned(
                     top: 44,
                     bottom: 0,
-                    child: Container(width: 3, color: cs.primaryContainer),
+                    // 네이버지도처럼 구간 연결선을 해당 노선 색으로 표시해
+                    // "지금 몇 호선을 타고 있는지" 세로선만 봐도 알 수 있게 함.
+                    child: Container(width: 3, color: lineColor ?? cs.primaryContainer),
                   ),
                 badge,
               ],
