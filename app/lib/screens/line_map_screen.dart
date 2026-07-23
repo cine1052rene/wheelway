@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
+import '../data/lines.dart';
+import '../data/stations.dart';
 import '../models/station.dart';
+import '../services/line_topology.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
+import '../widgets/line_map/subway_line_diagram.dart';
 import '../widgets/station_picker/line_filter_grid.dart';
-import '../widgets/station_picker/line_map_view.dart';
 
 /// 전체 지하철 노선도 — "지름길 안내 앱"인데도 정작 노선 전체를 훑어볼
 /// 화면이 없다는 지적(사용자 피드백, 네이버지도 참고)으로 신설.
 ///
-/// 역 좌표(위경도) 데이터가 없어 실제 지도처럼 정확한 굴곡은 그리지 않고,
-/// 노선별 역 순서(위상)를 살린 개략적 노선도로 보여준다([LineMapView] 재사용
-/// — 기존엔 역 선택 바텀시트 안에서만 쓰였는데, "그냥 훑어보기"용으로 별도
-/// 진입점을 만든 것). 역을 탭하면 출발/도착역으로 바로 지정해 지름길 찾기로
-/// 이동할 수 있다.
+/// **역 선택 시트의 "노선도" 모드와 일부러 다른 화면**이다(사용자 피드백:
+/// "노선도탭이 역선택창이랑 같을 필요는 없다"). 역 선택 시트는 빠르게
+/// 훑고 탭하는 목적이라 칩 그리드([LineMapView])면 충분하지만, 이 탭은
+/// "노선도를 본다"는 목적 자체가 다르므로 네이버지도의 지하철 전체노선도를
+/// 참고해 [SubwayLineDiagram](역=원/환승역=이중원, 구간=이어진 색선)으로
+/// 그린다. 역 좌표(위경도) 데이터가 없어 실제 지도처럼 정확한 굴곡은
+/// 그리지 않고, 노선별 역 순서(위상)만 살린 개략적 다이어그램이다.
+/// 역을 탭하면 출발/도착역으로 바로 지정해 지름길 찾기로 이동할 수 있다.
 class LineMapScreen extends StatefulWidget {
   final ValueChanged<Station> onPickOrigin;
   final ValueChanged<Station> onPickDestination;
@@ -52,6 +58,9 @@ class _LineMapScreenState extends State<LineMapScreen> {
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
     final cs = Theme.of(context).colorScheme;
+    final byId = {for (final s in kStations) s.id: s};
+    final lines = _selectedLine != null ? [_selectedLine!] : kAvailableLines;
+
     return Column(
       children: [
         SafeArea(
@@ -79,9 +88,54 @@ class _LineMapScreenState extends State<LineMapScreen> {
         ),
         Divider(height: 1, color: cs.outlineVariant),
         Expanded(
-          child: LineMapView(
-            selectedLine: _selectedLine,
-            onSelected: _onStationTap,
+          child: ListView.builder(
+            padding: const EdgeInsets.symmetric(vertical: AppSpacing.space8),
+            itemCount: lines.length,
+            itemBuilder: (_, i) {
+              final line = lines[i];
+              final chains = LineTopology.chainsFor(line);
+              if (chains.isEmpty) return const SizedBox.shrink();
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.screenPadding,
+                    vertical: AppSpacing.space8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: 22,
+                          height: 22,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: AppColors.lineColor(line),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Text(
+                            line,
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.onLineColor(line),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: AppSpacing.space8),
+                        Text('$line호선', style: t.titleSmall),
+                      ],
+                    ),
+                    const SizedBox(height: AppSpacing.space8),
+                    SubwayLineDiagram(
+                      line: line,
+                      chains: chains,
+                      byId: byId,
+                      onSelected: _onStationTap,
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ),
       ],
