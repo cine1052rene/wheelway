@@ -56,7 +56,7 @@ class TimelineStepCard extends StatelessWidget {
           const SizedBox(width: AppSpacing.space8),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: AppSpacing.space16),
+              padding: const EdgeInsets.only(bottom: AppSpacing.space12),
               child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(AppSpacing.space12),

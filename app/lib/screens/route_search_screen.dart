@@ -50,6 +50,9 @@ class _RouteSearchScreenState extends State<RouteSearchScreen> {
     super.dispose();
   }
 
+  // 역 선택하면 바로 결과가 나오게 — 예전엔 "지름길 찾기" 버튼을 따로
+  // 눌러야 했는데, 버튼 한 줄만큼 세로 공간을 아끼고 탭 한 번을 줄이려고
+  // 출발·도착이 둘 다 정해지는 즉시 자동 조회한다(사용자 피드백).
   Future<void> _pick(bool isOrigin) async {
     final s = await showStationPicker(context,
         title: isOrigin ? '출발역 선택' : '도착역 선택');
@@ -64,6 +67,7 @@ class _RouteSearchScreenState extends State<RouteSearchScreen> {
       _journey = null;
       _error = null;
     });
+    if (_origin != null && _destination != null) _findRoute();
   }
 
   void _swap() {
@@ -75,15 +79,13 @@ class _RouteSearchScreenState extends State<RouteSearchScreen> {
       _journey = null;
       _error = null;
     });
+    if (_origin != null && _destination != null) _findRoute();
   }
 
   Future<void> _findRoute() async {
     final origin = _origin;
     final dest = _destination;
-    if (origin == null || dest == null) {
-      setState(() => _error = '출발역과 도착역을 선택하세요.');
-      return;
-    }
+    if (origin == null || dest == null) return;
     if (origin.id == dest.id) {
       setState(() => _error = '출발역과 도착역이 같습니다.');
       return;
@@ -122,17 +124,19 @@ class _RouteSearchScreenState extends State<RouteSearchScreen> {
           profile: _profile,
           origin: _origin,
           destination: _destination,
-          loading: _loading,
-          onProfileChanged: (p) => setState(() {
-            _profile = p;
-            _result = null;
-            _journey = null;
-          }),
+          onProfileChanged: (p) {
+            setState(() {
+              _profile = p;
+              _result = null;
+              _journey = null;
+            });
+            if (_origin != null && _destination != null) _findRoute();
+          },
           onPickOrigin: () => _pick(true),
           onPickDestination: () => _pick(false),
           onSwap: _swap,
-          onFindRoute: _findRoute,
         ),
+        if (_loading) const LinearProgressIndicator(minHeight: 2),
         Divider(height: 1, color: cs.outlineVariant),
         Expanded(
           child: _ResultArea(
@@ -146,28 +150,29 @@ class _RouteSearchScreenState extends State<RouteSearchScreen> {
   }
 }
 
-/// 화면 상단 고정 입력 영역(프로필·출발/도착·CTA). 스크롤되지 않는다.
+/// 화면 상단 고정 입력 영역(프로필·출발/도착). 스크롤되지 않는다.
+///
+/// **CTA 버튼 제거(사용자 피드백)**: "역 선택하면 자동으로 결과가 나오게"
+/// — 출발/도착이 둘 다 정해지면 [RouteSearchScreen]이 알아서 조회하므로
+/// 버튼 한 줄(56dp)만큼 세로 공간을 아꼈다. 조회 중엔 이 헤더 바로 아래
+/// 얇은 [LinearProgressIndicator]로만 표시(별도 박스 없음).
 class _InputHeader extends StatelessWidget {
   final MobilityProfile profile;
   final Station? origin;
   final Station? destination;
-  final bool loading;
   final ValueChanged<MobilityProfile> onProfileChanged;
   final VoidCallback onPickOrigin;
   final VoidCallback onPickDestination;
   final VoidCallback onSwap;
-  final VoidCallback onFindRoute;
 
   const _InputHeader({
     required this.profile,
     required this.origin,
     required this.destination,
-    required this.loading,
     required this.onProfileChanged,
     required this.onPickOrigin,
     required this.onPickDestination,
     required this.onSwap,
-    required this.onFindRoute,
   });
 
   @override
@@ -177,7 +182,7 @@ class _InputHeader extends StatelessWidget {
       bottom: false,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(AppSpacing.screenPadding,
-            AppSpacing.space12, AppSpacing.screenPadding, AppSpacing.space12),
+            AppSpacing.space8, AppSpacing.screenPadding, AppSpacing.space8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -188,36 +193,20 @@ class _InputHeader extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text('지름길 찾기',
-                      style: t.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+                      style: t.titleMedium?.copyWith(fontWeight: FontWeight.w800),
                       overflow: TextOverflow.ellipsis),
                 ),
                 const SizedBox(width: AppSpacing.space8),
                 _ProfileSelector(value: profile, onChanged: onProfileChanged),
               ],
             ),
-            const SizedBox(height: AppSpacing.space12),
+            const SizedBox(height: AppSpacing.space8),
             _RouteInputBox(
               origin: origin,
               destination: destination,
               onPickOrigin: onPickOrigin,
               onPickDestination: onPickDestination,
               onSwap: onSwap,
-            ),
-            const SizedBox(height: AppSpacing.space12),
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton.icon(
-                onPressed: loading ? null : onFindRoute,
-                icon: loading
-                    ? const SizedBox(
-                        width: 18,
-                        height: 18,
-                        child: CircularProgressIndicator(
-                            strokeWidth: 2, color: Colors.white),
-                      )
-                    : const Icon(Icons.route),
-                label: Text(loading ? '지름길 찾는 중…' : '지름길 찾기'),
-              ),
             ),
           ],
         ),
@@ -255,7 +244,7 @@ class _ResultArea extends StatelessWidget {
                 Icon(Icons.route_outlined, size: 40, color: cs.onSurfaceVariant),
                 const SizedBox(height: AppSpacing.space12),
                 Text(
-                  '출발·도착역을 선택하고 지름길 찾기를 눌러주세요.',
+                  '출발·도착역을 선택하면 바로 지름길을 찾아드려요.',
                   textAlign: TextAlign.center,
                   style: t.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
                 ),
@@ -267,15 +256,14 @@ class _ResultArea extends StatelessWidget {
     }
     return ListView(
       padding: const EdgeInsets.fromLTRB(AppSpacing.screenPadding,
-          AppSpacing.space16, AppSpacing.screenPadding, AppSpacing.space32),
+          AppSpacing.space12, AppSpacing.screenPadding, AppSpacing.space32),
       children: [
         RouteSummaryCard(
-          profileLabel: result!.profileLabel,
           totalMinutes: result!.totalMinutes,
           transferCount: result!.transferStations.length,
           legs: journey!.legs,
         ),
-        const SizedBox(height: AppSpacing.space20),
+        const SizedBox(height: AppSpacing.space12),
         JourneyTimeline(journey: journey!),
         const SizedBox(height: AppSpacing.space16),
         Text(
@@ -413,7 +401,7 @@ class _RouteInputBox extends StatelessWidget {
           ),
           Positioned(
             right: AppSpacing.space8,
-            top: AppSpacing.touchPreferred - 20,
+            top: AppSpacing.touchMin - 20,
             child: _SwapButton(onTap: onSwap),
           ),
         ],
@@ -444,10 +432,10 @@ class _RouteInputRow extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        constraints: const BoxConstraints(minHeight: AppSpacing.touchPreferred),
+        constraints: const BoxConstraints(minHeight: AppSpacing.touchMin),
         // 오른쪽은 겹쳐 뜨는 스위칭 버튼과 부딪히지 않게 여백 확보.
         padding: const EdgeInsets.fromLTRB(AppSpacing.space16,
-            AppSpacing.space12, AppSpacing.space48 + AppSpacing.space8, AppSpacing.space12),
+            AppSpacing.space8, AppSpacing.space48 + AppSpacing.space8, AppSpacing.space8),
         child: Row(
           children: [
             Icon(icon, size: 14, color: iconColor),
