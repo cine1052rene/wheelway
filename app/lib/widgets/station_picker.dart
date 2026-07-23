@@ -10,7 +10,7 @@ import 'station_picker/line_map_view.dart';
 /// 반환한다.
 ///
 /// 검색바·호선 필터는 고정, 아래 영역만 "목록"(가나다순, 독립 스크롤) 또는
-/// "노선도"(노선을 가로로 훑으며 역을 직접 탭)로 전환된다.
+/// "노선도"(역 순서를 줄바꿈 그리드로 훑으며 직접 탭)로 전환된다.
 Future<Station?> showStationPicker(BuildContext context, {String? title}) {
   return showModalBottomSheet<Station>(
     context: context,
@@ -133,7 +133,7 @@ class _StationPickerSheetState extends State<_StationPickerSheet> {
                     ),
                   if (_mode == _ViewMode.map)
                     Text(
-                      '노선을 고르고 가로로 훑으며 역을 탭해 선택하세요.',
+                      '노선을 고르고 역을 탭해 선택하세요.',
                       style: t.bodySmall?.copyWith(color: cs.onSurfaceVariant),
                     ),
                   const SizedBox(height: AppSpacing.space12),

@@ -10,9 +10,9 @@ import '../../theme/app_spacing.dart';
 ///
 /// ⚠️ 역 좌표(위경도) 데이터가 없어 실제 지하철 노선도처럼 정확한 굴곡·
 /// 교차를 그린 지도는 아니다 — 노선별 역 순서(위상)를 살린 **개략적
-/// 노선도**로, 노선 하나를 고르면 그 노선을 가로로 훑으며 역을 탭해
-/// 선택한다. 정확한 지리 배치가 필요하면 역 좌표 데이터 확보가 별도로
-/// 필요하다(추후 과제).
+/// 노선도**로, 역 칩이 화면 너비를 채우며 아래로 줄바꿈돼(Wrap) 세로
+/// 스크롤만으로 노선 전체를 훑을 수 있다. 정확한 지리 배치가 필요하면
+/// 역 좌표 데이터 확보가 별도로 필요하다(추후 과제).
 class LineMapView extends StatelessWidget {
   final String? selectedLine;
   final ValueChanged<Station> onSelected;
@@ -83,6 +83,13 @@ class LineMapView extends StatelessWidget {
   }
 }
 
+/// 노선 하나의 역 순서를 줄바꿈되는 칩 그리드로 보여준다.
+///
+/// 예전엔 한 줄짜리 가로 스크롤(48dp 높이)이라, 화면 아래는 텅 비어있는데
+/// 역을 보려면 옆으로 계속 스크롤해야 했다(사용자 피드백: "빈 공간 두고
+/// 횡스크롤 할 필요가 있을까"). `Wrap`으로 바꿔 화면 너비를 다 채우며
+/// 아래로 흐르게 해, 세로 스크롤 한 번으로 노선 전체 역이 한눈에 보이게
+/// 했다.
 class _LineChainRow extends StatelessWidget {
   final String line;
   final List<String> chain;
@@ -98,33 +105,25 @@ class _LineChainRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lineColor = AppColors.lineColor(line);
     return Padding(
       padding: const EdgeInsets.only(bottom: AppSpacing.space8),
-      child: SizedBox(
-        height: AppSpacing.touchMin,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: chain.length,
-          itemBuilder: (_, idx) {
-            final station = byId[chain[idx]];
-            if (station == null) return const SizedBox.shrink();
-            return Row(
-              children: [
-                if (idx > 0)
-                  Container(
-                    width: 16,
-                    height: 3,
-                    color: AppColors.lineColor(line),
-                  ),
-                _StationDot(
-                  station: station,
-                  line: line,
-                  onTap: () => onSelected(station),
-                ),
-              ],
-            );
-          },
-        ),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 2,
+        runSpacing: AppSpacing.space8,
+        children: [
+          for (int idx = 0; idx < chain.length; idx++) ...[
+            if (idx > 0)
+              Icon(Icons.chevron_right, size: 16, color: lineColor),
+            if (byId[chain[idx]] case final station?)
+              _StationDot(
+                station: station,
+                line: line,
+                onTap: () => onSelected(station),
+              ),
+          ],
+        ],
       ),
     );
   }
@@ -140,28 +139,34 @@ class _StationDot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    return Semantics(
-      label: '${station.name}역 선택',
-      button: true,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(AppSpacing.radiusChip),
-        child: Container(
-          constraints: const BoxConstraints(
-            minWidth: AppSpacing.touchMin,
-            minHeight: AppSpacing.touchMin,
-          ),
-          padding:
-              const EdgeInsets.symmetric(horizontal: AppSpacing.space12),
-          decoration: BoxDecoration(
-            color: cs.surface,
-            border: Border.all(color: AppColors.lineColor(line), width: 1.5),
-            borderRadius: BorderRadius.circular(AppSpacing.radiusChip),
-          ),
-          alignment: Alignment.center,
-          child: Text(
-            station.name,
-            style: Theme.of(context).textTheme.labelMedium,
+    // ⚠️ Wrap 안에 InkWell+Container(alignment 포함)를 IntrinsicWidth 없이
+    // 넣으면 Wrap의 무제한 폭 측정 때문에 칩이 한 줄 전체로 늘어나는 렌더링
+    // 버그가 있다(이 프로젝트에서 반복 발생 — MEMORY.md에 기록된 함정).
+    // 항상 IntrinsicWidth로 감쌀 것.
+    return IntrinsicWidth(
+      child: Semantics(
+        label: '${station.name}역 선택',
+        button: true,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(AppSpacing.radiusChip),
+          child: Container(
+            constraints: const BoxConstraints(
+              minWidth: AppSpacing.touchMin,
+              minHeight: AppSpacing.touchMin,
+            ),
+            padding:
+                const EdgeInsets.symmetric(horizontal: AppSpacing.space12),
+            decoration: BoxDecoration(
+              color: cs.surface,
+              border: Border.all(color: AppColors.lineColor(line), width: 1.5),
+              borderRadius: BorderRadius.circular(AppSpacing.radiusChip),
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              station.name,
+              style: Theme.of(context).textTheme.labelMedium,
+            ),
           ),
         ),
       ),
