@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../data/stations.dart';
 import '../models/station.dart';
-import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
+import 'station_picker/grouped_station_list.dart';
 import 'station_picker/line_filter_grid.dart';
 import 'station_picker/line_map_view.dart';
 
@@ -158,56 +158,15 @@ class _StationPickerSheetState extends State<_StationPickerSheet> {
                           child: Text('검색 결과가 없습니다.',
                               style: t.bodyMedium
                                   ?.copyWith(color: cs.onSurfaceVariant)))
-                      : ListView.builder(
-                          controller: widget.scrollController,
-                          itemCount: list.length,
-                          itemBuilder: (_, i) {
-                            final s = list[i];
-                            return ListTile(
-                              minTileHeight: AppSpacing.touchMin,
-                              leading: Wrap(
-                                spacing: 2,
-                                children: [
-                                  for (final ln in s.lines) _LineBadge(ln),
-                                ],
-                              ),
-                              title: Text(s.name, style: t.titleMedium),
-                              subtitle: s.hasFacility
-                                  ? null
-                                  : Text('편의시설 정보 없음',
-                                      style: t.bodySmall
-                                          ?.copyWith(color: cs.error)),
-                              onTap: () => _select(s),
-                            );
-                          },
+                      : GroupedStationList(
+                          stations: list,
+                          onSelected: _select,
+                          scrollController: widget.scrollController,
                         )),
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class _LineBadge extends StatelessWidget {
-  final String line;
-  const _LineBadge(this.line);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 26,
-      height: 26,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: AppColors.lineColor(line),
-        shape: BoxShape.circle,
-      ),
-      child: Text(line,
-          style: TextStyle(
-              color: AppColors.onLineColor(line),
-              fontSize: 13,
-              fontWeight: FontWeight.w700)),
     );
   }
 }
