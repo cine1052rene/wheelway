@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/page_header.dart';
 
@@ -23,6 +22,7 @@ class DataInfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     final t = Theme.of(context).textTheme;
     return ListView(
       children: [
@@ -34,20 +34,20 @@ class DataInfoScreen extends StatelessWidget {
         ..._sources.map(
           (s) => Container(
             margin: const EdgeInsets.fromLTRB(
-              AppSpacing.screenPadding, 0, AppSpacing.screenPadding, AppSpacing.sm,
+              AppSpacing.screenPadding, 0, AppSpacing.screenPadding, AppSpacing.space12,
             ),
             padding: AppSpacing.cardInsets,
             decoration: BoxDecoration(
-              color: AppColors.background,
-              borderRadius: BorderRadius.circular(AppSpacing.radius),
-              border: Border.all(color: AppColors.outline),
+              color: cs.surface,
+              borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+              border: Border.all(color: cs.outlineVariant),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(s.name, style: t.titleMedium),
-                const SizedBox(height: AppSpacing.xs),
-                Text(s.detail, style: t.bodyMedium),
+                const SizedBox(height: AppSpacing.space4),
+                Text(s.detail, style: t.bodyMedium?.copyWith(color: cs.onSurfaceVariant)),
               ],
             ),
           ),
@@ -56,19 +56,19 @@ class DataInfoScreen extends StatelessWidget {
           margin: AppSpacing.screenInsets,
           padding: AppSpacing.cardInsets,
           decoration: BoxDecoration(
-            color: AppColors.availableBg,
-            borderRadius: BorderRadius.circular(AppSpacing.radius),
+            color: cs.primaryContainer,
+            borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.lock_outline, color: AppColors.available),
-              const SizedBox(width: AppSpacing.sm),
+              Icon(Icons.lock_outline, color: cs.onPrimaryContainer),
+              const SizedBox(width: AppSpacing.space8),
               Expanded(
                 child: Text(
                   '공공 API → Firebase 서버 함수 → 앱. API 키는 Firebase Secret에만 '
                   '저장되며 앱 배포 파일에는 포함되지 않습니다.',
-                  style: t.bodyMedium?.copyWith(color: AppColors.textPrimary),
+                  style: t.bodyMedium?.copyWith(color: cs.onPrimaryContainer),
                 ),
               ),
             ],

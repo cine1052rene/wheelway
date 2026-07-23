@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../models/facility.dart';
 import '../services/wheelway_api.dart';
@@ -47,6 +46,7 @@ class _StationAccessScreenState extends State<StationAccessScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     final t = Theme.of(context).textTheme;
     return ListView(
       children: [
@@ -66,19 +66,10 @@ class _StationAccessScreenState extends State<StationAccessScreen> {
                   textInputAction: TextInputAction.search,
                   onSubmitted: (_) => _search(),
                   style: t.bodyLarge,
-                  decoration: const InputDecoration(
-                    hintText: '예: 강남',
-                    filled: true,
-                    fillColor: AppColors.surface,
-                    border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: AppSpacing.lg,
-                      vertical: AppSpacing.md,
-                    ),
-                  ),
+                  decoration: const InputDecoration(hintText: '예: 강남'),
                 ),
               ),
-              const SizedBox(width: AppSpacing.sm),
+              const SizedBox(width: AppSpacing.space8),
               FilledButton(
                 onPressed: _loading ? null : _search,
                 child: Text(_loading ? '조회 중' : '조회'),
@@ -89,19 +80,19 @@ class _StationAccessScreenState extends State<StationAccessScreen> {
         if (_error != null)
           _MessageBox(
             icon: Icons.error_outline,
-            color: AppColors.blocked,
-            bg: AppColors.blockedBg,
+            color: cs.onErrorContainer,
+            bg: cs.errorContainer,
             text: _error!,
           ),
         if (!_loading && _error == null && _results.isEmpty)
           _MessageBox(
             icon: Icons.info_outline,
-            color: AppColors.textSecondary,
-            bg: AppColors.surface,
+            color: cs.onSurfaceVariant,
+            bg: cs.surfaceContainerHighest,
             text: '조회 버튼을 눌러 편의시설 위치를 불러오세요.',
           ),
         ..._results.map((f) => _FacilityTile(facility: f)),
-        const SizedBox(height: AppSpacing.xl),
+        const SizedBox(height: AppSpacing.space24),
       ],
     );
   }
@@ -113,29 +104,27 @@ class _FacilityTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     final t = Theme.of(context).textTheme;
     final isElevator = facility.kind == FacilityKind.elevator;
     return Container(
       margin: const EdgeInsets.fromLTRB(
-        AppSpacing.screenPadding,
-        0,
-        AppSpacing.screenPadding,
-        AppSpacing.sm,
+        AppSpacing.screenPadding, 0, AppSpacing.screenPadding, AppSpacing.space12,
       ),
       padding: AppSpacing.cardInsets,
       decoration: BoxDecoration(
-        color: AppColors.background,
-        borderRadius: BorderRadius.circular(AppSpacing.radius),
-        border: Border.all(color: AppColors.outline),
+        color: cs.surface,
+        borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+        border: Border.all(color: cs.outlineVariant),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(
             isElevator ? Icons.elevator : Icons.escalator,
-            color: AppColors.primary,
+            color: cs.primary,
           ),
-          const SizedBox(width: AppSpacing.md),
+          const SizedBox(width: AppSpacing.space12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,7 +133,7 @@ class _FacilityTile extends StatelessWidget {
                   '${facility.stationName} · ${isElevator ? '엘리베이터' : '에스컬레이터'}',
                   style: t.titleMedium,
                 ),
-                const SizedBox(height: AppSpacing.xs),
+                const SizedBox(height: AppSpacing.space4),
                 Text(
                   [
                     if (facility.exit.isNotEmpty) '출구 ${facility.exit}',
@@ -152,7 +141,7 @@ class _FacilityTile extends StatelessWidget {
                     if (isElevator && facility.capacityKg.isNotEmpty)
                       '정격 ${facility.capacityKg}kg',
                   ].join(' · '),
-                  style: t.bodyMedium,
+                  style: t.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
                 ),
               ],
             ),
@@ -183,12 +172,12 @@ class _MessageBox extends StatelessWidget {
       padding: AppSpacing.cardInsets,
       decoration: BoxDecoration(
         color: bg,
-        borderRadius: BorderRadius.circular(AppSpacing.radius),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
       ),
       child: Row(
         children: [
           Icon(icon, color: color),
-          const SizedBox(width: AppSpacing.sm),
+          const SizedBox(width: AppSpacing.space8),
           Expanded(child: Text(text, style: t.bodyMedium?.copyWith(color: color))),
         ],
       ),

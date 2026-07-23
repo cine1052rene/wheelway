@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/page_header.dart';
 
@@ -11,6 +10,7 @@ class RouteSearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
+    final cs = Theme.of(context).colorScheme;
     return ListView(
       children: [
         const PageHeader(
@@ -24,27 +24,24 @@ class RouteSearchScreen extends StatelessWidget {
           child: Container(
             padding: AppSpacing.cardInsets,
             decoration: BoxDecoration(
-              color: AppColors.surface,
-              borderRadius: BorderRadius.circular(AppSpacing.radius),
-              border: Border.all(color: AppColors.outline),
+              color: cs.surfaceContainerHighest,
+              borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.construction, color: AppColors.warning),
-                    const SizedBox(width: AppSpacing.sm),
-                    Expanded(
-                      child: Text('준비 중', style: t.titleMedium),
-                    ),
+                    Icon(Icons.construction, color: cs.secondary),
+                    const SizedBox(width: AppSpacing.space8),
+                    Expanded(child: Text('준비 중', style: t.headlineSmall)),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.sm),
+                const SizedBox(height: AppSpacing.space8),
                 Text(
                   '출발·도착역 선택과 이동 타임라인 화면이 다음 단계에서 '
                   '연결됩니다. (네트워크 데이터·라우팅 엔진 포팅)',
-                  style: t.bodyMedium,
+                  style: t.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
                 ),
               ],
             ),

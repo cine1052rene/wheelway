@@ -15,6 +15,8 @@ class WheelwayApp extends StatelessWidget {
       title: 'WheelWay',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
+      themeMode: ThemeMode.system,
       home: const HomeShell(),
     );
   }

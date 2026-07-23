@@ -1,63 +1,54 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
 
-/// 타이포그래피 토큰.
+/// 타이포그래피 토큰 ("에메랄드 클리어").
 ///
-/// 접근성 우선: 본문 최소 16sp. 폰트 크기 단위는 sp(논리 픽셀 + 시스템 글꼴
-/// 배율)이며, 사용자의 OS 글꼴 확대 설정을 존중하기 위해 배율을 임의로
-/// 제한(clamp)하지 않는다. 굵기는 저시력 가독성을 위해 본문도 w500 이상 사용.
+/// 접근성 우선: 본문 최소 16sp, 캡션 최소 12sp(11 이하 금지). 색은 지정하지
+/// 않아 ColorScheme.onSurface 등 테마 색을 그대로 상속한다(다크모드 자동 대응).
+/// 시스템 글꼴 확대 배율은 임의 제한하지 않는다.
+///
+/// 폰트: 디자인 가이드는 Noto Sans KR을 권장하나, 번들 없이 fontFamily만
+/// 지정하면 조용히 시스템 폰트로 폴백되므로(안드/iOS는 한글 폴백 정상 렌더),
+/// 지금은 [fontFamily]=null(시스템 기본)로 두고 배포 전 Noto 번들 시 이 값만
+/// 바꾼다. (수치/굵기/자간은 가이드 스펙 그대로.)
 class AppTypography {
   AppTypography._();
 
-  static const String? fontFamily = null; // 시스템 기본(가독성 검증된 Roboto/한글 폰트)
+  static const String? fontFamily = null;
 
   static const TextTheme textTheme = TextTheme(
-    // 화면 타이틀
+    displayLarge: TextStyle(
+        fontSize: 32, fontWeight: FontWeight.w700, height: 1.25, letterSpacing: -0.5),
+    displayMedium: TextStyle(
+        fontSize: 28, fontWeight: FontWeight.w700, height: 1.28, letterSpacing: -0.25),
+    displaySmall: TextStyle(
+        fontSize: 24, fontWeight: FontWeight.w700, height: 1.33, letterSpacing: 0),
+    headlineLarge: TextStyle(
+        fontSize: 24, fontWeight: FontWeight.w600, height: 1.33, letterSpacing: 0),
     headlineMedium: TextStyle(
-      fontSize: 26,
-      height: 1.25,
-      fontWeight: FontWeight.w700,
-      color: AppColors.textPrimary,
-    ),
-    // 섹션 제목
+        fontSize: 22, fontWeight: FontWeight.w600, height: 1.27, letterSpacing: 0),
+    headlineSmall: TextStyle(
+        fontSize: 20, fontWeight: FontWeight.w500, height: 1.30, letterSpacing: 0),
     titleLarge: TextStyle(
-      fontSize: 20,
-      height: 1.3,
-      fontWeight: FontWeight.w700,
-      color: AppColors.textPrimary,
-    ),
-    // 카드 제목 / 역명
+        fontSize: 18, fontWeight: FontWeight.w600, height: 1.33, letterSpacing: 0),
     titleMedium: TextStyle(
-      fontSize: 18,
-      height: 1.35,
-      fontWeight: FontWeight.w600,
-      color: AppColors.textPrimary,
-    ),
-    // 본문 (최소 16)
+        fontSize: 16, fontWeight: FontWeight.w500, height: 1.375, letterSpacing: 0.1),
+    titleSmall: TextStyle(
+        fontSize: 14, fontWeight: FontWeight.w500, height: 1.43, letterSpacing: 0.1),
     bodyLarge: TextStyle(
-      fontSize: 17,
-      height: 1.5,
-      fontWeight: FontWeight.w500,
-      color: AppColors.textPrimary,
-    ),
+        fontSize: 16, fontWeight: FontWeight.w400, height: 1.5, letterSpacing: 0.5),
     bodyMedium: TextStyle(
-      fontSize: 16,
-      height: 1.5,
-      fontWeight: FontWeight.w500,
-      color: AppColors.textSecondary,
-    ),
-    // 보조 설명(주의: 15 미만으로 내리지 말 것)
+        fontSize: 14, fontWeight: FontWeight.w400, height: 1.43, letterSpacing: 0.25),
     bodySmall: TextStyle(
-      fontSize: 15,
-      height: 1.45,
-      fontWeight: FontWeight.w500,
-      color: AppColors.textSecondary,
-    ),
-    // 버튼 라벨
+        fontSize: 12, fontWeight: FontWeight.w400, height: 1.33, letterSpacing: 0.4),
     labelLarge: TextStyle(
-      fontSize: 17,
-      height: 1.2,
-      fontWeight: FontWeight.w700,
-    ),
+        fontSize: 14, fontWeight: FontWeight.w500, height: 1.43, letterSpacing: 0.1),
+    labelMedium: TextStyle(
+        fontSize: 12, fontWeight: FontWeight.w500, height: 1.33, letterSpacing: 0.5),
+    labelSmall: TextStyle(
+        fontSize: 12, fontWeight: FontWeight.w500, height: 1.33, letterSpacing: 0.5),
   );
+
+  /// 수치(칸번호·층수·거리) 표시용 — 향후 Noto Sans Mono 번들 시 fontFamily 지정.
+  static const TextStyle monoNumber = TextStyle(
+      fontSize: 28, fontWeight: FontWeight.w700, height: 1.28, fontFeatures: [FontFeature.tabularFigures()]);
 }
