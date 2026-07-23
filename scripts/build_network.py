@@ -85,12 +85,24 @@ for name in all_names:
     exits_elev = sorted({r.get('vcntEntrcNo') for r in erows if r.get('vcntEntrcNo')}, key=lambda x: (len(x), x))
     exits_escal = sorted({r.get('vcntEntrcNo') for r in srows if r.get('vcntEntrcNo')}, key=lambda x: (len(x), x))
 
+    # vcntEntrcNo(출구 위치) 원본 값은 '7', '내부', '1,2', '천호 방면1-2번 출구'처럼 형식이
+    # 제각각이라 "~번 출구"를 기계적으로 붙이면 어색하거나 틀린 문장이 됨. 숫자(콤마 포함)만
+    # 있을 때만 "번 출구"를 붙이고, 그 외 자유텍스트는 원문 그대로 둔다.
+    def format_exit(token):
+        return f'{token}번 출구' if re.fullmatch(r'[0-9,]+', token) else token
+
     if has_elevator:
-        exit_label = '·'.join(exits_elev[:3]) if exits_elev else '역 구내'
-        note = f'{exit_label}번 출구 방면 엘리베이터 이용'
+        if exits_elev:
+            exit_label = ', '.join(format_exit(t) for t in exits_elev[:3])
+            note = f'엘리베이터 위치: {exit_label}{" 등" if len(exits_elev) > 3 else ""}'
+        else:
+            note = '엘리베이터 이용 가능 (세부 위치 미확인)'
     elif has_escalator:
-        exit_label = '·'.join(exits_escal[:3]) if exits_escal else '역 구내'
-        note = f'엘리베이터 정보 없음 · {exit_label}번 출구 에스컬레이터만 이용 가능'
+        if exits_escal:
+            exit_label = ', '.join(format_exit(t) for t in exits_escal[:3])
+            note = f'엘리베이터 없음 · 에스컬레이터 위치: {exit_label}{" 등" if len(exits_escal) > 3 else ""}'
+        else:
+            note = '엘리베이터 없음 · 에스컬레이터만 이용 가능 (세부 위치 미확인)'
     else:
         note = '편의시설 정보 미확인'
 
