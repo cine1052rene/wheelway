@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../models/arrival.dart';
 import '../models/facility.dart';
 import 'api_config.dart';
 
@@ -51,6 +52,14 @@ class WheelwayApi {
   Future<List<QuickExit>> fetchQuickExit(String stationName) async {
     final rows = await _getRows(ApiConfig.quickExit, {'stnNm': stationName});
     return rows.map(QuickExit.fromRow).toList();
+  }
+
+  /// 실시간 도착정보 조회. 인증키의 "실시간 서비스" 승인 전에는 서버가
+  /// 빈 목록을 돌려줄 수 있다 — 이 경우 UI에서 "불러올 수 없음"으로
+  /// 안내하고 임의의 시간을 만들어 보여주지 않는다.
+  Future<List<StationArrival>> fetchArrivals(String stationName) async {
+    final rows = await _getRows(ApiConfig.arrivals, {'stnNm': stationName});
+    return rows.map(StationArrival.fromRow).toList();
   }
 
   void dispose() => _client.close();

@@ -80,7 +80,8 @@ class TimelineStepCard extends StatelessWidget {
                         ),
                         if (durationMinutes != null) ...[
                           const SizedBox(width: AppSpacing.space8),
-                          DurationLozenge(minutes: durationMinutes!),
+                          DurationLozenge(
+                              minutes: durationMinutes!, color: lineColor),
                         ],
                       ],
                     ),

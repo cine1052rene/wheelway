@@ -125,3 +125,48 @@ exports.quickExit = onRequest(
     }
   }
 );
+
+// 서울시 지하철 실시간 도착정보 (data.seoul.go.kr, swopenAPI 서브웨이 실시간)
+// 서울 열린데이터광장 인증키는 데이터셋별이 아니라 계정 공통 키라, 기존
+// facilities에서 쓰던 seoulOpenDataKey를 그대로 재사용한다(별도 키 발급 불필요).
+exports.arrivals = onRequest(
+  { region: 'asia-northeast3', secrets: [seoulOpenDataKey] },
+  async (request, response) => {
+    if (request.method !== 'GET') return response.status(405).json({ error: 'Method not allowed' });
+
+    const stationName = typeof request.query.stnNm === 'string' ? request.query.stnNm.trim() : '';
+    if (!stationName) return response.status(400).json({ error: '역명(stnNm)을 입력하세요.' });
+
+    const key = seoulOpenDataKey.value();
+    // 이 API만 도메인이 다르다(openapi.seoul.go.kr:8088이 아니라 swopenapi.seoul.go.kr) —
+    // 같은 서울 열린데이터광장 계정 인증키를 그대로 쓰지만 엔드포인트가 분리돼 있음.
+    const url = `http://swopenapi.seoul.go.kr/api/subway/${key}/json/realtimeStationArrival/0/20/${encodeURIComponent(stationName)}`;
+
+    try {
+      const upstream = await fetch(url);
+      if (!upstream.ok) {
+        console.error('Realtime arrival response status:', upstream.status);
+        return response.status(502).json({ error: '공공데이터 서버 응답 오류' });
+      }
+      const raw = await upstream.text();
+      let data;
+      try {
+        data = JSON.parse(raw);
+      } catch {
+        console.error('Realtime arrival returned non-JSON response:', raw.slice(0, 300));
+        return response.status(502).json({ error: '공공데이터 인증 또는 서비스 설정을 확인하세요.' });
+      }
+      const status = data.errorMessage?.status ?? data.status;
+      // INFO-200(정상, 데이터 없음)은 에러가 아니라 "지금 도착 예정 열차가 없다"는 뜻.
+      if (status !== undefined && status !== 200 && data.errorMessage?.code !== 'INFO-200') {
+        console.error('Realtime arrival non-normal result:', status, data.errorMessage?.message);
+        return response.status(502).json({ error: '공공데이터 인증 또는 서비스 설정을 확인하세요.' });
+      }
+      const rows = Array.isArray(data.realtimeArrivalList) ? data.realtimeArrivalList : [];
+      return response.json({ rows });
+    } catch (error) {
+      console.error('Realtime arrival request error:', error.message);
+      return response.status(503).json({ error: '실시간 도착정보를 불러오지 못했습니다.' });
+    }
+  }
+);

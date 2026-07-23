@@ -56,19 +56,20 @@ class DataInfoScreen extends StatelessWidget {
           margin: AppSpacing.screenInsets,
           padding: AppSpacing.cardInsets,
           decoration: BoxDecoration(
-            color: cs.primaryContainer,
+            color: cs.surface,
             borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+            border: Border.all(color: cs.outlineVariant),
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(Icons.lock_outline, color: cs.onPrimaryContainer),
+              Icon(Icons.lock_outline, color: cs.primary),
               const SizedBox(width: AppSpacing.space8),
               Expanded(
                 child: Text(
                   '공공 API → Firebase 서버 함수 → 앱. API 키는 Firebase Secret에만 '
                   '저장되며 앱 배포 파일에는 포함되지 않습니다.',
-                  style: t.bodyMedium?.copyWith(color: cs.onPrimaryContainer),
+                  style: t.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
                 ),
               ),
             ],

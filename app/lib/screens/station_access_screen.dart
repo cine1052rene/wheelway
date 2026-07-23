@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
+import '../models/arrival.dart';
 import '../models/facility.dart';
 import '../services/wheelway_api.dart';
 import '../widgets/station_access/facility_type_filter.dart';
@@ -21,6 +23,12 @@ class _StationAccessScreenState extends State<StationAccessScreen> {
   List<Facility> _results = const [];
   FacilityFilterType _filter = FacilityFilterType.all;
 
+  // 실시간 도착정보는 별도 상태로 관리 — 이 API가 실패해도(현재 인증키가
+  // 실시간 서비스 미승인 상태) 편의시설 조회 자체는 막지 않는다.
+  bool _arrivalsLoading = false;
+  List<StationArrival> _arrivals = const [];
+  bool _arrivalsFailed = false;
+
   @override
   void dispose() {
     _controller.dispose();
@@ -34,6 +42,8 @@ class _StationAccessScreenState extends State<StationAccessScreen> {
     setState(() {
       _loading = true;
       _error = null;
+      _arrivalsLoading = true;
+      _arrivalsFailed = false;
     });
     try {
       final list = await _api.fetchStationFacilities(name);
@@ -42,6 +52,14 @@ class _StationAccessScreenState extends State<StationAccessScreen> {
       setState(() => _error = '$e');
     } finally {
       if (mounted) setState(() => _loading = false);
+    }
+    try {
+      final arrivals = await _api.fetchArrivals(name);
+      if (mounted) setState(() => _arrivals = arrivals);
+    } catch (_) {
+      if (mounted) setState(() => _arrivalsFailed = true);
+    } finally {
+      if (mounted) setState(() => _arrivalsLoading = false);
     }
   }
 
@@ -143,11 +161,136 @@ class _StationAccessScreenState extends State<StationAccessScreen> {
                   : ListView.builder(
                       padding: const EdgeInsets.only(
                           top: AppSpacing.space12, bottom: AppSpacing.space24),
-                      itemCount: filtered.length,
-                      itemBuilder: (_, i) => _FacilityTile(facility: filtered[i]),
+                      itemCount: filtered.length + 1,
+                      itemBuilder: (_, i) {
+                        if (i == 0) {
+                          return _ArrivalSection(
+                            loading: _arrivalsLoading,
+                            failed: _arrivalsFailed,
+                            arrivals: _arrivals,
+                          );
+                        }
+                        return _FacilityTile(facility: filtered[i - 1]);
+                      },
                     ),
         ),
       ],
+    );
+  }
+}
+
+/// 실시간 도착정보 섹션. 로딩/실패/데이터 3가지 상태를 그대로 보여주고,
+/// 실패해도 절대 임의의 도착시간을 지어내지 않는다(데이터 정직성 원칙 —
+/// 문 폭 미실측 처리와 동일한 기준). 현재는 API 인증키가 이 서비스의
+/// "실시간" 권한을 아직 승인받지 못해 항상 실패 상태로 보일 수 있음
+/// (data.seoul.go.kr에서 별도 활용신청 필요 — MEMORY.md 참고).
+class _ArrivalSection extends StatelessWidget {
+  final bool loading;
+  final bool failed;
+  final List<StationArrival> arrivals;
+  const _ArrivalSection({
+    required this.loading,
+    required this.failed,
+    required this.arrivals,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final t = Theme.of(context).textTheme;
+
+    Widget body;
+    if (loading) {
+      body = const Padding(
+        padding: EdgeInsets.symmetric(vertical: AppSpacing.space12),
+        child: Center(
+            child: SizedBox(
+                width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2))),
+      );
+    } else if (failed || arrivals.isEmpty) {
+      body = Text(
+        '실시간 도착정보를 지금은 불러올 수 없습니다.',
+        style: t.bodySmall?.copyWith(color: cs.onSurfaceVariant),
+      );
+    } else {
+      body = Column(
+        children: [
+          for (final a in arrivals.take(6)) _ArrivalTile(arrival: a),
+        ],
+      );
+    }
+
+    return Container(
+      margin: const EdgeInsets.fromLTRB(
+        AppSpacing.screenPadding, 0, AppSpacing.screenPadding, AppSpacing.space16,
+      ),
+      padding: AppSpacing.cardInsets,
+      decoration: BoxDecoration(
+        color: cs.surface,
+        borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+        border: Border.all(color: cs.outlineVariant),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.train_outlined, size: 18, color: cs.onSurfaceVariant),
+              const SizedBox(width: AppSpacing.space8),
+              Text('실시간 도착정보', style: t.titleSmall),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.space8),
+          body,
+        ],
+      ),
+    );
+  }
+}
+
+class _ArrivalTile extends StatelessWidget {
+  final StationArrival arrival;
+  const _ArrivalTile({required this.arrival});
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final t = Theme.of(context).textTheme;
+    final lineNo = arrival.lineNumber;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: AppSpacing.space4),
+      child: Row(
+        children: [
+          Container(
+            width: 22,
+            height: 22,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: lineNo != null ? AppColors.lineColor(lineNo) : cs.surfaceContainerHighest,
+              shape: BoxShape.circle,
+            ),
+            child: Text(
+              lineNo ?? '?',
+              style: TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
+                color: lineNo != null ? AppColors.onLineColor(lineNo) : cs.onSurfaceVariant,
+              ),
+            ),
+          ),
+          const SizedBox(width: AppSpacing.space8),
+          Expanded(
+            child: Text(
+              arrival.trainLineNm.isNotEmpty ? arrival.trainLineNm : arrival.direction,
+              style: t.bodyMedium,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Text(arrival.minutesLabel,
+              style: t.bodyMedium?.copyWith(
+                  color: cs.primary, fontWeight: FontWeight.w700)),
+        ],
+      ),
     );
   }
 }
@@ -234,8 +377,9 @@ class _MiniBadge extends StatelessWidget {
       padding:
           const EdgeInsets.symmetric(horizontal: AppSpacing.space8, vertical: 2),
       decoration: BoxDecoration(
-        color: cs.surfaceContainerHighest,
+        color: cs.surface,
         borderRadius: BorderRadius.circular(AppSpacing.radiusChip),
+        border: Border.all(color: cs.outlineVariant),
       ),
       child: Text(text,
           style: t.labelSmall?.copyWith(

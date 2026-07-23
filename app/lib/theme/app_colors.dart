@@ -16,12 +16,15 @@ class AppColors {
   static const Color seedSecondary = Color(0xFFB45400);
   static const Color seedTertiary = Color(0xFFEE8D42); // 장식 전용(텍스트 금지)
 
-  // 스캐폴드(앱 기본 배경) — ColorScheme.surface(카드=흰색)와 구분되는 값.
-  static const Color scaffoldLight = Color(0xFFF8FAF7);
+  // 스캐폴드(앱 기본 배경) — 네이버지도 참고: 배경을 흰색에 가깝게 두고
+  // 카드는 옅은 테두리로만 구분해, 실제 정보(호선색·미니바)가 튀지 않고
+  // 선명하게 보이도록 한다. 예전엔 미색(cream) 배경이 깔려 있어 카드 위
+  // 색상 요소들과 배경이 서로 탁하게 섞여 보였다(사용자 피드백).
+  static const Color scaffoldLight = Color(0xFFFFFFFF);
   static const Color scaffoldDark = Color(0xFF0E1A16);
 
   // 구분/장식 배경(구 surfaceVariant 역할) — 위젯에서 직접 참조.
-  static const Color surfaceVariantLight = Color(0xFFDBE5DF);
+  static const Color surfaceVariantLight = Color(0xFFF1F2F1);
   static const Color surfaceVariantDark = Color(0xFF2D3F38);
 
   static const ColorScheme light = ColorScheme(
@@ -45,7 +48,7 @@ class AppColors {
     surface: Color(0xFFFFFFFF),
     onSurface: Color(0xFF15211D),
     onSurfaceVariant: Color(0xFF414E48),
-    surfaceContainerHighest: Color(0xFFDBE5DF),
+    surfaceContainerHighest: Color(0xFFF1F2F1),
     outline: Color(0xFF66736D),
     outlineVariant: Color(0xFFBFC9C2),
     shadow: Color(0xFF000000),

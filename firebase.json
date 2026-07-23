@@ -23,6 +23,13 @@
           "functionId": "quickExit",
           "region": "asia-northeast3"
         }
+      },
+      {
+        "source": "/api/arrivals",
+        "function": {
+          "functionId": "arrivals",
+          "region": "asia-northeast3"
+        }
       }
     ]
   }

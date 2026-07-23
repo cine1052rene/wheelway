@@ -26,11 +26,16 @@ class RouteSummaryCard extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     final t = Theme.of(context).textTheme;
 
+    // 네이버지도 참고 — 예전엔 이 카드 전체가 진한 색으로 채워져 있어
+    // 화면에 들어오자마자 색상 블록이 하나 더 생기는 느낌이었다(사용자
+    // 피드백: "색상박스가 너무 많아 산만하다"). 배경은 중립(흰색+테두리)로
+    // 비우고, 색은 진짜 정보를 담은 미니바에만 쓴다.
     return Container(
       padding: const EdgeInsets.all(AppSpacing.space16),
       decoration: BoxDecoration(
-        color: cs.primaryContainer,
+        color: cs.surface,
         borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
+        border: Border.all(color: cs.outlineVariant),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,8 +46,7 @@ class RouteSummaryCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(profileLabel,
-                      style: t.bodySmall
-                          ?.copyWith(color: cs.onPrimaryContainer)),
+                      style: t.bodySmall?.copyWith(color: cs.onSurfaceVariant)),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.baseline,
                     textBaseline: TextBaseline.alphabetic,
@@ -50,14 +54,14 @@ class RouteSummaryCard extends StatelessWidget {
                       Text(
                         '$totalMinutes',
                         style: t.headlineMedium?.copyWith(
-                          color: cs.onPrimaryContainer,
-                          fontWeight: FontWeight.w700,
+                          color: cs.primary,
+                          fontWeight: FontWeight.w800,
                         ),
                       ),
                       const SizedBox(width: 2),
                       Text('분',
-                          style: t.bodyMedium
-                              ?.copyWith(color: cs.onPrimaryContainer)),
+                          style:
+                              t.bodyMedium?.copyWith(color: cs.onSurfaceVariant)),
                     ],
                   ),
                 ],
@@ -66,19 +70,18 @@ class RouteSummaryCard extends StatelessWidget {
               Container(
                 width: 1,
                 height: 40,
-                color: cs.onPrimaryContainer.withValues(alpha: 0.3),
+                color: cs.outlineVariant,
               ),
               const SizedBox(width: AppSpacing.space24),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('환승',
-                      style: t.bodySmall
-                          ?.copyWith(color: cs.onPrimaryContainer)),
+                      style: t.bodySmall?.copyWith(color: cs.onSurfaceVariant)),
                   Text(
                     transferCount == 0 ? '없음' : '$transferCount회',
                     style: t.titleMedium?.copyWith(
-                      color: cs.onPrimaryContainer,
+                      color: cs.onSurface,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -125,7 +128,7 @@ class _RouteMiniBar extends StatelessWidget {
                   child: Text(
                     '${rideLegs[i].minutes}분',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: cs.onPrimaryContainer,
+                          color: cs.onSurface,
                           fontWeight: FontWeight.w600,
                         ),
                   ),
@@ -142,8 +145,7 @@ class _RouteMiniBar extends StatelessWidget {
             child: Row(
               children: [
                 for (int i = 0; i < rideLegs.length; i++) ...[
-                  if (i > 0)
-                    Container(width: 3, color: cs.primaryContainer),
+                  if (i > 0) Container(width: 3, color: cs.surface),
                   Expanded(
                     flex: rideLegs[i].minutes,
                     child: Container(color: AppColors.lineColor(rideLegs[i].line)),
@@ -165,7 +167,7 @@ class _RouteMiniBar extends StatelessWidget {
                   child: Text(
                     '${rideLegs[i].line}호선',
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: cs.onPrimaryContainer,
+                          color: cs.onSurfaceVariant,
                           fontWeight: FontWeight.w700,
                         ),
                   ),

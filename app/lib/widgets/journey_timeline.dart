@@ -91,8 +91,6 @@ class _ElevatorChips extends StatelessWidget {
             icon: Icons.elevator,
             title: e.exit.isNotEmpty ? '출구 ${e.exit}' : '엘리베이터',
             subtitle: e.detail,
-            background: cs.surfaceContainerHighest,
-            foreground: cs.onSurfaceVariant,
           ),
       ],
     );
@@ -120,8 +118,7 @@ class _CarChips extends StatelessWidget {
             icon: Icons.door_front_door,
             title: '${c.door}번 칸',
             subtitle: c.toward,
-            background: cs.secondaryContainer,
-            foreground: cs.onSecondaryContainer,
+            accent: cs.secondary,
           ),
       ],
     );

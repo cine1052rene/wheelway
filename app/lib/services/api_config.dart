@@ -5,6 +5,8 @@
 /// 엔드포인트(firebase.json rewrites 기준):
 ///   GET /api/facilities?stnNm=&type=elevator|escalator
 ///   GET /api/quickExit?stnNm=            (도착역 기준 빠른 하차 칸번호)
+///   GET /api/arrivals?stnNm=             (실시간 도착정보 — 인증키 실시간
+///                                         서비스 승인 전에는 빈 결과)
 class ApiConfig {
   ApiConfig._();
 
@@ -12,6 +14,7 @@ class ApiConfig {
 
   static const String facilities = '/api/facilities';
   static const String quickExit = '/api/quickExit';
+  static const String arrivals = '/api/arrivals';
 
   // 백엔드(facilities)가 서울 전역 데이터를 페이지네이션 후 서버측 필터링하는
   // 구조라 escalator 조회가 실측 ~11.6s까지 걸린다(콜드스타트 시 더). 12s로는
