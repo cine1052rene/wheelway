@@ -9,6 +9,9 @@ class Facility {
   final String detail; // dtlPstn — 상세 위치
   final String capacityKg; // pscpWht — 정격하중(원본 문자열)
   final String direction; // upbdnbSe — 상/하행 등
+  final String floorFrom; // bgngFlr — 시작 층
+  final String floorTo; // endFlr — 끝 층
+  final bool isGroundEntrance; // 지상↔지하 진입용(true) vs 역 구내 이동용(false)
 
   const Facility({
     required this.kind,
@@ -17,10 +20,15 @@ class Facility {
     required this.detail,
     required this.capacityKg,
     required this.direction,
+    this.floorFrom = '',
+    this.floorTo = '',
+    this.isGroundEntrance = false,
   });
 
   factory Facility.fromRow(Map<String, dynamic> row, FacilityKind kind) {
     String s(dynamic v) => (v ?? '').toString().trim();
+    final ground =
+        s(row['bgngFlrGrndUdgdSe']) == '지상' || s(row['endFlrGrndUdgdSe']) == '지상';
     return Facility(
       kind: kind,
       stationName: s(row['stnNm']),
@@ -28,6 +36,9 @@ class Facility {
       detail: s(row['dtlPstn']),
       capacityKg: s(row['pscpWht']),
       direction: s(row['upbdnbSe']),
+      floorFrom: s(row['bgngFlr']),
+      floorTo: s(row['endFlr']),
+      isGroundEntrance: ground,
     );
   }
 }
