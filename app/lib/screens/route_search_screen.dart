@@ -181,23 +181,28 @@ class _InputHeader extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('지름길 찾기', style: t.headlineLarge),
-            const SizedBox(height: AppSpacing.space12),
-            _ProfileSelector(value: profile, onChanged: onProfileChanged),
-            const SizedBox(height: AppSpacing.space12),
-            _StationField(label: '출발역', station: origin, onTap: onPickOrigin),
-            const SizedBox(height: AppSpacing.space4),
-            Align(
-              alignment: Alignment.centerRight,
-              child: IconButton(
-                onPressed: onSwap,
-                icon: const Icon(Icons.swap_vert),
-                tooltip: '출발·도착 바꾸기',
-              ),
+            // 제목 + 프로필 선택을 한 줄로 — 네이버지도 길찾기 상단의
+            // "교통수단 탭 한 줄" 배치를 참고(사용자 피드백: 이전엔 프로필
+            // 선택줄이 따로 있어 세로 공간을 더 썼음).
+            Row(
+              children: [
+                Expanded(
+                  child: Text('지름길 찾기',
+                      style: t.titleLarge?.copyWith(fontWeight: FontWeight.w800),
+                      overflow: TextOverflow.ellipsis),
+                ),
+                const SizedBox(width: AppSpacing.space8),
+                _ProfileSelector(value: profile, onChanged: onProfileChanged),
+              ],
             ),
-            const SizedBox(height: AppSpacing.space4),
-            _StationField(
-                label: '도착역', station: destination, onTap: onPickDestination),
+            const SizedBox(height: AppSpacing.space12),
+            _RouteInputBox(
+              origin: origin,
+              destination: destination,
+              onPickOrigin: onPickOrigin,
+              onPickDestination: onPickDestination,
+              onSwap: onSwap,
+            ),
             const SizedBox(height: AppSpacing.space12),
             SizedBox(
               width: double.infinity,
@@ -283,6 +288,10 @@ class _ResultArea extends StatelessWidget {
   }
 }
 
+/// 목발/수동/전동 프로필 선택 — 아이콘만 있는 원형 토글 한 줄(48dp,
+/// 터치 최소 기준 유지). 예전엔 라벨까지 있는 SegmentedButton이 한 줄을
+/// 통째로 차지했는데, 제목과 같은 줄에 넣기 위해 아이콘 전용으로 축소했다
+/// (라벨은 Tooltip·Semantics로 접근성 유지).
 class _ProfileSelector extends StatelessWidget {
   final MobilityProfile value;
   final ValueChanged<MobilityProfile> onChanged;
@@ -290,34 +299,143 @@ class _ProfileSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SegmentedButton<MobilityProfile>(
-      segments: const [
-        ButtonSegment(
-            value: MobilityProfile.crutch,
-            label: Text('목발'),
-            icon: Icon(Icons.accessible)),
-        ButtonSegment(
-            value: MobilityProfile.manual,
-            label: Text('수동'),
-            icon: Icon(Icons.accessible_forward)),
-        ButtonSegment(
-            value: MobilityProfile.electric,
-            label: Text('전동'),
-            icon: Icon(Icons.electric_bolt)),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        for (final p in MobilityProfile.values) ...[
+          if (p != MobilityProfile.values.first)
+            const SizedBox(width: AppSpacing.space4),
+          _ProfileIconButton(
+            profile: p,
+            selected: value == p,
+            onTap: () => onChanged(p),
+          ),
+        ],
       ],
-      selected: {value},
-      onSelectionChanged: (s) => onChanged(s.first),
-      showSelectedIcon: false,
     );
   }
 }
 
-class _StationField extends StatelessWidget {
+class _ProfileIconButton extends StatelessWidget {
+  final MobilityProfile profile;
+  final bool selected;
+  final VoidCallback onTap;
+  const _ProfileIconButton(
+      {required this.profile, required this.selected, required this.onTap});
+
+  IconData get _icon => switch (profile) {
+        MobilityProfile.crutch => Icons.accessible,
+        MobilityProfile.manual => Icons.accessible_forward,
+        MobilityProfile.electric => Icons.electric_bolt,
+      };
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Tooltip(
+      message: profile.label,
+      child: Semantics(
+        label: '${profile.label}${selected ? " 선택됨" : ""}',
+        button: true,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(AppSpacing.radiusFull),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 150),
+            width: AppSpacing.touchMin,
+            height: AppSpacing.touchMin,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: selected ? cs.primary : cs.surfaceContainerHighest,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(_icon,
+                size: 22, color: selected ? cs.onPrimary : cs.onSurfaceVariant),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// 출발/도착역을 하나의 박스 안에 위/아래로 붙여 담고, 그 경계선 위에
+/// 스위칭 버튼을 겹쳐 띄운다(네이버지도 길찾기 입력창 배치 참고).
+/// 예전엔 스위칭 버튼이 별도 줄(Align+IconButton)을 차지해 세로 공간을
+/// 낭비했었다(사용자 피드백).
+class _RouteInputBox extends StatelessWidget {
+  final Station? origin;
+  final Station? destination;
+  final VoidCallback onPickOrigin;
+  final VoidCallback onPickDestination;
+  final VoidCallback onSwap;
+
+  const _RouteInputBox({
+    required this.origin,
+    required this.destination,
+    required this.onPickOrigin,
+    required this.onPickDestination,
+    required this.onSwap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Container(
+      decoration: BoxDecoration(
+        color: cs.surface,
+        borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
+        border: Border.all(color: cs.outline),
+      ),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Column(
+            children: [
+              _RouteInputRow(
+                icon: Icons.trip_origin,
+                iconColor: cs.primary,
+                label: '출발역',
+                station: origin,
+                onTap: onPickOrigin,
+              ),
+              Divider(
+                  height: 1,
+                  color: cs.outlineVariant,
+                  indent: AppSpacing.space16),
+              _RouteInputRow(
+                icon: Icons.flag,
+                iconColor: cs.error,
+                label: '도착역',
+                station: destination,
+                onTap: onPickDestination,
+              ),
+            ],
+          ),
+          Positioned(
+            right: AppSpacing.space8,
+            top: AppSpacing.touchPreferred - 20,
+            child: _SwapButton(onTap: onSwap),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RouteInputRow extends StatelessWidget {
+  final IconData icon;
+  final Color iconColor;
   final String label;
   final Station? station;
   final VoidCallback onTap;
-  const _StationField(
-      {required this.label, required this.station, required this.onTap});
+
+  const _RouteInputRow({
+    required this.icon,
+    required this.iconColor,
+    required this.label,
+    required this.station,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -325,18 +443,15 @@ class _StationField extends StatelessWidget {
     final t = Theme.of(context).textTheme;
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
       child: Container(
         constraints: const BoxConstraints(minHeight: AppSpacing.touchPreferred),
-        padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.space16, vertical: AppSpacing.space12),
-        decoration: BoxDecoration(
-          color: cs.surface,
-          borderRadius: BorderRadius.circular(AppSpacing.radiusInput),
-          border: Border.all(color: cs.outline),
-        ),
+        // 오른쪽은 겹쳐 뜨는 스위칭 버튼과 부딪히지 않게 여백 확보.
+        padding: const EdgeInsets.fromLTRB(AppSpacing.space16,
+            AppSpacing.space12, AppSpacing.space48 + AppSpacing.space8, AppSpacing.space12),
         child: Row(
           children: [
+            Icon(icon, size: 14, color: iconColor),
+            const SizedBox(width: AppSpacing.space12),
             Text('$label  ',
                 style: t.labelMedium?.copyWith(color: cs.onSurfaceVariant)),
             Expanded(
@@ -345,10 +460,38 @@ class _StationField extends StatelessWidget {
                 style: t.titleMedium?.copyWith(
                   color: station == null ? cs.onSurfaceVariant : cs.onSurface,
                 ),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
-            Icon(Icons.expand_more, color: cs.onSurfaceVariant),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SwapButton extends StatelessWidget {
+  final VoidCallback onTap;
+  const _SwapButton({required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Semantics(
+      label: '출발·도착 바꾸기',
+      button: true,
+      child: Material(
+        color: cs.surface,
+        shape: CircleBorder(side: BorderSide(color: cs.outline)),
+        elevation: 1,
+        child: InkWell(
+          onTap: onTap,
+          customBorder: const CircleBorder(),
+          child: const SizedBox(
+            width: 40,
+            height: 40,
+            child: Icon(Icons.swap_vert, size: 20),
+          ),
         ),
       ),
     );
