@@ -64,3 +64,11 @@
   - **화면 뼈대**: 3탭 셸(지름길 찾기/역 접근성/데이터 정보). 역 접근성 탭은 라이브 API 실조회 동작(백엔드 재사용 즉시 검증). 지름길 찾기는 라우팅 엔진·네트워크 데이터(240역) Dart 포팅 전까지 "준비 중" placeholder.
   - **검증**: dart analyze No issues, **APK 디버그 빌드 성공**(app-debug.apk). 커밋 `01a52e4`(착수), `575b56e`(디자인 반영).
   - **다음**: 라우팅 엔진 + stations/connections(240역) Dart 포팅 → 지름길 찾기 실동작. `doorWidthCm=null(실측 전)은 게이팅 제외` 안전 원칙 그대로 승계. 이후 실기기에서 디자인 디테일·Noto 폰트·다크모드 육안 확인.
+- 2026-07-23 (⭐ Flutter "지름길 찾기" 실동작 완성 — 라우팅 엔진·240역 데이터·타임라인 Dart 포팅, 커밋 `4c06823`): 웹의 routeEngine.js/journey.js를 Flutter로 이식해 앱의 핵심 기능을 완성. 에뮬레이터(Pixel6/Android15)로 강동→강남 전체 흐름 시각 검증 완료.
+  - **데이터 생성**: `scripts/gen_dart_data.mjs`가 JS 데이터(src/data/stations.js·connections.js)를 Dart 소스(`app/lib/data/stations.dart`·`connections.dart`)로 자동 변환(240역/266간선). build_network.py 재실행 후 이 스크립트만 다시 돌리면 됨. connections는 Dart record 타입 `(String,String,String,int)` 리스트. **doorWidthCm=null(실측 전)은 게이팅 제외 원칙 그대로 승계.**
+  - **route_engine.dart**: 다익스트라(인접리스트 캐시+바이너리 최소힙+previous 포인터 역추적), (역,진입노선) 상태키로 환승 페널티 반영(목발3/수동6/전동7). 순수 Dart 회귀검증: 강남→서울역 목발25·수동28·전동29분, 전동 통과역 227==capacity≥1000 엘리베이터역 227(문폭 게이트 무해), 잠실→신촌 전동 8호선 우회 — 웹과 동일.
+  - **journey_service.dart**: 경로를 '지상진입→승차칸→환승→지상진출' 타임라인으로 확장. 엘리베이터를 bgngFlrGrndUdgdSe/endFlrGrndUdgdSe로 지상진입용/구내이동용 분리, 칸번호는 quickExit API. 모든 역 엘리베이터+칸을 Future.wait 병렬 조회.
+  - **UI**: 프로필 세그먼트(목발/수동/전동), 240역 검색 바텀시트(station_picker), 결과 요약카드+세로 타임라인(journey_timeline). 출발/도착 스왑 버튼.
+  - **에뮬 시각검증으로 버그 발견·수정**: (1) API 타임아웃 12→30s(escalator 조회 ~11.6s, 커밋 `7395598`). (2) off-by-one 라벨 버그 — leg.isTransfer를 '진입 시 환승'(출발 기준)으로 잡아 도착역이 환승으로 오표기됨 → buildLegs에서 `i < groups.length-1`(마지막 구간만 도착, 나머지는 환승)로 수정.
+  - **⚠️ 에뮬레이터 테스트 노하우(중요)**: (a) `flutter analyze`는 SDK dev/ 폴더 버그로 크래시 → `dart analyze lib` 사용. (b) `adb shell input text`는 한글(비ASCII) 불가 → 역 검색 대신 목록에서 좌표 직접 탭하거나 ADBKeyboard 필요. (c) Android15 스타일러스 손글씨 팝업이 검색창 포커스에 끼어듦 → `adb shell settings put secure stylus_handwriting_enabled 0`로 비활성. (d) Git Bash가 `/sdcard/` 경로를 Windows경로로 변환 → screencap엔 `MSYS_NO_PATHCONV=1`, pull 로컬경로엔 미적용(별도 명령)으로 분리. 스크린샷 로컬저장은 `/c/tmp/`.
+  - **남은 과제**: 관리자 인증/DB(②), 상행/하행 자동추천, 백엔드 facilities 응답 최적화(TODO), 실기기 다크모드·Noto 폰트 확인, 스토어 배포 준비.
