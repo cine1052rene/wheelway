@@ -9,11 +9,12 @@ import '../services/wheelway_api.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
 import '../widgets/journey_timeline.dart';
-import '../widgets/page_header.dart';
+import '../widgets/route/route_summary_card.dart';
 import '../widgets/station_picker.dart';
 
-/// 지름길 찾기 — 핵심 화면. 프로필·출발·도착을 고르면 라우팅 엔진으로
-/// 경로를 계산하고, 실제 이동 순서 타임라인으로 확장해 보여준다.
+/// 지름길 찾기 — 핵심 화면. 입력(프로필·출발·도착·CTA)은 화면 상단에
+/// 고정하고, 결과(요약+타임라인)만 독립적으로 스크롤되게 분리했다.
+/// 이전엔 결과를 본 뒤 입력을 바꾸려면 맨 위까지 다시 스크롤해야 했다.
 class RouteSearchScreen extends StatefulWidget {
   const RouteSearchScreen({super.key});
 
@@ -106,70 +107,168 @@ class _RouteSearchScreenState extends State<RouteSearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.only(bottom: AppSpacing.space32),
+    final cs = Theme.of(context).colorScheme;
+    return Column(
       children: [
-        const PageHeader(
-          eyebrow: '교통약자 지름길',
-          title: '지름길 찾기',
-          description: '지상 진입부터 승차 칸, 환승, 지상 진출까지 '
-              '가장 빠르고 안전한 이동 순서를 안내합니다.',
+        _InputHeader(
+          profile: _profile,
+          origin: _origin,
+          destination: _destination,
+          loading: _loading,
+          onProfileChanged: (p) => setState(() {
+            _profile = p;
+            _result = null;
+            _journey = null;
+          }),
+          onPickOrigin: () => _pick(true),
+          onPickDestination: () => _pick(false),
+          onSwap: _swap,
+          onFindRoute: _findRoute,
         ),
-        Padding(
-          padding: AppSpacing.screenInsets,
-          child: Column(
-            children: [
-              _ProfileSelector(
-                value: _profile,
-                onChanged: (p) => setState(() {
-                  _profile = p;
-                  _result = null;
-                  _journey = null;
-                }),
-              ),
-              const SizedBox(height: AppSpacing.space16),
-              _StationField(
-                label: '출발역',
-                station: _origin,
-                onTap: () => _pick(true),
-              ),
-              const SizedBox(height: AppSpacing.space8),
-              Align(
-                alignment: Alignment.centerRight,
-                child: IconButton(
-                  onPressed: _swap,
-                  icon: const Icon(Icons.swap_vert),
-                  tooltip: '출발·도착 바꾸기',
-                ),
-              ),
-              const SizedBox(height: AppSpacing.space8),
-              _StationField(
-                label: '도착역',
-                station: _destination,
-                onTap: () => _pick(false),
-              ),
-              const SizedBox(height: AppSpacing.space16),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton.icon(
-                  onPressed: _loading ? null : _findRoute,
-                  icon: _loading
-                      ? const SizedBox(
-                          width: 18,
-                          height: 18,
-                          child: CircularProgressIndicator(
-                              strokeWidth: 2, color: Colors.white),
-                        )
-                      : const Icon(Icons.route),
-                  label: Text(_loading ? '지름길 찾는 중…' : '지름길 찾기'),
-                ),
-              ),
-            ],
+        Divider(height: 1, color: cs.outlineVariant),
+        Expanded(
+          child: _ResultArea(
+            error: _error,
+            result: _result,
+            journey: _journey,
           ),
         ),
-        if (_error != null) _ErrorCard(_error!),
-        if (_result != null && _journey != null)
-          _ResultSection(result: _result!, journey: _journey!),
+      ],
+    );
+  }
+}
+
+/// 화면 상단 고정 입력 영역(프로필·출발/도착·CTA). 스크롤되지 않는다.
+class _InputHeader extends StatelessWidget {
+  final MobilityProfile profile;
+  final Station? origin;
+  final Station? destination;
+  final bool loading;
+  final ValueChanged<MobilityProfile> onProfileChanged;
+  final VoidCallback onPickOrigin;
+  final VoidCallback onPickDestination;
+  final VoidCallback onSwap;
+  final VoidCallback onFindRoute;
+
+  const _InputHeader({
+    required this.profile,
+    required this.origin,
+    required this.destination,
+    required this.loading,
+    required this.onProfileChanged,
+    required this.onPickOrigin,
+    required this.onPickDestination,
+    required this.onSwap,
+    required this.onFindRoute,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final t = Theme.of(context).textTheme;
+    return SafeArea(
+      bottom: false,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(AppSpacing.screenPadding,
+            AppSpacing.space12, AppSpacing.screenPadding, AppSpacing.space12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('지름길 찾기', style: t.headlineLarge),
+            const SizedBox(height: AppSpacing.space12),
+            _ProfileSelector(value: profile, onChanged: onProfileChanged),
+            const SizedBox(height: AppSpacing.space12),
+            _StationField(label: '출발역', station: origin, onTap: onPickOrigin),
+            const SizedBox(height: AppSpacing.space4),
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: onSwap,
+                icon: const Icon(Icons.swap_vert),
+                tooltip: '출발·도착 바꾸기',
+              ),
+            ),
+            const SizedBox(height: AppSpacing.space4),
+            _StationField(
+                label: '도착역', station: destination, onTap: onPickDestination),
+            const SizedBox(height: AppSpacing.space12),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
+                onPressed: loading ? null : onFindRoute,
+                icon: loading
+                    ? const SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(
+                            strokeWidth: 2, color: Colors.white),
+                      )
+                    : const Icon(Icons.route),
+                label: Text(loading ? '지름길 찾는 중…' : '지름길 찾기'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// 결과 표시 영역(독립 스크롤) — 빈 상태 / 에러 / 결과 타임라인.
+class _ResultArea extends StatelessWidget {
+  final String? error;
+  final RouteResult? result;
+  final Journey? journey;
+  const _ResultArea({required this.error, required this.result, required this.journey});
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final t = Theme.of(context).textTheme;
+
+    if (error != null) {
+      return ListView(
+        padding: AppSpacing.screenInsets,
+        children: [_ErrorCard(error!)],
+      );
+    }
+    if (result == null || journey == null) {
+      return ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.screenPadding, vertical: AppSpacing.space32),
+            child: Column(
+              children: [
+                Icon(Icons.route_outlined, size: 40, color: cs.onSurfaceVariant),
+                const SizedBox(height: AppSpacing.space12),
+                Text(
+                  '출발·도착역을 선택하고 지름길 찾기를 눌러주세요.',
+                  textAlign: TextAlign.center,
+                  style: t.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+    }
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(AppSpacing.screenPadding,
+          AppSpacing.space16, AppSpacing.screenPadding, AppSpacing.space32),
+      children: [
+        RouteSummaryCard(
+          profileLabel: result!.profileLabel,
+          totalMinutes: result!.totalMinutes,
+          transferCount: result!.transferStations.length,
+        ),
+        const SizedBox(height: AppSpacing.space20),
+        JourneyTimeline(journey: journey!),
+        const SizedBox(height: AppSpacing.space16),
+        Text(
+          '※ 소요시간은 평균 역간 운행시간 기준 추정치이며, 문 폭 등 미실측 값은 '
+          '경로 판정에 사용하지 않습니다.',
+          style: t.bodySmall?.copyWith(color: AppColors.seedSecondary),
+        ),
       ],
     );
   }
@@ -256,7 +355,6 @@ class _ErrorCard extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     final t = Theme.of(context).textTheme;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
       padding: AppSpacing.cardInsets,
       decoration: BoxDecoration(
         color: cs.errorContainer,
@@ -269,55 +367,6 @@ class _ErrorCard extends StatelessWidget {
           Expanded(
               child: Text(message,
                   style: t.bodyMedium?.copyWith(color: cs.onErrorContainer))),
-        ],
-      ),
-    );
-  }
-}
-
-class _ResultSection extends StatelessWidget {
-  final RouteResult result;
-  final Journey journey;
-  const _ResultSection({required this.result, required this.journey});
-
-  @override
-  Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-    final t = Theme.of(context).textTheme;
-    return Padding(
-      padding: AppSpacing.screenInsets,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: AppSpacing.cardInsets,
-            decoration: BoxDecoration(
-              color: cs.primaryContainer,
-              borderRadius: BorderRadius.circular(AppSpacing.radiusCard),
-            ),
-            child: Row(
-              children: [
-                Icon(Icons.schedule, color: cs.onPrimaryContainer),
-                const SizedBox(width: AppSpacing.space8),
-                Expanded(
-                  child: Text(
-                    '${result.profileLabel} · 약 ${result.totalMinutes}분'
-                    '${result.transferStations.isEmpty ? ' · 환승 없음' : ' · 환승 ${result.transferStations.length}회'}',
-                    style: t.titleMedium
-                        ?.copyWith(color: cs.onPrimaryContainer),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: AppSpacing.space20),
-          JourneyTimeline(journey: journey),
-          const SizedBox(height: AppSpacing.space16),
-          Text(
-            '※ 소요시간은 평균 역간 운행시간 기준 추정치이며, 문 폭 등 미실측 값은 '
-            '경로 판정에 사용하지 않습니다.',
-            style: t.bodySmall?.copyWith(color: AppColors.seedSecondary),
-          ),
         ],
       ),
     );

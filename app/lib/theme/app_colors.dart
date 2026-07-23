@@ -99,4 +99,22 @@ class AppColors {
   };
 
   static Color lineColor(String lineNo) => line[lineNo] ?? seedPrimary;
+
+  /// 호선 배경 위에 올릴 텍스트/아이콘 색을 자동 판정한다(하드코딩 목록 대신
+  /// 실제 색상 휘도를 계산 — 색상표가 바뀌어도 항상 WCAG 대비를 만족한다).
+  /// 예: 3호선(주황)·6호선(갈색)처럼 밝은 배경은 검정 텍스트를, 나머지는
+  /// 흰 텍스트를 골라 흰 글자가 밝은 배경에 묻히는 문제를 방지한다.
+  static Color onLineColor(String lineNo) {
+    final bg = lineColor(lineNo);
+    const black = Color(0xFF1A1A1A);
+    final contrastWithWhite = _contrastRatio(bg, Colors.white);
+    final contrastWithBlack = _contrastRatio(bg, black);
+    return contrastWithBlack > contrastWithWhite ? black : Colors.white;
+  }
+
+  static double _contrastRatio(Color a, Color b) {
+    final la = a.computeLuminance() + 0.05;
+    final lb = b.computeLuminance() + 0.05;
+    return la > lb ? la / lb : lb / la;
+  }
 }

@@ -3,20 +3,36 @@ import '../data/stations.dart';
 import '../models/station.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
+import 'station_picker/line_filter_grid.dart';
 
-/// 역 선택 바텀시트(검색 가능). 선택한 [Station]을 반환한다.
+/// 역 선택 바텀시트(검색 + 호선 필터). 선택한 [Station]을 반환한다.
+///
+/// 검색바·호선 필터는 고정, 역 목록만 독립 스크롤되는 구조로 바꿔
+/// 240역 전체를 매번 스크롤하지 않고 호선으로 즉시 좁힐 수 있게 했다.
 Future<Station?> showStationPicker(BuildContext context, {String? title}) {
   return showModalBottomSheet<Station>(
     context: context,
     isScrollControlled: true,
-    showDragHandle: true,
-    builder: (_) => _StationPickerSheet(title: title ?? '역 선택'),
+    backgroundColor: Colors.transparent,
+    builder: (_) => DraggableScrollableSheet(
+      initialChildSize: 0.6,
+      minChildSize: 0.4,
+      maxChildSize: 0.92,
+      snap: true,
+      snapSizes: const [0.6, 0.92],
+      builder: (_, scrollController) => _StationPickerSheet(
+        title: title ?? '역 선택',
+        scrollController: scrollController,
+      ),
+    ),
   );
 }
 
 class _StationPickerSheet extends StatefulWidget {
   final String title;
-  const _StationPickerSheet({required this.title});
+  final ScrollController scrollController;
+  const _StationPickerSheet(
+      {required this.title, required this.scrollController});
 
   @override
   State<_StationPickerSheet> createState() => _StationPickerSheetState();
@@ -25,6 +41,7 @@ class _StationPickerSheet extends StatefulWidget {
 class _StationPickerSheetState extends State<_StationPickerSheet> {
   final _controller = TextEditingController();
   String _query = '';
+  String? _selectedLine;
 
   @override
   void dispose() {
@@ -32,26 +49,43 @@ class _StationPickerSheetState extends State<_StationPickerSheet> {
     super.dispose();
   }
 
+  List<Station> get _filtered {
+    final q = _query.trim();
+    return kStations.where((s) {
+      final matchQuery = q.isEmpty || s.name.contains(q);
+      final matchLine = _selectedLine == null || s.lines.contains(_selectedLine);
+      return matchQuery && matchLine;
+    }).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final t = Theme.of(context).textTheme;
-    final q = _query.trim();
-    final list = q.isEmpty
-        ? kStations
-        : kStations.where((s) => s.name.contains(q)).toList();
+    final list = _filtered;
 
-    return Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
+    return Container(
+      decoration: BoxDecoration(
+        color: cs.surface,
+        borderRadius:
+            const BorderRadius.vertical(top: Radius.circular(AppSpacing.radiusSheet)),
       ),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.8,
+      child: Padding(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
         child: Column(
           children: [
+            const SizedBox(height: AppSpacing.space8),
+            Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: cs.outlineVariant,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(AppSpacing.space16, 0,
-                  AppSpacing.space16, AppSpacing.space12),
+              padding: const EdgeInsets.fromLTRB(AppSpacing.space16,
+                  AppSpacing.space12, AppSpacing.space16, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -59,7 +93,6 @@ class _StationPickerSheetState extends State<_StationPickerSheet> {
                   const SizedBox(height: AppSpacing.space12),
                   TextField(
                     controller: _controller,
-                    autofocus: true,
                     style: t.bodyLarge,
                     onChanged: (v) => setState(() => _query = v),
                     decoration: const InputDecoration(
@@ -67,9 +100,16 @@ class _StationPickerSheetState extends State<_StationPickerSheet> {
                       prefixIcon: Icon(Icons.search),
                     ),
                   ),
+                  const SizedBox(height: AppSpacing.space12),
+                  LineFilterGrid(
+                    selectedLine: _selectedLine,
+                    onLineSelected: (line) =>
+                        setState(() => _selectedLine = line),
+                  ),
                 ],
               ),
             ),
+            const Divider(height: AppSpacing.space16),
             Expanded(
               child: list.isEmpty
                   ? Center(
@@ -77,6 +117,7 @@ class _StationPickerSheetState extends State<_StationPickerSheet> {
                           style: t.bodyMedium
                               ?.copyWith(color: cs.onSurfaceVariant)))
                   : ListView.builder(
+                      controller: widget.scrollController,
                       itemCount: list.length,
                       itemBuilder: (_, i) {
                         final s = list[i];
@@ -121,8 +162,10 @@ class _LineBadge extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       child: Text(line,
-          style: const TextStyle(
-              color: Colors.white, fontSize: 13, fontWeight: FontWeight.w700)),
+          style: TextStyle(
+              color: AppColors.onLineColor(line),
+              fontSize: 13,
+              fontWeight: FontWeight.w700)),
     );
   }
 }

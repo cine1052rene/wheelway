@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import '../theme/app_spacing.dart';
 import '../models/facility.dart';
 import '../services/wheelway_api.dart';
-import '../widgets/page_header.dart';
+import '../widgets/station_access/facility_type_filter.dart';
 
 /// 역 접근성 — 실제 엘리베이터/에스컬레이터 위치를 라이브 API로 조회.
-/// (백엔드 재사용 레이어 동작 검증을 겸한 첫 실사용 화면.)
+/// 검색바+시설 필터는 상단 고정, 결과 목록만 독립 스크롤된다.
 class StationAccessScreen extends StatefulWidget {
   const StationAccessScreen({super.key});
 
@@ -19,6 +19,7 @@ class _StationAccessScreenState extends State<StationAccessScreen> {
   bool _loading = false;
   String? _error;
   List<Facility> _results = const [];
+  FacilityFilterType _filter = FacilityFilterType.all;
 
   @override
   void dispose() {
@@ -44,55 +45,108 @@ class _StationAccessScreenState extends State<StationAccessScreen> {
     }
   }
 
+  List<Facility> get _filteredResults {
+    switch (_filter) {
+      case FacilityFilterType.all:
+        return _results;
+      case FacilityFilterType.elevator:
+        return _results.where((f) => f.kind == FacilityKind.elevator).toList();
+      case FacilityFilterType.escalator:
+        return _results.where((f) => f.kind == FacilityKind.escalator).toList();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final t = Theme.of(context).textTheme;
-    return ListView(
+    final filtered = _filteredResults;
+
+    return Column(
       children: [
-        const PageHeader(
-          eyebrow: '역별 접근성',
-          title: '편의시설 현황',
-          description: '역명을 입력하면 실제 엘리베이터·에스컬레이터 위치를 '
-              '공개데이터에서 조회합니다.',
-        ),
-        Padding(
-          padding: AppSpacing.screenInsets,
-          child: Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _controller,
-                  textInputAction: TextInputAction.search,
-                  onSubmitted: (_) => _search(),
-                  style: t.bodyLarge,
-                  decoration: const InputDecoration(hintText: '예: 강남'),
+        SafeArea(
+          bottom: false,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(AppSpacing.screenPadding,
+                AppSpacing.space12, AppSpacing.screenPadding, AppSpacing.space12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('편의시설 현황', style: t.headlineLarge),
+                const SizedBox(height: AppSpacing.space12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _controller,
+                        textInputAction: TextInputAction.search,
+                        onSubmitted: (_) => _search(),
+                        style: t.bodyLarge,
+                        decoration: const InputDecoration(hintText: '예: 강남'),
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.space8),
+                    FilledButton(
+                      onPressed: _loading ? null : _search,
+                      child: Text(_loading ? '조회 중' : '조회'),
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(width: AppSpacing.space8),
-              FilledButton(
-                onPressed: _loading ? null : _search,
-                child: Text(_loading ? '조회 중' : '조회'),
-              ),
-            ],
+                if (_results.isNotEmpty) ...[
+                  const SizedBox(height: AppSpacing.space12),
+                  FacilityTypeFilter(
+                    selected: _filter,
+                    onChanged: (f) => setState(() => _filter = f),
+                  ),
+                ],
+              ],
+            ),
           ),
         ),
-        if (_error != null)
-          _MessageBox(
-            icon: Icons.error_outline,
-            color: cs.onErrorContainer,
-            bg: cs.errorContainer,
-            text: _error!,
-          ),
-        if (!_loading && _error == null && _results.isEmpty)
-          _MessageBox(
-            icon: Icons.info_outline,
-            color: cs.onSurfaceVariant,
-            bg: cs.surfaceContainerHighest,
-            text: '조회 버튼을 눌러 편의시설 위치를 불러오세요.',
-          ),
-        ..._results.map((f) => _FacilityTile(facility: f)),
-        const SizedBox(height: AppSpacing.space24),
+        Divider(height: 1, color: cs.outlineVariant),
+        Expanded(
+          child: _error != null
+              ? ListView(
+                  padding: AppSpacing.screenInsets,
+                  children: [
+                    _MessageBox(
+                      icon: Icons.error_outline,
+                      color: cs.onErrorContainer,
+                      bg: cs.errorContainer,
+                      text: _error!,
+                    ),
+                  ],
+                )
+              : (!_loading && _results.isEmpty)
+                  ? ListView(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.screenPadding,
+                              vertical: AppSpacing.space32),
+                          child: Column(
+                            children: [
+                              Icon(Icons.elevator_outlined,
+                                  size: 40, color: cs.onSurfaceVariant),
+                              const SizedBox(height: AppSpacing.space12),
+                              Text(
+                                '역명을 입력하고 조회를 눌러 실제 엘리베이터·\n에스컬레이터 위치를 확인하세요.',
+                                textAlign: TextAlign.center,
+                                style: t.bodyMedium
+                                    ?.copyWith(color: cs.onSurfaceVariant),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    )
+                  : ListView.builder(
+                      padding: const EdgeInsets.only(
+                          top: AppSpacing.space12, bottom: AppSpacing.space24),
+                      itemCount: filtered.length,
+                      itemBuilder: (_, i) => _FacilityTile(facility: filtered[i]),
+                    ),
+        ),
       ],
     );
   }
@@ -120,9 +174,19 @@ class _FacilityTile extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(
-            isElevator ? Icons.elevator : Icons.escalator,
-            color: cs.primary,
+          Container(
+            width: 40,
+            height: 40,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: cs.surfaceContainerHighest,
+              borderRadius: BorderRadius.circular(AppSpacing.radiusChip),
+            ),
+            child: Icon(
+              isElevator ? Icons.elevator : Icons.escalator,
+              color: cs.primary,
+              size: 20,
+            ),
           ),
           const SizedBox(width: AppSpacing.space12),
           Expanded(
@@ -134,20 +198,48 @@ class _FacilityTile extends StatelessWidget {
                   style: t.titleMedium,
                 ),
                 const SizedBox(height: AppSpacing.space4),
-                Text(
-                  [
-                    if (facility.exit.isNotEmpty) '출구 ${facility.exit}',
-                    if (facility.detail.isNotEmpty) facility.detail,
+                Wrap(
+                  spacing: AppSpacing.space8,
+                  runSpacing: AppSpacing.space4,
+                  children: [
+                    if (facility.exit.isNotEmpty) _MiniBadge('출구 ${facility.exit}'),
                     if (isElevator && facility.capacityKg.isNotEmpty)
-                      '정격 ${facility.capacityKg}kg',
-                  ].join(' · '),
-                  style: t.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
+                      _MiniBadge('${facility.capacityKg}kg'),
+                  ],
                 ),
+                if (facility.detail.isNotEmpty) ...[
+                  const SizedBox(height: AppSpacing.space4),
+                  Text(facility.detail,
+                      style:
+                          t.bodySmall?.copyWith(color: cs.onSurfaceVariant)),
+                ],
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class _MiniBadge extends StatelessWidget {
+  final String text;
+  const _MiniBadge(this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final t = Theme.of(context).textTheme;
+    return Container(
+      padding:
+          const EdgeInsets.symmetric(horizontal: AppSpacing.space8, vertical: 2),
+      decoration: BoxDecoration(
+        color: cs.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(AppSpacing.radiusChip),
+      ),
+      child: Text(text,
+          style: t.labelSmall?.copyWith(
+              color: cs.onSurfaceVariant, fontWeight: FontWeight.w600)),
     );
   }
 }
@@ -168,7 +260,6 @@ class _MessageBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = Theme.of(context).textTheme;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
       padding: AppSpacing.cardInsets,
       decoration: BoxDecoration(
         color: bg,
