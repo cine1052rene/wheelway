@@ -72,3 +72,10 @@
   - **에뮬 시각검증으로 버그 발견·수정**: (1) API 타임아웃 12→30s(escalator 조회 ~11.6s, 커밋 `7395598`). (2) off-by-one 라벨 버그 — leg.isTransfer를 '진입 시 환승'(출발 기준)으로 잡아 도착역이 환승으로 오표기됨 → buildLegs에서 `i < groups.length-1`(마지막 구간만 도착, 나머지는 환승)로 수정.
   - **⚠️ 에뮬레이터 테스트 노하우(중요)**: (a) `flutter analyze`는 SDK dev/ 폴더 버그로 크래시 → `dart analyze lib` 사용. (b) `adb shell input text`는 한글(비ASCII) 불가 → 역 검색 대신 목록에서 좌표 직접 탭하거나 ADBKeyboard 필요. (c) Android15 스타일러스 손글씨 팝업이 검색창 포커스에 끼어듦 → `adb shell settings put secure stylus_handwriting_enabled 0`로 비활성. (d) Git Bash가 `/sdcard/` 경로를 Windows경로로 변환 → screencap엔 `MSYS_NO_PATHCONV=1`, pull 로컬경로엔 미적용(별도 명령)으로 분리. 스크린샷 로컬저장은 `/c/tmp/`.
   - **남은 과제**: 관리자 인증/DB(②), 상행/하행 자동추천, 백엔드 facilities 응답 최적화(TODO), 실기기 다크모드·Noto 폰트 확인, 스토어 배포 준비.
+- 2026-07-24 (⭐ 디자인기획팀 UX 구조 개선 반영 — 커밋 `b326f4c`): 사용자가 "텍스트위주·호선별 선택 안 됨·스크롤 압박" 3가지를 지적. "이건 디자인(색)이 아니라 구조 문제"라 판단해 디자인기획팀(에이전트룸)에게 UX 구조 재설계만(에메랄드 클리어 토큰은 무수정) 의뢰 → 하이브리드 컨셉(타임라인=스텝카드, 역선택=호선 2×4그리드, 입력분리=고정헤더) 채택.
+  - 가이드 원문 대비 **2가지 자체 판단으로 개선**: (1) 호선 배경 위 텍스트 색은 가이드의 하드코딩 목록(`{3,6,9}`) 대신 `AppColors.onLineColor()`로 **실제 색상 휘도 계산**해 자동 판정 — 색상표가 바뀌어도 항상 대비 보장. (2) `FacilityTile` 상태 배지(운행중/점검중/고장)는 **실데이터에 없는 필드라 제외**(문폭 실측 전 원칙과 동일한 데이터 정직성 기준) — 실측 가능한 출구·정격하중만 배지화.
+  - 신규 컴포넌트: `StepIconBadge`(48dp 터치, 진입/승차/환승 프리셋), `DurationLozenge`, `FacilityChip`(엘리베이터·칸번호 정보를 통일된 칩으로 — 기존엔 문장 나열이라 시각 언어 불일치했음), `TimelineStepCard`(연결선+배지+카드), `LineFilterGrid`(호선 2×4 그리드, 64dp), `RouteSummaryCard`(총 소요시간 숫자 강조), `FacilityTypeFilter`(전체/엘리베이터/에스컬레이터).
+  - `route_search_screen`/`station_access_screen`: `Column(고정 헤더) + Divider + Expanded(독립 스크롤)` 구조로 리팩터 — 결과를 보다가 입력을 다시 확인하려 매번 최상단 스크롤할 필요 없어짐. `station_picker`는 `showModalBottomSheet`+고정높이 → `DraggableScrollableSheet(snap, snapSizes:[0.6,0.85])`로 전환.
+  - **에뮬레이터 실기기 검증 완료**: 2호선 필터→3역만 남음(가나다순 240역 스크롤 불필요 확인), 3·6호선 카드가 자동으로 검정 텍스트(대비 계산 정확), 강남→강동구청 목발 경로에서 문장 나열이 카드+칩("출구1/1번출입구", "3-4번 칸/강변")으로 완전히 바뀜, 스크롤해도 상단 출발/도착역 필드 고정 확인, 역접근성 엘리베이터/에스컬레이터 필터 정상 동작.
+  - `dart analyze` 통과. 새 파일 8개+수정 4개.
+  - **다음**: ② 관리자 인증/DB, 상행/하행 자동추천, 실기기 다크모드 확인, Noto 폰트 번들, 스토어 배포 준비.
