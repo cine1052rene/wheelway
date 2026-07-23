@@ -1,9 +1,20 @@
 import { connections } from '../data/network.js';
 
+// 전동 휠체어 통과 최소 기준(문 폭). 단, 문 폭은 실측 데이터가 있을 때만 게이팅에 사용한다.
+// doorWidthCm이 null(=실측 전)이면 지어낸 값으로 통과/차단을 결정하지 않고 통과시킨 뒤 UI에서 '실측 필요'로 안내한다.
+const MIN_DOOR_CM = 90;
+
 const profileRules = {
-  crutch: { label: '목발 이용', transferPenalty: 3, minimumKg: 0, minimumDoor: 0, allowed: station => station.elevator || station.escalator },
-  manual: { label: '수동 휠체어', transferPenalty: 6, minimumKg: 0, minimumDoor: 0, allowed: station => station.elevator },
-  electric: { label: '전동 휠체어', transferPenalty: 7, minimumKg: 1000, minimumDoor: 90, allowed: station => station.elevator && station.capacityKg >= 1000 && station.doorWidthCm >= 90 }
+  crutch: { label: '목발 이용', transferPenalty: 3, minimumKg: 0, allowed: station => station.elevator || station.escalator },
+  manual: { label: '수동 휠체어', transferPenalty: 6, minimumKg: 0, allowed: station => station.elevator },
+  electric: {
+    label: '전동 휠체어', transferPenalty: 7, minimumKg: 1000, minimumDoor: MIN_DOOR_CM,
+    allowed: station =>
+      station.elevator
+      && station.capacityKg >= 1000
+      // 실측 문 폭이 있고 기준 미달이면 차단. 실측 전(null)이면 이 조건으로 막지 않는다.
+      && (station.doorWidthCm == null || station.doorWidthCm >= MIN_DOOR_CM)
+  }
 };
 
 export function validateStation(station, profile) {

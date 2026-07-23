@@ -119,7 +119,7 @@ function stationsView() {
     const facilitySummary = s.noFacility
       ? '장애인 편의시설 정보 없음'
       : s.elevator
-        ? `엘리베이터 ${s.capacityKg}kg${s.doorWidthEstimated ? ' · 문폭 90cm(법정기준 추정치, 실측 아님)' : s.doorWidthCm ? ` · 문폭 ${s.doorWidthCm}cm` : ''}`
+        ? `엘리베이터 ${s.capacityKg}kg${s.doorWidthCm ? ` · 문폭 ${s.doorWidthCm}cm` : s.doorWidthStatus ? ` · 문폭 ${s.doorWidthStatus}(실측 필요)` : ''}`
         : '엘리베이터 없음 · 에스컬레이터만 이용 가능';
     return `<article class="station-card ${s.noFacility ? 'unavailable' : ''}"><div><span class="line-list">${s.lines.map(line => `<b style="background:${lineColors[line]}">${line}</b>`).join('')}</span><h3>${s.name}</h3></div><span class="status ${s.noFacility ? 'off' : 'on'}">${s.noFacility ? '우회 필요' : '이용 가능'}</span><p>${facilitySummary}</p><small>${escape(s.note)}</small>${facilityListHtml(s.name)}</article>`;
   }).join('')}</div></section>`;
