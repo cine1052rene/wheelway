@@ -56,3 +56,11 @@
   - `routeEngine.js`: `electric.allowed`를 `capacityKg >= 1000 && (doorWidthCm == null || doorWidthCm >= MIN_DOOR_CM)`로 변경 — 실측 전(null)은 통과, 실측값이 있고 기준 미달이면 차단. **회귀 검증**: electric 통과역 227 == capacity≥1000 엘리베이터역 227(문폭 게이트 무해화 확인), 강남→서울역 3프로필·잠실→신촌 전동(8호선 천호 우회로 750kg 잠실나루 회피) 모두 기존과 동일.
   - `main.js` UI: "문폭 90cm(법정기준 추정치)" → "문폭 실측 전(실측 필요)". `README.md`·`build_network.py` 주석·방법론 설명 전부 갱신. `doorWidthEstimated` 참조 저장소 전체에서 완전 제거 확인. `vite build` 통과.
   - **미측정 값은 필터에 안 쓴다 원칙**은 새 앱(Flutter/네이티브) 데이터 스키마의 기본 원칙으로 그대로 승계할 것. 다음: 국가철도공단 등 실제 문 폭 API 재조사 or 관리자 인증(②)의 "실측 제보" 필드로 점진 대체.
+- 2026-07-23 (⭐ Flutter 앱 신규 착수 — 웹 포팅이 아니라 새로 빌드): 사용자가 "웹을 앱으로 바로 전환할 필요 없다, 새로 처음부터 앱 빌드"를 택함. 백엔드(Firebase Functions)·데이터는 재사용, 프론트는 접근성 우선으로 새 설계. Flutter로 결정(iOS는 추후). 진행 순서 합의: ①프로젝트 구조 → ②디자인 토큰/테마 → ③백엔드 연동 레이어 → ④화면 뼈대 → (이후)로직·실기기.
+  - **구조**: 기존 저장소 안 `app/`에 Flutter 생성(`com.emeraldworks.wheelway`, Android/iOS). Flutter SDK 경로: `C:\Users\cine1\Documents\flutter`(PATH 미등록 — 빌드 시 export 필요). `flutter analyze`는 SDK dev/ 폴더 탐색 버그로 크래시하니 **`dart analyze lib`로 검증**할 것(dart 경로: `flutter/bin/cache/dart-sdk/bin`).
+  - **디자인 시스템 "에메랄드 클리어"**: design_planning 에이전트룸으로 색/타이포/간격/컴포넌트/다크모드 전체 스펙 수립(보고서: `app/../memory/agent-room/agent-room-design_planning-2026-07-23T12-15-06.md`). 라이트/다크 ColorScheme 완전 정의(primary #08705B / 다크 #6FDBB8), 15단계 TextTheme, space2~64, 반경 토큰. `lib/theme/`(app_colors/app_spacing/app_typography/app_theme)로 분리. **Flutter 3.44에서 deprecated된 background/surfaceVariant/MaterialStatePropertyAll은 회피**(scaffoldBackgroundColor·surfaceContainerHighest·WidgetStatePropertyAll로 대체) — analyze 경고 0.
+  - **폰트**: 가이드는 Noto Sans KR 권장하나 번들 없이 fontFamily 지정하면 조용히 폴백되므로 지금은 시스템 기본(fontFamily=null) 유지, 수치/굵기/자간만 스펙대로. **배포 전 Noto 번들 시 AppTypography.fontFamily만 바꾸면 됨**.
+  - **백엔드 레이어**: `WheelwayApi`(facilities/quickExit 기존 엔드포인트 재사용), `Facility`/`QuickExit` 모델(웹 publicData.js와 동일 필드). baseUrl=https://emeraldworks.web.app.
+  - **화면 뼈대**: 3탭 셸(지름길 찾기/역 접근성/데이터 정보). 역 접근성 탭은 라이브 API 실조회 동작(백엔드 재사용 즉시 검증). 지름길 찾기는 라우팅 엔진·네트워크 데이터(240역) Dart 포팅 전까지 "준비 중" placeholder.
+  - **검증**: dart analyze No issues, **APK 디버그 빌드 성공**(app-debug.apk). 커밋 `01a52e4`(착수), `575b56e`(디자인 반영).
+  - **다음**: 라우팅 엔진 + stations/connections(240역) Dart 포팅 → 지름길 찾기 실동작. `doorWidthCm=null(실측 전)은 게이팅 제외` 안전 원칙 그대로 승계. 이후 실기기에서 디자인 디테일·Noto 폰트·다크모드 육안 확인.
