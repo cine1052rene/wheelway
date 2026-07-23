@@ -311,8 +311,10 @@ class _ProfileIconButton extends StatelessWidget {
   const _ProfileIconButton(
       {required this.profile, required this.selected, required this.onTap});
 
+  // 목발은 이동보조기구 이용자지 휠체어 이용자가 아니라서, 휠체어
+  // 심볼(Icons.accessible)이 아니라 일반 보행 아이콘을 쓴다(사용자 피드백).
   IconData get _icon => switch (profile) {
-        MobilityProfile.crutch => Icons.accessible,
+        MobilityProfile.crutch => Icons.directions_walk,
         MobilityProfile.manual => Icons.accessible_forward,
         MobilityProfile.electric => Icons.electric_bolt,
       };
