@@ -1,0 +1,694 @@
+- generic [ref=f1e3]:
+  - generic:
+    - link "본문 바로가기" [ref=f1e4] [cursor=pointer]:
+      - /url: "#section_content"
+    - link "주 메뉴 바로가기" [ref=f1e6] [cursor=pointer]:
+      - /url: "#header"
+  - banner [ref=f1e8]:
+    - heading [level=1] [ref=f1e9]:
+      - link "네이버지도" [ref=f1e10] [cursor=pointer]:
+        - /url: https://www.naver.com
+    - navigation [ref=f1e12]:
+      - list [ref=f1e13]:
+        - listitem [ref=f1e14]:
+          - button "지도 홈" [ref=f1e15] [cursor=pointer]
+        - listitem [ref=f1e22]:
+          - button "길찾기 선택됨" [ref=f1e23] [cursor=pointer]:
+            - generic [ref=f1e28]: 길찾기
+            - generic [ref=f1e29]: 선택됨
+        - listitem [ref=f1e30]:
+          - button "버스" [ref=f1e31] [cursor=pointer]
+        - listitem [ref=f1e37]:
+          - button "지하철" [ref=f1e38] [cursor=pointer]
+        - listitem [ref=f1e44]:
+          - button "기차" [ref=f1e45] [cursor=pointer]
+        - listitem [ref=f1e51]:
+          - button "new 저장" [ref=f1e52] [cursor=pointer]:
+            - generic [ref=f1e53]: new
+            - generic [ref=f1e59]: 저장
+        - listitem [ref=f1e60]:
+          - button "더보기" [ref=f1e61] [cursor=pointer]
+    - generic [ref=f1e68]:
+      - strong [ref=f1e69]: 사용자 링크
+      - list [ref=f1e70]:
+        - listitem [ref=f1e71]:
+          - link "로그인" [ref=f1e72] [cursor=pointer]:
+            - /url: https://nid.naver.com/nidlogin.login
+        - listitem [ref=f1e74]:
+          - link "서비스 더보기" [ref=f1e75] [cursor=pointer]:
+            - /url: javascript:;
+  - generic:
+    - application [ref=f1e80]:
+      - region "Map" [ref=f1e197]
+      - generic [ref=f1e83]:
+        - img "NAVER" [ref=f1e85] [cursor=pointer]
+        - generic [ref=f1e86]: 100m
+    - generic [ref=f1e90]:
+      - generic [ref=f1e92]:
+        - status [ref=f1e93]
+        - generic [ref=f1e95]:
+          - generic [ref=f1e96]:
+            - tablist "이동수단 선택" [ref=f1e97]:
+              - tab "대중교통" [selected] [ref=f1e98] [cursor=pointer]
+              - tab "자동차" [ref=f1e99] [cursor=pointer]
+              - tab "도보" [ref=f1e100] [cursor=pointer]
+              - tab "자전거" [ref=f1e101] [cursor=pointer]
+            - generic [ref=f1e102]:
+              - generic [ref=f1e105]:
+                - generic [ref=f1e106]: 출발지 입력
+                - combobox "출발지 입력" [ref=f1e107]: 강남역 2호선
+              - generic [ref=f1e110]:
+                - generic [ref=f1e111]: 도착지 입력
+                - combobox "도착지 입력" [ref=f1e112]: 서울역 1호선
+              - button "출발지/도착지 전환" [ref=f1e113] [cursor=pointer]
+            - generic [ref=f1e115]:
+              - button "다시입력" [ref=f1e116] [cursor=pointer]
+              - button "길찾기" [ref=f1e117] [cursor=pointer]
+          - tabpanel [ref=f1e410]:
+            - generic [ref=f1e411]:
+              - tablist [ref=f1e414]:
+                - tab "전체" [selected] [ref=f1e415] [cursor=pointer]
+                - tab "버스 7" [ref=f1e416] [cursor=pointer]
+                - tab "지하철 4" [ref=f1e417] [cursor=pointer]
+                - tab "버스 + 지하철 0" [disabled] [ref=f1e418]
+              - generic [ref=f1e420]:
+                - button "ON" [ref=f1e421] [cursor=pointer]
+                - button "오늘 오전 01:05 출발 펼치기" [ref=f1e423] [cursor=pointer]:
+                  - emphasis [ref=f1e424]:
+                    - generic [ref=f1e425]: 오늘
+                    - generic [ref=f1e426]: 오전 01:05
+                  - text: 출발
+                  - generic [ref=f1e427]: 펼치기
+                - button "최적 경로순 펼치기" [ref=f1e429] [cursor=pointer]:
+                  - text: 최적 경로순
+                  - generic [ref=f1e430]: 펼치기
+              - tabpanel [ref=f1e431]:
+                - list [ref=f1e432]:
+                  - listitem [ref=f1e433]:
+                    - button "최적 33분 오전 2:04 도착 2,500원 기후동행 도보 4분 심야버스 27분 도보 1분 일반 일반 지하철2호선강남역(중) 중앙 도착정보 버스 N75 4분 2정류장 여유 버스 N75 32분 25정류장 여유 하차 숭례문 상세보기" [pressed] [ref=f1e434] [cursor=pointer]:
+                      - generic [ref=f1e435]:
+                        - emphasis [ref=f1e436]: 최적
+                        - generic [ref=f1e437]:
+                          - emphasis [ref=f1e438]: 33분
+                          - generic [ref=f1e439]: 오전 2:04 도착
+                          - generic [ref=f1e440]: 2,500원
+                          - generic [ref=f1e441]: 기후동행
+                      - list [ref=f1e449]:
+                        - listitem [ref=f1e450]:
+                          - generic [ref=f1e451]: 도보
+                          - generic [ref=f1e453]: 4분
+                        - listitem [ref=f1e454]:
+                          - generic [ref=f1e455]: 심야버스
+                          - generic [ref=f1e457]: 27분
+                        - listitem [ref=f1e458]:
+                          - generic [ref=f1e459]:
+                            - generic [ref=f1e460]: 도보
+                            - text: 1분
+                      - list [ref=f1e461]:
+                        - listitem [ref=f1e462]:
+                          - generic [ref=f1e463]:
+                            - emphasis [ref=f1e465]:
+                              - generic [ref=f1e466]: 일반
+                            - emphasis [ref=f1e471]: 일반
+                          - generic [ref=f1e472]:
+                            - generic [ref=f1e473]:
+                              - generic [ref=f1e474]:
+                                - emphasis [ref=f1e475]: 지하철2호선강남역(중)
+                                - generic [ref=f1e476]: 중앙
+                              - button "도착정보" [ref=f1e477]
+                            - list [ref=f1e478]:
+                              - listitem [ref=f1e479]:
+                                - generic [ref=f1e480]:
+                                  - emphasis [ref=f1e481]:
+                                    - generic [ref=f1e482]: 버스
+                                  - emphasis [ref=f1e487]: N75
+                                - time [ref=f1e488]: 4분
+                                - generic [ref=f1e489]: 2정류장
+                                - emphasis [ref=f1e490]:
+                                  - generic: 여유
+                              - listitem [ref=f1e491]:
+                                - generic [ref=f1e492]:
+                                  - emphasis [ref=f1e493]:
+                                    - generic [ref=f1e494]: 버스
+                                  - emphasis [ref=f1e499]: N75
+                                - time [ref=f1e500]: 32분
+                                - generic [ref=f1e501]: 25정류장
+                                - emphasis [ref=f1e502]:
+                                  - generic: 여유
+                        - listitem [ref=f1e503]:
+                          - emphasis [ref=f1e505]: 하차
+                          - emphasis [ref=f1e509]: 숭례문
+                      - button "상세보기" [ref=f1e510]
+                  - listitem [ref=f1e511]:
+                    - button "최소도보 35분 오전 2:05 도착 2,500원 기후동행 도보 1분 심야버스 21분 심야버스 8분 도보 1분 일반 일반 신분당선강남역(중) 중앙 도착정보 버스 N37 24분 17정류장 여유 일반 일반 종로2가 중앙 N15 하차 숭례문 중앙 상세보기" [ref=f1e512] [cursor=pointer]:
+                      - generic [ref=f1e513]:
+                        - emphasis [ref=f1e514]: 최소도보
+                        - generic [ref=f1e515]:
+                          - emphasis [ref=f1e516]: 35분
+                          - generic [ref=f1e517]: 오전 2:05 도착
+                          - generic [ref=f1e518]: 2,500원
+                          - generic [ref=f1e519]: 기후동행
+                      - list [ref=f1e527]:
+                        - listitem [ref=f1e528]:
+                          - generic [ref=f1e529]: 도보
+                          - generic [ref=f1e531]: 1분
+                        - listitem [ref=f1e532]:
+                          - generic [ref=f1e533]: 심야버스
+                          - generic [ref=f1e535]: 21분
+                        - listitem [ref=f1e536]:
+                          - generic [ref=f1e537]: 심야버스
+                          - generic [ref=f1e539]: 8분
+                        - listitem [ref=f1e540]:
+                          - generic [ref=f1e541]:
+                            - generic [ref=f1e542]: 도보
+                            - text: 1분
+                      - list [ref=f1e543]:
+                        - listitem [ref=f1e544]:
+                          - generic [ref=f1e545]:
+                            - emphasis [ref=f1e547]:
+                              - generic [ref=f1e548]: 일반
+                            - emphasis [ref=f1e553]: 일반
+                          - generic [ref=f1e554]:
+                            - generic [ref=f1e555]:
+                              - generic [ref=f1e556]:
+                                - emphasis [ref=f1e557]: 신분당선강남역(중)
+                                - generic [ref=f1e558]: 중앙
+                              - button "도착정보" [ref=f1e559]
+                            - list [ref=f1e560]:
+                              - listitem [ref=f1e561]:
+                                - generic [ref=f1e562]:
+                                  - emphasis [ref=f1e563]:
+                                    - generic [ref=f1e564]: 버스
+                                  - emphasis [ref=f1e569]: N37
+                                - time [ref=f1e570]: 24분
+                                - generic [ref=f1e571]: 17정류장
+                                - emphasis [ref=f1e572]:
+                                  - generic: 여유
+                        - listitem [ref=f1e573]:
+                          - generic [ref=f1e574]:
+                            - emphasis [ref=f1e576]:
+                              - generic [ref=f1e577]: 일반
+                            - emphasis [ref=f1e582]: 일반
+                          - generic [ref=f1e583]:
+                            - generic [ref=f1e585]:
+                              - emphasis [ref=f1e586]: 종로2가
+                              - generic [ref=f1e587]: 중앙
+                            - list [ref=f1e588]:
+                              - listitem [ref=f1e589]:
+                                - emphasis [ref=f1e590]: N15
+                        - listitem [ref=f1e591]:
+                          - emphasis [ref=f1e593]: 하차
+                          - generic [ref=f1e596]:
+                            - emphasis [ref=f1e597]: 숭례문
+                            - generic [ref=f1e598]: 중앙
+                      - button "상세보기" [ref=f1e599]
+                  - listitem [ref=f1e600]:
+                    - button "50분 오전 1:56 도착 2,500원 기후동행 도보 1분 심야버스 29분 도보 6분 심야버스 4분 도보 1분 일반 일반 강남역12번출구 도착정보 버스 N31 2분 2정류장 여유 버스 N31 38분 21정류장 보통 일반 일반 퇴계로2가.명동역7번출구 N16 하차 숭례문 상세보기" [ref=f1e601] [cursor=pointer]:
+                      - generic [ref=f1e603]:
+                        - emphasis [ref=f1e604]: 50분
+                        - generic [ref=f1e605]: 오전 1:56 도착
+                        - generic [ref=f1e606]: 2,500원
+                        - generic [ref=f1e607]: 기후동행
+                      - list [ref=f1e615]:
+                        - listitem [ref=f1e616]:
+                          - generic [ref=f1e617]: 도보
+                          - generic [ref=f1e619]: 1분
+                        - listitem [ref=f1e620]:
+                          - generic [ref=f1e621]: 심야버스
+                          - generic [ref=f1e623]: 29분
+                        - listitem [ref=f1e624]:
+                          - generic [ref=f1e625]:
+                            - generic [ref=f1e626]: 도보
+                            - text: 6분
+                        - listitem [ref=f1e627]:
+                          - generic [ref=f1e628]: 심야버스
+                          - generic [ref=f1e630]: 4분
+                        - listitem [ref=f1e631]:
+                          - generic [ref=f1e632]:
+                            - generic [ref=f1e633]: 도보
+                            - text: 1분
+                      - list [ref=f1e634]:
+                        - listitem [ref=f1e635]:
+                          - generic [ref=f1e636]:
+                            - emphasis [ref=f1e638]:
+                              - generic [ref=f1e639]: 일반
+                            - emphasis [ref=f1e644]: 일반
+                          - generic [ref=f1e645]:
+                            - generic [ref=f1e646]:
+                              - emphasis [ref=f1e648]: 강남역12번출구
+                              - button "도착정보" [ref=f1e649]
+                            - list [ref=f1e650]:
+                              - listitem [ref=f1e651]:
+                                - generic [ref=f1e652]:
+                                  - emphasis [ref=f1e653]:
+                                    - generic [ref=f1e654]: 버스
+                                  - emphasis [ref=f1e659]: N31
+                                - time [ref=f1e660]: 2분
+                                - generic [ref=f1e661]: 2정류장
+                                - emphasis [ref=f1e662]:
+                                  - generic: 여유
+                              - listitem [ref=f1e663]:
+                                - generic [ref=f1e664]:
+                                  - emphasis [ref=f1e665]:
+                                    - generic [ref=f1e666]: 버스
+                                  - emphasis [ref=f1e671]: N31
+                                - time [ref=f1e672]: 38분
+                                - generic [ref=f1e673]: 21정류장
+                                - emphasis [ref=f1e674]:
+                                  - generic: 보통
+                        - listitem [ref=f1e675]:
+                          - generic [ref=f1e676]:
+                            - emphasis [ref=f1e678]:
+                              - generic [ref=f1e679]: 일반
+                            - emphasis [ref=f1e684]: 일반
+                          - generic [ref=f1e685]:
+                            - emphasis [ref=f1e688]: 퇴계로2가.명동역7번출구
+                            - list [ref=f1e689]:
+                              - listitem [ref=f1e690]:
+                                - emphasis [ref=f1e691]: N16
+                        - listitem [ref=f1e692]:
+                          - emphasis [ref=f1e694]: 하차
+                          - emphasis [ref=f1e698]: 숭례문
+                      - button "상세보기" [ref=f1e699]
+                  - listitem [ref=f1e700]:
+                    - button "최소환승 50분 오전 1:56 도착 2,500원 기후동행 도보 1분 심야버스 29분 도보 17분 일반 일반 강남역12번출구 도착정보 버스 N31 2분 2정류장 여유 버스 N31 38분 21정류장 보통 하차 남산3호터널.정화예술대학교 상세보기" [ref=f1e701] [cursor=pointer]:
+                      - generic [ref=f1e702]:
+                        - emphasis [ref=f1e703]: 최소환승
+                        - generic [ref=f1e704]:
+                          - emphasis [ref=f1e705]: 50분
+                          - generic [ref=f1e706]: 오전 1:56 도착
+                          - generic [ref=f1e707]: 2,500원
+                          - generic [ref=f1e708]: 기후동행
+                      - list [ref=f1e716]:
+                        - listitem [ref=f1e717]:
+                          - generic [ref=f1e718]: 도보
+                          - generic [ref=f1e720]: 1분
+                        - listitem [ref=f1e721]:
+                          - generic [ref=f1e722]: 심야버스
+                          - generic [ref=f1e724]: 29분
+                        - listitem [ref=f1e725]:
+                          - generic [ref=f1e726]:
+                            - generic [ref=f1e727]: 도보
+                            - text: 17분
+                      - list [ref=f1e728]:
+                        - listitem [ref=f1e729]:
+                          - generic [ref=f1e730]:
+                            - emphasis [ref=f1e732]:
+                              - generic [ref=f1e733]: 일반
+                            - emphasis [ref=f1e738]: 일반
+                          - generic [ref=f1e739]:
+                            - generic [ref=f1e740]:
+                              - emphasis [ref=f1e742]: 강남역12번출구
+                              - button "도착정보" [ref=f1e743]
+                            - list [ref=f1e744]:
+                              - listitem [ref=f1e745]:
+                                - generic [ref=f1e746]:
+                                  - emphasis [ref=f1e747]:
+                                    - generic [ref=f1e748]: 버스
+                                  - emphasis [ref=f1e753]: N31
+                                - time [ref=f1e754]: 2분
+                                - generic [ref=f1e755]: 2정류장
+                                - emphasis [ref=f1e756]:
+                                  - generic: 여유
+                              - listitem [ref=f1e757]:
+                                - generic [ref=f1e758]:
+                                  - emphasis [ref=f1e759]:
+                                    - generic [ref=f1e760]: 버스
+                                  - emphasis [ref=f1e765]: N31
+                                - time [ref=f1e766]: 38분
+                                - generic [ref=f1e767]: 21정류장
+                                - emphasis [ref=f1e768]:
+                                  - generic: 보통
+                        - listitem [ref=f1e769]:
+                          - emphasis [ref=f1e771]: 하차
+                          - emphasis [ref=f1e775]: 남산3호터널.정화예술대학교
+                      - button "상세보기" [ref=f1e776]
+                - generic [ref=f1e778]:
+                  - generic [ref=f1e779]: 나중에 출발
+                  - generic [ref=f1e780]: 운행 시간 주의
+                - list [ref=f1e781]:
+                  - listitem [ref=f1e782]:
+                    - button "35분 오전 4:15 출발 1,500원 기후동행 도보 1분 간선버스 32분 도보 1분 간선 간선 신분당선강남역(중) 중앙 도착정보 버스 421 막차통과 하차 서울역9번출구.서울스퀘어빌딩앞 상세보기" [ref=f1e783] [cursor=pointer]:
+                      - generic [ref=f1e785]:
+                        - emphasis [ref=f1e786]: 35분
+                        - generic [ref=f1e787]: 오전 4:15 출발
+                        - generic [ref=f1e788]: 1,500원
+                        - generic [ref=f1e789]: 기후동행
+                      - list [ref=f1e797]:
+                        - listitem [ref=f1e798]:
+                          - generic [ref=f1e799]: 도보
+                          - generic [ref=f1e801]: 1분
+                        - listitem [ref=f1e802]:
+                          - generic [ref=f1e803]: 간선버스
+                          - generic [ref=f1e805]: 32분
+                        - listitem [ref=f1e806]:
+                          - generic [ref=f1e807]:
+                            - generic [ref=f1e808]: 도보
+                            - text: 1분
+                      - list [ref=f1e809]:
+                        - listitem [ref=f1e810]:
+                          - generic [ref=f1e811]:
+                            - emphasis [ref=f1e813]:
+                              - generic [ref=f1e814]: 간선
+                            - emphasis [ref=f1e819]: 간선
+                          - generic [ref=f1e820]:
+                            - generic [ref=f1e821]:
+                              - generic [ref=f1e822]:
+                                - emphasis [ref=f1e823]: 신분당선강남역(중)
+                                - generic [ref=f1e824]: 중앙
+                              - button "도착정보" [ref=f1e825]
+                            - list [ref=f1e826]:
+                              - listitem [ref=f1e827]:
+                                - generic [ref=f1e828]:
+                                  - emphasis [ref=f1e829]:
+                                    - generic [ref=f1e830]: 버스
+                                  - emphasis [ref=f1e835]: "421"
+                                - generic [ref=f1e836]: 막차통과
+                        - listitem [ref=f1e837]:
+                          - emphasis [ref=f1e839]: 하차
+                          - emphasis [ref=f1e843]: 서울역9번출구.서울스퀘어빌딩앞
+                      - button "상세보기" [ref=f1e844]
+                  - listitem [ref=f1e845]:
+                    - button "1시간1분 오전 4:30 출발 1,500원 기후동행 도보 1분 간선버스 59분 도보 1분 간선 간선 신분당선강남역(중) 중앙 도착정보 버스 400 막차통과 하차 남대문경찰서.서울역10번출구 상세보기" [ref=f1e846] [cursor=pointer]:
+                      - generic [ref=f1e848]:
+                        - emphasis [ref=f1e849]: 1시간1분
+                        - generic [ref=f1e850]: 오전 4:30 출발
+                        - generic [ref=f1e851]: 1,500원
+                        - generic [ref=f1e852]: 기후동행
+                      - list [ref=f1e860]:
+                        - listitem [ref=f1e861]:
+                          - generic [ref=f1e862]: 도보
+                          - generic [ref=f1e864]: 1분
+                        - listitem [ref=f1e865]:
+                          - generic [ref=f1e866]: 간선버스
+                          - generic [ref=f1e868]: 59분
+                        - listitem [ref=f1e869]:
+                          - generic [ref=f1e870]:
+                            - generic [ref=f1e871]: 도보
+                            - text: 1분
+                      - list [ref=f1e872]:
+                        - listitem [ref=f1e873]:
+                          - generic [ref=f1e874]:
+                            - emphasis [ref=f1e876]:
+                              - generic [ref=f1e877]: 간선
+                            - emphasis [ref=f1e882]: 간선
+                          - generic [ref=f1e883]:
+                            - generic [ref=f1e884]:
+                              - generic [ref=f1e885]:
+                                - emphasis [ref=f1e886]: 신분당선강남역(중)
+                                - generic [ref=f1e887]: 중앙
+                              - button "도착정보" [ref=f1e888]
+                            - list [ref=f1e889]:
+                              - listitem [ref=f1e890]:
+                                - generic [ref=f1e891]:
+                                  - emphasis [ref=f1e892]:
+                                    - generic [ref=f1e893]: 버스
+                                  - emphasis [ref=f1e898]: "400"
+                                - generic [ref=f1e899]: 막차통과
+                        - listitem [ref=f1e900]:
+                          - emphasis [ref=f1e902]: 하차
+                          - emphasis [ref=f1e906]: 남대문경찰서.서울역10번출구
+                      - button "상세보기" [ref=f1e907]
+                  - listitem [ref=f1e908]:
+                    - button "35분 오전 4:50 출발 1,500원 기후동행 도보 1분 간선버스 26분 도보 7분 간선 간선 신분당선강남역(중) 중앙 도착정보 버스 402 막차통과 하차 남산공원.구힐튼호텔 상세보기" [ref=f1e909] [cursor=pointer]:
+                      - generic [ref=f1e911]:
+                        - emphasis [ref=f1e912]: 35분
+                        - generic [ref=f1e913]: 오전 4:50 출발
+                        - generic [ref=f1e914]: 1,500원
+                        - generic [ref=f1e915]: 기후동행
+                      - list [ref=f1e923]:
+                        - listitem [ref=f1e924]:
+                          - generic [ref=f1e925]: 도보
+                          - generic [ref=f1e927]: 1분
+                        - listitem [ref=f1e928]:
+                          - generic [ref=f1e929]: 간선버스
+                          - generic [ref=f1e931]: 26분
+                        - listitem [ref=f1e932]:
+                          - generic [ref=f1e933]:
+                            - generic [ref=f1e934]: 도보
+                            - text: 7분
+                      - list [ref=f1e935]:
+                        - listitem [ref=f1e936]:
+                          - generic [ref=f1e937]:
+                            - emphasis [ref=f1e939]:
+                              - generic [ref=f1e940]: 간선
+                            - emphasis [ref=f1e945]: 간선
+                          - generic [ref=f1e946]:
+                            - generic [ref=f1e947]:
+                              - generic [ref=f1e948]:
+                                - emphasis [ref=f1e949]: 신분당선강남역(중)
+                                - generic [ref=f1e950]: 중앙
+                              - button "도착정보" [ref=f1e951]
+                            - list [ref=f1e952]:
+                              - listitem [ref=f1e953]:
+                                - generic [ref=f1e954]:
+                                  - emphasis [ref=f1e955]:
+                                    - generic [ref=f1e956]: 버스
+                                  - emphasis [ref=f1e961]: "402"
+                                - generic [ref=f1e962]: 막차통과
+                        - listitem [ref=f1e963]:
+                          - emphasis [ref=f1e965]: 하차
+                          - emphasis [ref=f1e969]: 남산공원.구힐튼호텔
+                      - button "상세보기" [ref=f1e970]
+                  - listitem [ref=f1e971]:
+                    - button "45분 오전 5:19 출발 1,650원 기후동행 도보 10분 9호선지하철 9분 도보 8분 4호선지하철 11분 도보 4분 지하철 9호선 신논현역 실시간 시간표 05:30개화행 첫 사평역 방면 지하철 4호선 동작역 하차 서울역 상세보기" [ref=f1e972] [cursor=pointer]:
+                      - generic [ref=f1e974]:
+                        - emphasis [ref=f1e975]: 45분
+                        - generic [ref=f1e976]: 오전 5:19 출발
+                        - generic [ref=f1e977]: 1,650원
+                        - generic [ref=f1e978]: 기후동행
+                      - list [ref=f1e986]:
+                        - listitem [ref=f1e987]:
+                          - generic [ref=f1e988]: 도보
+                          - generic [ref=f1e990]: 10분
+                        - listitem [ref=f1e991]:
+                          - generic [ref=f1e992]: 9호선지하철
+                          - generic [ref=f1e994]: 9분
+                        - listitem [ref=f1e995]:
+                          - generic [ref=f1e996]:
+                            - generic [ref=f1e997]: 도보
+                            - text: 8분
+                        - listitem [ref=f1e998]:
+                          - generic [ref=f1e999]: 4호선지하철
+                          - generic [ref=f1e1001]: 11분
+                        - listitem [ref=f1e1002]:
+                          - generic [ref=f1e1003]:
+                            - generic [ref=f1e1004]: 도보
+                            - text: 4분
+                      - list [ref=f1e1005]:
+                        - listitem [ref=f1e1006]:
+                          - generic [ref=f1e1007]:
+                            - emphasis [ref=f1e1009]:
+                              - generic [ref=f1e1010]: 지하철
+                            - emphasis [ref=f1e1015]: 9호선
+                          - generic [ref=f1e1016]:
+                            - generic [ref=f1e1017]:
+                              - emphasis [ref=f1e1019]: 신논현역
+                              - button "실시간" [ref=f1e1020]
+                              - button "시간표" [ref=f1e1021]
+                            - generic [ref=f1e1022]:
+                              - time [ref=f1e1023]: 05:30
+                              - text: 개화행
+                              - generic [ref=f1e1024]: 첫
+                              - text: 사평역 방면
+                        - listitem [ref=f1e1025]:
+                          - generic [ref=f1e1026]:
+                            - emphasis [ref=f1e1028]:
+                              - generic [ref=f1e1029]: 지하철
+                            - emphasis [ref=f1e1034]: 4호선
+                          - emphasis [ref=f1e1038]: 동작역
+                        - listitem [ref=f1e1039]:
+                          - emphasis [ref=f1e1041]: 하차
+                          - emphasis [ref=f1e1045]: 서울역
+                      - button "상세보기" [ref=f1e1046]
+                  - listitem [ref=f1e1047]:
+                    - button "36분 오전 5:36 출발 1,650원 기후동행 2호선지하철 9분 도보 2분 4호선지하철 16분 도보 4분 지하철 2호선 강남역 실시간 시간표 05:36내선순환행 교대역 방면 지하철 4호선 사당역 하차 서울역 상세보기" [ref=f1e1048] [cursor=pointer]:
+                      - generic [ref=f1e1050]:
+                        - emphasis [ref=f1e1051]: 36분
+                        - generic [ref=f1e1052]: 오전 5:36 출발
+                        - generic [ref=f1e1053]: 1,650원
+                        - generic [ref=f1e1054]: 기후동행
+                      - list [ref=f1e1062]:
+                        - listitem [ref=f1e1063]:
+                          - generic [ref=f1e1064]: 2호선지하철
+                          - generic [ref=f1e1066]: 9분
+                        - listitem [ref=f1e1067]:
+                          - generic [ref=f1e1068]:
+                            - generic [ref=f1e1069]: 도보
+                            - text: 2분
+                        - listitem [ref=f1e1070]:
+                          - generic [ref=f1e1071]: 4호선지하철
+                          - generic [ref=f1e1073]: 16분
+                        - listitem [ref=f1e1074]:
+                          - generic [ref=f1e1075]:
+                            - generic [ref=f1e1076]: 도보
+                            - text: 4분
+                      - list [ref=f1e1077]:
+                        - listitem [ref=f1e1078]:
+                          - generic [ref=f1e1079]:
+                            - emphasis [ref=f1e1081]:
+                              - generic [ref=f1e1082]: 지하철
+                            - emphasis [ref=f1e1087]: 2호선
+                          - generic [ref=f1e1088]:
+                            - generic [ref=f1e1089]:
+                              - emphasis [ref=f1e1091]: 강남역
+                              - button "실시간" [ref=f1e1092]
+                              - button "시간표" [ref=f1e1093]
+                            - generic [ref=f1e1094]:
+                              - time [ref=f1e1095]: 05:36
+                              - text: 내선순환행 교대역 방면
+                        - listitem [ref=f1e1096]:
+                          - generic [ref=f1e1097]:
+                            - emphasis [ref=f1e1099]:
+                              - generic [ref=f1e1100]: 지하철
+                            - emphasis [ref=f1e1105]: 4호선
+                          - emphasis [ref=f1e1109]: 사당역
+                        - listitem [ref=f1e1110]:
+                          - emphasis [ref=f1e1112]: 하차
+                          - emphasis [ref=f1e1116]: 서울역
+                      - button "상세보기" [ref=f1e1117]
+                  - listitem [ref=f1e1118]:
+                    - button "1시간 오전 5:12 출발 1,550원 기후동행 도보 24분 7호선지하철 8분 도보 3분 4호선지하철 14분 도보 4분 지하철 7호선 논현역 실시간 시간표 05:36석남행 첫 반포역 방면 지하철 4호선 총신대입구(이수)역 하차 서울역 상세보기" [ref=f1e1119] [cursor=pointer]:
+                      - generic [ref=f1e1121]:
+                        - emphasis [ref=f1e1122]: 1시간
+                        - generic [ref=f1e1123]: 오전 5:12 출발
+                        - generic [ref=f1e1124]: 1,550원
+                        - generic [ref=f1e1125]: 기후동행
+                      - list [ref=f1e1133]:
+                        - listitem [ref=f1e1134]:
+                          - generic [ref=f1e1135]: 도보
+                          - generic [ref=f1e1137]: 24분
+                        - listitem [ref=f1e1138]:
+                          - generic [ref=f1e1139]: 7호선지하철
+                          - generic [ref=f1e1141]: 8분
+                        - listitem [ref=f1e1142]:
+                          - generic [ref=f1e1143]:
+                            - generic [ref=f1e1144]: 도보
+                            - text: 3분
+                        - listitem [ref=f1e1145]:
+                          - generic [ref=f1e1146]: 4호선지하철
+                          - generic [ref=f1e1148]: 14분
+                        - listitem [ref=f1e1149]:
+                          - generic [ref=f1e1150]:
+                            - generic [ref=f1e1151]: 도보
+                            - text: 4분
+                      - list [ref=f1e1152]:
+                        - listitem [ref=f1e1153]:
+                          - generic [ref=f1e1154]:
+                            - emphasis [ref=f1e1156]:
+                              - generic [ref=f1e1157]: 지하철
+                            - emphasis [ref=f1e1162]: 7호선
+                          - generic [ref=f1e1163]:
+                            - generic [ref=f1e1164]:
+                              - emphasis [ref=f1e1166]: 논현역
+                              - button "실시간" [ref=f1e1167]
+                              - button "시간표" [ref=f1e1168]
+                            - generic [ref=f1e1169]:
+                              - time [ref=f1e1170]: 05:36
+                              - text: 석남행
+                              - generic [ref=f1e1171]: 첫
+                              - text: 반포역 방면
+                        - listitem [ref=f1e1172]:
+                          - generic [ref=f1e1173]:
+                            - emphasis [ref=f1e1175]:
+                              - generic [ref=f1e1176]: 지하철
+                            - emphasis [ref=f1e1181]: 4호선
+                          - emphasis [ref=f1e1185]: 총신대입구(이수)역
+                        - listitem [ref=f1e1186]:
+                          - emphasis [ref=f1e1188]: 하차
+                          - emphasis [ref=f1e1192]: 서울역
+                      - button "상세보기" [ref=f1e1193]
+                  - listitem [ref=f1e1194]:
+                    - button "38분 오전 6:02 출발 1,650원 기후동행 도보 10분 9호선지하철 11분 도보 3분 1호선지하철 8분 지하철 9호선 신논현역 실시간 시간표 06:12김포공항행 급 첫 고속터미널역 방면 지하철 1호선 노량진역 하차 서울역 상세보기" [ref=f1e1195] [cursor=pointer]:
+                      - generic [ref=f1e1197]:
+                        - emphasis [ref=f1e1198]: 38분
+                        - generic [ref=f1e1199]: 오전 6:02 출발
+                        - generic [ref=f1e1200]: 1,650원
+                        - generic [ref=f1e1201]: 기후동행
+                      - list [ref=f1e1209]:
+                        - listitem [ref=f1e1210]:
+                          - generic [ref=f1e1211]: 도보
+                          - generic [ref=f1e1213]: 10분
+                        - listitem [ref=f1e1214]:
+                          - generic [ref=f1e1215]: 9호선지하철
+                          - generic [ref=f1e1217]: 11분
+                        - listitem [ref=f1e1218]:
+                          - generic [ref=f1e1219]:
+                            - generic [ref=f1e1220]: 도보
+                            - text: 3분
+                        - listitem [ref=f1e1221]:
+                          - generic [ref=f1e1222]: 1호선지하철
+                          - generic [ref=f1e1224]: 8분
+                      - list [ref=f1e1225]:
+                        - listitem [ref=f1e1226]:
+                          - generic [ref=f1e1227]:
+                            - emphasis [ref=f1e1229]:
+                              - generic [ref=f1e1230]: 지하철
+                            - emphasis [ref=f1e1235]: 9호선
+                          - generic [ref=f1e1236]:
+                            - generic [ref=f1e1237]:
+                              - emphasis [ref=f1e1239]: 신논현역
+                              - button "실시간" [ref=f1e1240]
+                              - button "시간표" [ref=f1e1241]
+                            - generic [ref=f1e1242]:
+                              - time [ref=f1e1243]: 06:12
+                              - text: 김포공항행
+                              - generic [ref=f1e1244]: 급
+                              - generic [ref=f1e1245]: 첫
+                              - text: 고속터미널역 방면
+                        - listitem [ref=f1e1246]:
+                          - generic [ref=f1e1247]:
+                            - emphasis [ref=f1e1249]:
+                              - generic [ref=f1e1250]: 지하철
+                            - emphasis [ref=f1e1255]: 1호선
+                          - emphasis [ref=f1e1259]: 노량진역
+                        - listitem [ref=f1e1260]:
+                          - emphasis [ref=f1e1262]: 하차
+                          - emphasis [ref=f1e1266]: 서울역
+                      - button "상세보기" [ref=f1e1267]
+              - generic [ref=f1e1268]:
+                - list [ref=f1e1270]:
+                  - listitem [ref=f1e1271]: 강남역 2호선
+                  - listitem [ref=f1e1272]: 서울역 1호선
+                - generic [ref=f1e1273]:
+                  - paragraph [ref=f1e1275]: 경로를 저장해보세요
+                  - button "저장" [ref=f1e1276] [cursor=pointer]
+                  - button "공유하기" [ref=f1e1277] [cursor=pointer]
+      - button "패널 접기" [expanded] [ref=f1e145] [cursor=pointer]
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic [ref=f1e147]:
+                - button "일반지도" [ref=f1e148] [cursor=pointer]
+                - button "위성지도" [ref=f1e150] [cursor=pointer]
+                - button "지형지도" [ref=f1e152] [cursor=pointer]
+              - generic [ref=f1e154]:
+                - button "테마" [ref=f1e155] [cursor=pointer]
+                - button "저장" [ref=f1e157] [cursor=pointer]
+                - button "지적편집도" [ref=f1e159] [cursor=pointer]
+                - button "거리뷰" [ref=f1e161] [cursor=pointer]
+              - generic [ref=f1e163]:
+                - button "반경측정" [ref=f1e164] [cursor=pointer]
+                - button "면적측정" [ref=f1e166] [cursor=pointer]
+                - button "거리측정" [ref=f1e168] [cursor=pointer]
+              - generic [ref=f1e170]:
+                - button "다운로드" [ref=f1e171] [cursor=pointer]
+                - button "인쇄" [ref=f1e173] [cursor=pointer]
+                - button "공유하기" [ref=f1e175] [cursor=pointer]
+            - generic:
+              - button "접속위치" [ref=f1e179] [cursor=pointer]
+              - generic [ref=f1e185]:
+                - button "확대" [ref=f1e186] [cursor=pointer]
+                - generic [ref=f1e188]:
+                  - slider "줌 슬라이더" [ref=f1e192] [cursor=pointer]: "67"
+                  - generic:
+                    - button "부동산"
+                    - button "거리"
+                    - button "동"
+                    - button "읍/면"
+                    - button "시/군/구"
+                    - button "시/도"
+                - button "축소" [ref=f1e193] [cursor=pointer]
+  - status [ref=f1e195]
