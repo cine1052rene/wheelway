@@ -5,7 +5,7 @@ import { dataSources, getSeoulFacilities, loadFacilityIndex } from './services/p
 import { buildJourney } from './services/journey.js';
 
 const state = {
-  profile: 'manual', from: 'gangnam', to: 'seoul', activeTab: 'route',
+  profile: 'manual', from: '강남', to: '서울역', activeTab: 'route',
   overrides: JSON.parse(localStorage.getItem('wheelway-overrides') || '{}'),
   notices: JSON.parse(localStorage.getItem('wheelway-notices') || '[]'),
   result: null, syncing: false, syncMessage: '',
@@ -116,7 +116,12 @@ function stationsView() {
   </div>
   <div class="station-grid">${stations.map(station => {
     const s = currentStation(station.id);
-    return `<article class="station-card ${s.noFacility ? 'unavailable' : ''}"><div><span class="line-list">${s.lines.map(line => `<b style="background:${lineColors[line]}">${line}</b>`).join('')}</span><h3>${s.name}</h3></div><span class="status ${s.noFacility ? 'off' : 'on'}">${s.noFacility ? '우회 필요' : '이용 가능'}</span><p>${s.noFacility ? '장애인 편의시설 정보 없음' : `엘리베이터 ${s.capacityKg}kg · 문폭 ${s.doorWidthCm}cm`}</p><small>${escape(s.note)}</small>${facilityListHtml(s.name)}</article>`;
+    const facilitySummary = s.noFacility
+      ? '장애인 편의시설 정보 없음'
+      : s.elevator
+        ? `엘리베이터 ${s.capacityKg}kg${s.doorWidthEstimated ? ' · 문폭 90cm(법정기준 추정치, 실측 아님)' : s.doorWidthCm ? ` · 문폭 ${s.doorWidthCm}cm` : ''}`
+        : '엘리베이터 없음 · 에스컬레이터만 이용 가능';
+    return `<article class="station-card ${s.noFacility ? 'unavailable' : ''}"><div><span class="line-list">${s.lines.map(line => `<b style="background:${lineColors[line]}">${line}</b>`).join('')}</span><h3>${s.name}</h3></div><span class="status ${s.noFacility ? 'off' : 'on'}">${s.noFacility ? '우회 필요' : '이용 가능'}</span><p>${facilitySummary}</p><small>${escape(s.note)}</small>${facilityListHtml(s.name)}</article>`;
   }).join('')}</div></section>`;
 }
 function sourcesView() { return `<section class="sources-page"><div class="page-heading"><p class="eyebrow">신뢰할 수 있는 데이터</p><h2>공공데이터 연결</h2><p>공공데이터 키는 서버에만 보관하고, 앱에는 노출하지 않습니다.</p></div><div class="source-list">${dataSources.map(source => `<a href="${source.url}" target="_blank" rel="noreferrer"><span>◫</span><div><strong>${source.name}</strong><p>${source.detail}</p></div><b>↗</b></a>`).join('')}</div><div class="sync-card"><div><span class="sync-icon">↻</span><div><h3>서울교통공사 시설 정보 조회</h3><p>보안 서버를 통해 엘리베이터 현황을 조회합니다.</p></div></div><div class="sync-actions"><button data-action="sync" ${state.syncing ? 'disabled' : ''}>${state.syncing ? '조회 중...' : '시설 정보 연결 확인'}</button></div>${state.syncMessage ? `<p class="sync-message">${escape(state.syncMessage)}</p>` : ''}</div><aside class="architecture"><strong>안전한 API 키 처리</strong><p>공공 API → Firebase 서버 함수 → 앱. API 키는 Firebase Secret에만 저장되며 브라우저와 배포 파일에는 포함되지 않습니다.</p></aside></section>`; }
