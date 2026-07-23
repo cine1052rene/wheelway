@@ -86,31 +86,57 @@ class AppColors {
     inversePrimary: Color(0xFF08705B),
   );
 
-  /// 지하철 노선 원색(서울교통공사 공식 계열). 5호선(자주)·6호선(갈색)은
-  /// 원래 채도가 낮아(실측 HSL 채도 0.28/0.63) 화면에서 흐리게 보인다는
-  /// 피드백으로, [line]에서 채도를 보정한 값을 제공한다.
+  /// 지하철 노선 원색(서울교통공사 공식 계열). 실측 HSL 기준 5호선(자주)·
+  /// 6호선(갈색)은 채도가 낮아 흐리게 보이고, **3호선과 6호선은 색상각(Hue)이
+  /// 27.3°/29.2°로 사실상 같은 주황 계열**이라 채도를 아무리 올려도 육안
+  /// 구분이 안 된다(실측 후 확인). [line]에서 이 두 문제를 함께 보정한다.
   static const Map<String, Color> _rawLine = {
     '1': Color(0xFF0052A4),
     '2': Color(0xFF00A84D),
     '3': Color(0xFFEF7C1C),
     '4': Color(0xFF00A5DE),
     '5': Color(0xFF996CAC),
-    '6': Color(0xFFCD7C2F),
+    '6': Color(0xFFCD7C2F), // 원색 — 3호선과 색상각이 거의 같아 아래서 이동
     '7': Color(0xFF747F00),
     '8': Color(0xFFE6186C),
   };
 
-  /// 앱에서 실제 사용하는 호선 색 — 원색 중 채도가 낮은 것만 최소 채도
-  /// 기준(0.65)까지 끌어올려 모든 노선이 화면에서 고르게 선명해 보이게
-  /// 한다(색상환·명도는 유지 — 노선 정체성은 그대로).
-  static final Map<String, Color> line = {
-    for (final entry in _rawLine.entries) entry.key: _vivify(entry.value),
+  /// 아직 데이터에 없지만 조만간 추가될 노선(9호선·공항철도·GTX 등)의
+  /// placeholder 색. **공식 브랜드 색 확인 전 임시값** — 실제 노선 데이터가
+  /// 들어올 때 정확한 공식 색으로 교체할 것. 기존 1~8호선과 색상각이
+  /// 겹치지 않도록만 우선 배치했다.
+  static const Map<String, Color> _rawLineFuture = {
+    '9': Color(0xFFBDB092), // 9호선(금색 계열, 공식색 확인 필요)
+    '공항철도': Color(0xFF0090D2),
+    'GTX-A': Color(0xFF8A5CC7),
+    'GTX-B': Color(0xFFC74C7A),
+    'GTX-C': Color(0xFF4C7AC7),
+    '신분당선': Color(0xFFC7233A),
+    '수인분당선': Color(0xFFF5A200),
+    '경의중앙선': Color(0xFF77C4A3),
   };
+
+  /// 앱에서 실제 사용하는 호선 색 — 원색 중 채도가 낮은 것만 끌어올리고,
+  /// 3·6호선처럼 색상각이 겹치는 쌍은 6호선을 금갈색 쪽(H≈48°)으로 옮겨
+  /// 분리한다(색상환·명도는 유지 — 노선 정체성은 그대로).
+  static final Map<String, Color> line = _buildLineColors();
+
+  static Map<String, Color> _buildLineColors() {
+    final map = {
+      for (final entry in _rawLine.entries) entry.key: _vivify(entry.value),
+      for (final entry in _rawLineFuture.entries)
+        entry.key: _vivify(entry.value),
+    };
+    // 6호선만 색상각을 이동해 3호선(H≈27°)과의 충돌을 해소.
+    final six = HSLColor.fromColor(map['6']!);
+    map['6'] = six.withHue(48).withSaturation(0.78).withLightness(0.40).toColor();
+    return map;
+  }
 
   static Color _vivify(Color c) {
     final hsl = HSLColor.fromColor(c);
-    if (hsl.saturation >= 0.65) return c;
-    return hsl.withSaturation(0.72).toColor();
+    if (hsl.saturation >= 0.75) return c;
+    return hsl.withSaturation(0.8).toColor();
   }
 
   static Color lineColor(String lineNo) => line[lineNo] ?? seedPrimary;
