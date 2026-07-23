@@ -86,8 +86,10 @@ class AppColors {
     inversePrimary: Color(0xFF08705B),
   );
 
-  /// 지하철 노선 색 (서울교통공사 공식 계열, 1~8호선).
-  static const Map<String, Color> line = {
+  /// 지하철 노선 원색(서울교통공사 공식 계열). 5호선(자주)·6호선(갈색)은
+  /// 원래 채도가 낮아(실측 HSL 채도 0.28/0.63) 화면에서 흐리게 보인다는
+  /// 피드백으로, [line]에서 채도를 보정한 값을 제공한다.
+  static const Map<String, Color> _rawLine = {
     '1': Color(0xFF0052A4),
     '2': Color(0xFF00A84D),
     '3': Color(0xFFEF7C1C),
@@ -97,6 +99,19 @@ class AppColors {
     '7': Color(0xFF747F00),
     '8': Color(0xFFE6186C),
   };
+
+  /// 앱에서 실제 사용하는 호선 색 — 원색 중 채도가 낮은 것만 최소 채도
+  /// 기준(0.65)까지 끌어올려 모든 노선이 화면에서 고르게 선명해 보이게
+  /// 한다(색상환·명도는 유지 — 노선 정체성은 그대로).
+  static final Map<String, Color> line = {
+    for (final entry in _rawLine.entries) entry.key: _vivify(entry.value),
+  };
+
+  static Color _vivify(Color c) {
+    final hsl = HSLColor.fromColor(c);
+    if (hsl.saturation >= 0.65) return c;
+    return hsl.withSaturation(0.72).toColor();
+  }
 
   static Color lineColor(String lineNo) => line[lineNo] ?? seedPrimary;
 
