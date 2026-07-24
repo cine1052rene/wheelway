@@ -1,0 +1,365 @@
+- generic [active] [ref=f1e1]:
+  - link "본문 바로가기" [ref=f1e2] [cursor=pointer]:
+    - /url: "#ct"
+  - banner:
+    - generic [ref=f1e6]:
+      - heading [level=1] [ref=f1e7]:
+        - link "Naver" [ref=f1e8] [cursor=pointer]:
+          - /url: https://m.naver.com/
+        - link "이전페이지":
+          - /url: "#"
+      - search [ref=f1e10]:
+        - generic [ref=f1e11]:
+          - generic [ref=f1e13]:
+            - textbox "검색어를 입력해 주세요." [ref=f1e14]: 지하철노선도
+            - button "입력 내용 삭제" [ref=f1e15]
+          - generic [ref=f1e17]:
+            - button "음성검색" [ref=f1e18]
+            - button "검색"
+    - tablist [ref=f1e22]:
+      - tab "AI new" [ref=f1e23] [cursor=pointer]:
+        - text: AI
+        - generic [ref=f1e24]: new
+      - tab "블로그" [ref=f1e26] [cursor=pointer]
+      - tab "카페" [ref=f1e27] [cursor=pointer]
+      - tab "클립" [ref=f1e28] [cursor=pointer]
+      - tab "이미지" [ref=f1e29] [cursor=pointer]
+      - tab "지식iN" [ref=f1e30] [cursor=pointer]
+      - tab "동영상" [ref=f1e31] [cursor=pointer]
+      - tab "쇼핑" [ref=f1e32] [cursor=pointer]
+      - tab "뉴스" [ref=f1e33] [cursor=pointer]
+      - tab "어학사전" [ref=f1e34] [cursor=pointer]
+      - tab "지도" [ref=f1e35] [cursor=pointer]
+      - tab "인플루언서" [ref=f1e36] [cursor=pointer]
+      - tab "검색옵션" [ref=f1e37] [cursor=pointer]
+  - generic [ref=f1e39]:
+    - generic [ref=f1e44]:
+      - heading [level=2] [ref=f1e45]:
+        - text: 지하철 노선도
+        - button "문서 저장하기" [ref=f1e47] [cursor=pointer]
+      - list [ref=f1e50]:
+        - listitem [ref=f1e51]:
+          - button [ref=f1e52] [cursor=pointer]
+        - listitem [ref=f1e57]:
+          - button [ref=f1e58] [cursor=pointer]
+        - listitem [ref=f1e63]:
+          - button "급행" [ref=f1e64] [cursor=pointer]
+      - generic [ref=f1e74]:
+        - button "출발지 출발역 입력" [ref=f1e75] [cursor=pointer]:
+          - generic [ref=f1e76]: 출발지
+          - generic [ref=f1e81]: 출발역 입력
+        - button "출발지와 도착지 전환" [ref=f1e82] [cursor=pointer]
+        - button "도착지 도착역 입력" [ref=f1e88] [cursor=pointer]:
+          - generic [ref=f1e89]: 도착지
+          - generic [ref=f1e94]: 도착역 입력
+      - generic [ref=f1e96]:
+        - term [ref=f1e97]: 관련
+        - definition [ref=f1e98]:
+          - link "빠른길찾기" [ref=f1e99] [cursor=pointer]
+          - link "기차승차권예매" [ref=f1e100] [cursor=pointer]
+          - link "시외/고속버스시간조회" [ref=f1e101] [cursor=pointer]
+      - button [ref=f1e103] [cursor=pointer]
+    - generic [ref=f1e112]:
+      - generic [ref=f1e113]:
+        - generic [ref=f1e114]:
+          - link "서울시청 news.seoul.go.kr›지하철-노선도" [ref=f1e115] [cursor=pointer]:
+            - /url: https://news.seoul.go.kr/culture/archives/tag/%EC%A7%80%ED%95%98%EC%B2%A0-%EB%85%B8%EC%84%A0%EB%8F%84
+            - generic [ref=f1e117]:
+              - generic [ref=f1e121]: 서울시청
+              - generic [ref=f1e123]: news.seoul.go.kr›지하철-노선도
+          - button "옵션 메뉴 열기" [ref=f1e128] [cursor=pointer]
+        - generic [ref=f1e133]:
+          - link [ref=f1e135] [cursor=pointer]:
+            - /url: https://news.seoul.go.kr/culture/archives/tag/%EC%A7%80%ED%95%98%EC%B2%A0-%EB%85%B8%EC%84%A0%EB%8F%84
+            - generic [ref=f1e136]:
+              - mark [ref=f1e137]: 지하철 노선도
+              - text: < 문화
+          - link [ref=f1e139] [cursor=pointer]:
+            - /url: https://news.seoul.go.kr/culture/archives/tag/%EC%A7%80%ED%95%98%EC%B2%A0-%EB%85%B8%EC%84%A0%EB%8F%84
+            - generic [ref=f1e140]:
+              - text: 시민의 발, 디자인을 입다...서울시,
+              - mark [ref=f1e141]: 지하철 노선도
+              - text: 40년 만에 변경 ; 서울시의
+              - mark [ref=f1e142]: 지하철 노선도
+              - text: 가 40년 만에 바뀐다.
+              - mark [ref=f1e143]: 지하철 노선
+              - text: 이 1980년대 4개
+              - mark [ref=f1e144]: 노선
+              - text: (106개 역)에서 2000년대 9개
+              - mark [ref=f1e145]: 노선
+              - text: (338개 역)을 거쳐 현재 23개
+              - mark [ref=f1e146]: 노선
+              - text: (624개 역)으로 계속 증가하고 있지만,
+              - mark [ref=f1e147]: 노선도
+              - text: 는 1980년대의 형태를 유지한 채
+              - mark [ref=f1e148]: 노선
+              - text: 만 추가되어 다양한...
+      - generic [ref=f1e149]:
+        - generic [ref=f1e151]:
+          - link [ref=f1e152] [cursor=pointer]:
+            - /url: https://news.seoul.go.kr/culture/archives/520933
+            - generic [ref=f1e153]:
+              - text: 시민의 발, 디자인을 입다…서울시,
+              - mark [ref=f1e154]: 지하철 노선도
+              - text: 40년 만에 변경 < 문화
+          - generic [ref=f1e156]:
+            - text: 서울시의
+            - mark [ref=f1e157]: 지하철 노선도
+            - text: 가 40년 만에 바뀐다.
+            - mark [ref=f1e158]: 지하철 노선
+            - text: 이 1980년대 4개
+            - mark [ref=f1e159]: 노선
+            - text: (106개 역)에서 2000년대 9개
+            - mark [ref=f1e160]: 노선
+            - text: (338개 역)을 거쳐 현재 23개
+            - mark [ref=f1e161]: 노선
+            - text: (624개 역)으로 계속 증가하고 있지만,
+            - mark [ref=f1e162]: 노선도
+            - text: 는 1980년대의 형태를 유지한 채
+            - mark [ref=f1e163]: 노선
+            - text: 만 추가되어 다양한 형태로 혼용되고 있어 추가 확장
+            - mark [ref=f1e164]: 노선
+            - text: 의 적용이 어려운 상황이다.
+        - link "관련문서 더보기" [ref=f1e166] [cursor=pointer]:
+          - /url: "?page=2&query=%EC%A7%80%ED%95%98%EC%B2%A0%EB%85%B8%EC%84%A0%EB%8F%84+site%3Anews.seoul.go.kr&qvt=0&where=m_web"
+    - list [ref=f1e174]:
+      - listitem [ref=f1e175]:
+        - generic [ref=f1e176]:
+          - link "favicon6 쿠팡 m.coupang.com 광고 전철노선표 쿠팡 양면코팅 선명한 지도 지금 바로 확인해요" [ref=f1e179] [cursor=pointer]:
+            - /url: https://ader.naver.com/v1/2PtYbIBsC1u890MVGdN1aY5N_DlkIhS65swnRdCMvKQlKW6_yur31yBdtAhBRud2w255a_58dcBdj0WQb77aJeYJx0YVe2YWOBZMoHgt7k05Wy5__dsc9JzYCaBhtGarSYFaujEGp12Tsfv06lf41VMY60SjCQdYOuzsQ3NQ0Lmg-KSquaX3uRTqF01IsesKKVhBl5kbdzVZ6vcccqSD1NXGTs6peaOdVGlb7JsYmgbRxmCDmNY6K4Fv4ZGl9MvL8xdpYIIdBAqSptMkbRgkveuP-fR2eKdrxXLQe4EmUDeil5oXY6lLLAm_16aaZyOXjQ_TIrKSOhi6ULdwPuykuaO93gtPtEUMzqZbZLwcwITgRoeB6DQ3ljHsrINlNowClN9vp5qcYwyE4ZMjHRGnJbm7dweFqYTFvKQXTbskCiIUsJBVx8UstiATC8SUhFpqnqauhA9_qQ9V-ajBw0PGWHjAwsODZ5bOzPN5XbeTgwMgpbaiaerPrxlfDkA67BtGtHchYcdqlQ2cwWroHopevb7efHqyvYHxxG5tk_hrMn7drLqt4Xt7Q-fg9GnZeLcTqMzYi9NWf8GkKC0fX1v6Dw==?c=mnaver.search.plsearch&t=0
+            - generic [ref=f1e181]:
+              - img "favicon6" [ref=f1e183]
+              - generic [ref=f1e184]: 쿠팡
+              - generic [ref=f1e185]: m.coupang.com
+              - link "광고" [ref=f1e186]
+            - generic [ref=f1e192]:
+              - generic [ref=f1e193]:
+                - text: 전철
+                - mark [ref=f1e194]: 노선
+                - mark [ref=f1e195]: 표
+                - text: 쿠팡
+              - text: 양면코팅 선명한 지도 지금 바로 확인해요
+          - link [ref=f1e199] [cursor=pointer]:
+            - /url: https://ader.naver.com/v1/2PtYbIBsC1u890MVGdN1aY5N_DlkIhS65swnRdCMvKQlKW6_yur31yBdtAhBRud2w255a_58dcBdj0WQb77aJeYJx0YVe2YWOBZMoHgt7k05Wy5__dsc9JzYCaBhtGarSYFaujEGp12Tsfv06lf41VMY60SjCQdYOuzsQ3NQ0Lmg-KSquaX3uRTqF01IsesKKVhBl5kbdzVZ6vcccqSD1NXGTs6peaOdVGlb7JsYmgbRxmCDmNY6K4Fv4ZGl9MvL8xdpYIIdBAqSptMkbRgkveuP-fR2eKdrxXLQe4EmUDeil5oXY6lLLAm_16aaZyOXjQ_TIrKSOhi6ULdwPuykuaO93gtPtEUMzqZbZLwcwITgRoeB6DQ3ljHsrINlNowClN9vp5qcYwyE4ZMjHRGnJbm7dweFqYTFvKQXTbskCiIUsJBVx8UstiATC8SUhFpqnqauhA9_qQ9V-ajBw0PGWHjAwsODZ5bOzPN5XbeTgwMgpbaiaerPrxlfDkA67BtGtHchYcdqlQ2cwWroHopevb7efHqyvYHxxG5tk_hrMn7drLqt4Xt7Q-fg9GnZeLcTqMzYi9NWf8GkKC0fX1v6Dw==?c=mnaver.search.plsearch&t=0
+            - mark [ref=f1e200]: 지하
+            - text: 철 여행 계획! 온 가족이 즐기는
+            - mark [ref=f1e201]: 노선
+            - mark [ref=f1e202]: 표
+            - text: 를 쿠팡에서.
+          - link "오늘주문 내일도착 로켓배송 더보기" [ref=f1e203] [cursor=pointer]:
+            - /url: https://ader.naver.com/v1/fKaI0E3W-vQGxEiuowAQOJt5u4uQEL-tBWBcdgF82quwjtkgskXxGsWJsuLvOc8SxmVvCxwgTh75JJB7cyCTSktwHPrZa_oovC8WswXhzt0klM9UVgQapEN_M4cB1KOtZhIqhCwelRq3rGak8iwkaienMCWYiU9hiVrODNbw6R5qGZnNVFBZO19kv4_ocoW5LR_BMk3dQlcmnrBe1if10tNG8tBQ5QbDF0U7nQKZYfMsNkiwW05xHCpMcx1YztwRysW2pbDuslT5fsI_lpvlPjA4GpUP7laUgjOQPrR3c4PAp3fqiIelkVgmgVO5r8RHC6yQa58zcOOAnYY82DzLdSWMMJymV6c43Lwmw5J8tj4DDWimmBOUS0_-FfEqRz7a0E2Ykfufwpoln6KlJEs_ek8G5s4-sA9d05mjBPVfqHGzfxBRrW0daew2QFWbWaM6j_qPAfmSrLa7I8zVLK3pFNLXYdN7EnAwYZk-o6-7Z2LRjHYoW4v77ICbrG0_zBVTKrtDEMoNB6oBXyWf_Y1OswuEuchy7m8FxOv463f_bp48wo-n9f8Cltamlvy5N-HQ-vv0CD31wt0FIFb6eglaIXz_yp8B0UKnGP8wuYnPtlg=?c=mnaver.search.plsearch&t=0
+            - generic [ref=f1e207]: 오늘주문 내일도착 로켓배송
+            - img "더보기" [ref=f1e208]
+          - list [ref=f1e212]:
+            - listitem [ref=f1e213]:
+              - link "전철노선표" [ref=f1e214] [cursor=pointer]:
+                - /url: https://ader.naver.com/v1/-KDQap1JVL6OzjClhm8oFv7xfXYur_A8cp8UoPRMjc6-psG_U5cDK8T3_A_EGE22X7SkCBmAyotrdCQR7_n6G1KLQKYi93_v5pG0zmEDBqhHkoEMvJELXrMe_SWipKyTZEaU0VL8wC1599mD6QCcp3lAQAVkWtHwgosSyhg_uzFE9ZMOfDcy3D8jRihoUbvMEBsTMNqAP2NBRzHAkXCgpkzm0MlpqoCyKQOtBtvCqKrvSa_7LHROkw_Sf66a0PTrHCtnKDPPJR_5XdljrlfCFrYH4_XodaDpBWXv_Ds7vKwJl6yjoywOO_1h0aWpgEG6ms2h-D7O1NTQFSsQfZqvsoTYRdx_3A3cb8tftCkXWSMWHQCdtgo9WlgJSgTb1jBqP_mX6RHvZ-1xxDdZCBZUedE79BU12FsDCA_-NyXFn-q2ZdBrPQrunCiN4bb-eKD_XYIFW7ewQQWLdIGAq5L9VgZ35CEAIvtdmek7CSGUnaS5MtlfZIlVAwSYu5dttIqZ76byEv0YvCwZXUcEf4nelMLs6sxgaXk6swLCRjpKkZueq5zfGYWX1_i8lWZFrnvUu3XarpS6LzjR-OG5qw0qhbVMJeRXbujjq6VqF6jbSQ8g6vm0Cr5QnA--9LI8zbdY?c=mnaver.search.plsearch&t=0
+            - listitem [ref=f1e216]:
+              - link "지하철노선표" [ref=f1e217] [cursor=pointer]:
+                - /url: https://ader.naver.com/v1/1RdpfVgGr81THpBvvnG6EGi9qr_ZvdSDiiM0QMdCn4AH_kh93XDsN68ibTblTSSdnvuHaVwjZTfitPUPjXeTrJjeqqbHNzTxVfDTmjyetp9xcKJ_mwUBf2ubhyfNwtJ0I6cx3UNEU-9S786eDjZCdDJ8o7luQntcv4X5jLqHe2HcIh47oDbAiu2cwN_gMIsIYp9wSUq82lZhVwPwDbgeIUwB-K7gUwsN__U_3X_ACkMBLRVoipZnJELedYtD_RV9BOP03Icu8pAwQROxm9vAmoUng0YmF6R1LYcm7KtzM1BfgpGhC8iwNizTcMZhUplqRvSClbvfxJ_sKNKmJjVgkyv58ZXHhaZp99VT1nEtS6lqw2pxQP1ADxKG8Vr9LCQU4piN8EeMtOfM8-cMSrjE_bU7q_HMHVI8Z1dq5oj7kvFpFmyKxh_xCHojC9tQ1ZIm4G4vZKx330omMTWI4kYEjPNq2enr-mnCg9EZa-xgR9UC_Quy48AJJXWXSfVX-l9XIpOvoiS-wUSpoUotP5G2qg7cSCT1qmKvHd3OrFlVNzSUgKFNzDvvl4G_giZDCylztb6jgs1MMFXloH9mpDfC_auN9XDRSMvcoi_TPzcuBtbqQt8MSHc5rItL10NUZWnf?c=mnaver.search.plsearch&t=0
+            - listitem [ref=f1e219]:
+              - link "지하철노선" [ref=f1e220] [cursor=pointer]:
+                - /url: https://ader.naver.com/v1/2VXHdVqP8h_6ApnWK6IwtE7lus_x-iYClRkFub6CvX1LanYeKWVQE7nU0A9KkCpIcf_bx2xn_NdLqDIjEAwAMIcHYnEcVRaYEAYZ7fldRdzkSfF-lHTlGfDTiz9BPJacUdpKkwxqwW17erLE1YAIrd5hqiX8UFi_7yZdao3Ohnmi2gVD0Jf-wdn81WPIFsKUWbeFcmancQhZi8CCYb_7MWOTBMC0pLgsRMlpNZgfILEz8tnItXTkKiBDlM8vl1kGNJOXgR43yR2Azzwmguw9NLbXXSB4XeqjaptQefF95oZvqjQhEsU-1334l-2wDjl4_liiUKyL-qd5CEEimWNy-yYwK4xnTQ4i_9Yl_BtCwII94Tkqjyveimru2dYzDy9EUxe2qKmkNLc0Q5no11jkBxsj5px_Ps5E9GJVJcte5pnESnJ2TwIU7NCqF_5lKp-RCqogsLdppjU5fTSKUScZg6nY1MhvQsrsjEasEyXHQP5wntzHNY5SQrBI6A8-vTlfQNP8l5SucxAKjmp5mpcoVwncPTmYTprduzGLE8Oo1BTvbo79qzgSyzZ4mYYhRlAhFH1p1iZfj0a9XKdc7Aj0CRyHMcYSICPgktamfh5w9cFjgnWnYSzyXv4q3fEQNhzC?c=mnaver.search.plsearch&t=0
+            - listitem [ref=f1e222]:
+              - link "철도노선표" [ref=f1e223] [cursor=pointer]:
+                - /url: https://ader.naver.com/v1/-KDQap1JVL6OzjClhm8oFrpVQtc9w-YIvEL5ELVXJuodSn3_1rxwf_y2MXbBNSmLtcAsns0dFyMnbfxqS3SQOQ_7E6ZbvHmTa2TfkJZOgYoDSl0TJiUmLLeE3iV_k2x0xCCKmv7Fs4zZVDfA_P8tHLrl8vOe80JUuHVy2elSVTNWTm98Mjbj1mOAMOmnUe4W7wzLxI_PCEvI06fgcovOSlpGCrcAOk8vsNErKzzfUGVEiIrWhIY2YYeGIuk1gHblG4vUOs1UsOWSJhYJeMABI5h0HCehZBF2kKJ9OdSPgIUw9w-3LiFa0_dnag4zXaLsRotcs7uRELQqpwGbJjYsZkP-4V-K8YLRjuBZkQl4V88TGzX9AjUh23eAt6nCfDoQNPtNlR2IIMvZKC7ty1cBMV6srOy8zFUh9_B39BmZ6qbXc6DUdIrdYErph9yevg5dnrkfgG1Ku82mr7v1uL-qNxpltqu53hqFMiL8hBo3sDxZcq34_l7FbKPJZT8SA3GLQSjsoWeTJaomj_IyOb7DiX1BLBMrmnV0A327sbdfs2eVzqDlxpNON_uWVttECYdfOKVmkiTLIz-v_Glra4zK9siOWHRv2bQMUgNf1bAkcAvwYMCP519KaqBDAi2XwdQ1yJ3200XHDemdqdzGV5fJxA==?c=mnaver.search.plsearch&t=0
+          - generic [ref=f1e225]:
+            - link "전철노선표" [ref=f1e227] [cursor=pointer]:
+              - /url: https://ader.naver.com/v1/-KDQap1JVL6OzjClhm8oFhF-bbBFuywAEcQL7DxRFGfutDmFAqP77PAdrjhlVURsCkPLRCsD24oDsblrJM1lxfuduN2ED0J2WKhnEMH0pbg3h3haZtaYuWqd0xsxwKue_Zub-wM0dEszd65Ul78-Iq_HhO3WvTi-cb-rwqgvWDaL7yJElpKhKSZ_Om0RXC46nwP4iyj5muvOIiKqIhyuiI4Fm45-z6qaEeJVnO9xVdCx4gXeRARyo4CTUhPlNena6gIOFn4KafDVK0dcihL98YBe3Z47Gtysc7hEmYdlWeoM5yvF73_YMV7dHLwFJRgZt1cCcsMCcsvZwDn06-_dXFsuVbRbaTZu9hin1mequd-_AyQq92zBTI3RK0ofmUv0E-iK2-lD-govMjpcpUS_w0jXOJOvpbTgb4Nq1KkUME9ovRdXb0a9sytit0OQs5Am1PUVuFIB7G0Qcsq7WCABK4Ko2LTRaSZo4ckX3rKWSIOiZ8X7CfGeNrD_9UzcuxVs_0Eg7cSKzY42oE80aHTEzuYRxoP11zNWKg4Cj9Yo7DEvgYKiWL3h9PpKff0dHTdLQMUxhbBiUJJAoDCdA233u1t9Mjw_vNMOZxmyyZ2C6xc64xBNCM8OJKeQtxWaek7D?c=mnaver.search.plsearch&t=0
+            - link "지하철노선표" [ref=f1e232] [cursor=pointer]:
+              - /url: https://ader.naver.com/v1/1RdpfVgGr81THpBvvnG6EMmoMrZyCYc-Ob-0UJpth3Pjyfudm6mHaGT7_aFEVnQ0WV0-_OhHczJamrNHc4V3_KU9hJoNw3UQJOc6Sh5acK5CsiWxFewy3hR9eF2p3F5HdWlUQYoamHAVwUiaHy8KChPOVBb8sGNgtpFU0YT7CfDXQGoWfP9Wz9h63tJBslodr5tvYjrqmVl52PajR9L2EzPLSvCyzcXU3AnytF9Zotuymir9SSSauavRBwwBAwx2FOPRo-LjtRyxc6eUEkDUuNL9Da5hJ_tAQhPZ2e8DcTejtniFOmuElqHnpuayyZKhBtfkBHGQDnH0CWq46UI2OrKkWT59ZwraB_rXAkpQkgLqa4eyyNMfUdNTv6rKuVkk1WuGoiO8oNXBURgIK9BPcTyBwUOigQdx6VufRKE_PiaeIo84Jc-CLRAaVBDyPoUwgY_RiWvzau9wea4_DE9rXyxrBpv8c2V3_28kfMY1RS8vbXzOg2sjtGpB_1JN35fl0l5xA16uUf5lUNEI0WgQX2ATFiDVQ6d3swcjiLqsy_tv_2Xlti16JdGUIZoOp0GKWErGpzRhX36aAcsKtI-EDZoVL8KMCD7wtWiElnhdb6HHRg9mPUsFb8V5k0o1mu-w4Jw_fFQJg_SdG1JQivpwyQ==?c=mnaver.search.plsearch&t=0
+            - link "지하철노선" [ref=f1e237] [cursor=pointer]:
+              - /url: https://ader.naver.com/v1/2VXHdVqP8h_6ApnWK6IwtOy6FYAMl5VzQFqyqlZ8y0oYPxpIrUofvgqPq-jToBC5aa3Km1oqs2xQgC_PsFOwYNoYancQl2tbyM44XXG58QMGirsK1o_N60GutaUxj6rR9DGlMiOQLNzHsfoxjb2Of7ZUomwMjCKE0XL5LSAyBGGviGUNfad-3gk9KWK_q1-feV0ZXQnqOTGN6eSzxg8O1SG03SJDWrWcy4RsQUaJhnIKTlLYCYjfdRbgSejqy9vjMAM8jU7ig5OeZatHEh21WitTV2y9ksj6EvLbUFbQS4FsdIZLwZL0XpewzZJMuZXLL2xzjBxl4NAoxTl29So-ArjDQ9veItOgEs6J05yY6cX9-2h6pD0sr-Ok1fPYyutEyvu4GxJSA9jS5gdHbw6cNkzPRRpQAKXWEAe4H6rukuJkUr1uilEhw6qmmr0oWEVdVLjwu22kEDXJG_P_ECz-QX1JBV6l9IWqwapDIV6Fx_Ukvb8z5KnKhx1oBptYyS8mvAWCXrOGyU_oqirh1Qiji8jfU3mTdf_fcEvBCaySfW1GqpENUGC0jkUGMu4e2xhJ3bPIYaNF5qQ3pPXATIGCYo0DwtIT1QbL6n9vsZFjjZXZcFFf3yQYaFWodTJEAevoreJCcWAd2uNHYZH3MzZ05Q==?c=mnaver.search.plsearch&t=0
+    - generic [ref=f1e243]:
+      - generic [ref=f1e246]:
+        - heading "네이버 클립" [level=2] [ref=f1e247]
+        - button "정보 확인 도움말" [ref=f1e248] [cursor=pointer]
+      - generic [ref=f1e253]:
+        - generic [ref=f1e254]:
+          - generic [ref=f1e256]:
+            - generic [ref=f1e258]:
+              - link [ref=f1e259] [cursor=pointer]:
+                - /url: https://clip.naver.com/contents?serviceType=CLIP&seedMediaId=6a4ed24dd47f0657ffbe9f3f&recType=CLIP_PC&recId=%7B%22targetProfileId%22:%22hoq3WCSJulDOC46w60Hy%22,%22open%22:true%7D
+                - img "클립 이미지" [ref=f1e261]
+              - link [ref=f1e262] [cursor=pointer]:
+                - /url: https://clip.naver.com/contents?serviceType=CLIP&seedMediaId=6a4ed24dd47f0657ffbe9f3f&recType=CLIP_PC&recId=%7B%22targetProfileId%22:%22hoq3WCSJulDOC46w60Hy%22,%22open%22:true%7D
+                - generic [ref=f1e263]:
+                  - text: "#"
+                  - mark [ref=f1e264]: 지하철노선도
+            - link "프로필 이미지 Mobius58 2주 전" [ref=f1e265] [cursor=pointer]:
+              - /url: https://clip.naver.com/@33s33s33
+              - generic [ref=f1e266]:
+                - img "프로필 이미지" [ref=f1e268]
+                - generic [ref=f1e269]:
+                  - generic [ref=f1e270]: Mobius58
+                  - generic [ref=f1e272]: 2주 전
+          - generic [ref=f1e275]:
+            - generic [ref=f1e277]:
+              - link [ref=f1e278] [cursor=pointer]:
+                - /url: https://m.naver.com/shorts?serviceType=CLIP&mediaType=VOD&seedMediaId=EEF34B7964F284D4A2D2BC0618BB1F8A6417&recType=CLIP_PC&recId=%7B%22targetProfileId%22%3A%22c88ms7uDz2lBadMkKNte%22%2C%22open%22%3Atrue%7D
+                - img "클립 이미지" [ref=f1e280]
+              - link [ref=f1e281] [cursor=pointer]:
+                - /url: https://m.naver.com/shorts?serviceType=CLIP&mediaType=VOD&seedMediaId=EEF34B7964F284D4A2D2BC0618BB1F8A6417&recType=CLIP_PC&recId=%7B%22targetProfileId%22%3A%22c88ms7uDz2lBadMkKNte%22%2C%22open%22%3Atrue%7D
+                - generic [ref=f1e282]:
+                  - mark [ref=f1e283]: 지하철
+                  - text: 덕후라면 뉴욕...
+                  - mark [ref=f1e284]: 지하철
+                  - text: 박물관#뉴욕여행#미국여행#미국
+                  - mark [ref=f1e285]: 지하철
+            - link "프로필 이미지 황가지 05.20 조회 1.9천" [ref=f1e286] [cursor=pointer]:
+              - /url: https://clip.naver.com/@aa__jiiiii
+              - generic [ref=f1e287]:
+                - img "프로필 이미지" [ref=f1e289]
+                - generic [ref=f1e290]:
+                  - generic [ref=f1e291]: 황가지
+                  - generic [ref=f1e293]:
+                    - generic [ref=f1e294]: "05.20"
+                    - generic [ref=f1e296]: 조회 1.9천
+        - generic [ref=f1e297]:
+          - generic [ref=f1e299]:
+            - generic [ref=f1e301]:
+              - link [ref=f1e302] [cursor=pointer]:
+                - /url: https://m.naver.com/shorts?serviceType=CLIP&mediaType=VOD&seedMediaId=B855EEDA86D4CEAEB49F3AD312FFE8099B55&recType=CLIP_PC&recId=%7B%22targetProfileId%22%3A%22rPDucz1VoGk7gyssUQnN%22%2C%22open%22%3Atrue%7D
+                - img "클립 이미지" [ref=f1e304]
+              - link [ref=f1e305] [cursor=pointer]:
+                - /url: https://m.naver.com/shorts?serviceType=CLIP&mediaType=VOD&seedMediaId=B855EEDA86D4CEAEB49F3AD312FFE8099B55&recType=CLIP_PC&recId=%7B%22targetProfileId%22%3A%22rPDucz1VoGk7gyssUQnN%22%2C%22open%22%3Atrue%7D
+                - generic [ref=f1e306]:
+                  - text: "#"
+                  - mark [ref=f1e307]: 지하철노선도
+            - link "cccjs79 05.08 조회 3.1천" [ref=f1e308] [cursor=pointer]:
+              - /url: https://clip.naver.com/@cccjs79
+              - generic [ref=f1e314]:
+                - generic [ref=f1e315]: cccjs79
+                - generic [ref=f1e317]:
+                  - generic [ref=f1e318]: "05.08"
+                  - generic [ref=f1e320]: 조회 3.1천
+          - generic [ref=f1e322]:
+            - generic [ref=f1e324]:
+              - link [ref=f1e325] [cursor=pointer]:
+                - /url: https://m.naver.com/shorts?serviceType=MOMENT&mediaType=VOD&seedMediaId=6C3EE2A720DB5B268DC7C90867F79A36B0D8&recType=CLIP_PC&recId=%7B%22targetProfileId%22%3A%22aon04YSL4h2TAXhvMeAx%22%2C%22open%22%3Atrue%7D
+                - img "클립 이미지" [ref=f1e327]
+              - link [ref=f1e328] [cursor=pointer]:
+                - /url: https://m.naver.com/shorts?serviceType=MOMENT&mediaType=VOD&seedMediaId=6C3EE2A720DB5B268DC7C90867F79A36B0D8&recType=CLIP_PC&recId=%7B%22targetProfileId%22%3A%22aon04YSL4h2TAXhvMeAx%22%2C%22open%22%3Atrue%7D
+                - generic [ref=f1e329]:
+                  - text: 현재
+                  - mark [ref=f1e330]: 지하철
+                  - text: "역 위치는? #"
+                  - mark [ref=f1e331]: 지하철
+                  - text: "#"
+                  - mark [ref=f1e332]: 지하철
+                  - text: "역 #"
+                  - mark [ref=f1e333]: 노선도
+                  - text: "#"
+                  - mark [ref=f1e334]: 지하철노선도
+            - link "프로필 이미지 인터랙티브 뉴스 03.30 조회 1.4만" [ref=f1e335] [cursor=pointer]:
+              - /url: https://clip.naver.com/@woomuleconomy
+              - generic [ref=f1e336]:
+                - img "프로필 이미지" [ref=f1e338]
+                - generic [ref=f1e339]:
+                  - generic [ref=f1e340]: 인터랙티브 뉴스
+                  - generic [ref=f1e342]:
+                    - generic [ref=f1e343]: "03.30"
+                    - generic [ref=f1e345]: 조회 1.4만
+      - link "클립 더보기" [ref=f1e347] [cursor=pointer]:
+        - /url: "?nso=&query=%EC%A7%80%ED%95%98%EC%B2%A0%EB%85%B8%EC%84%A0%EB%8F%84&sm=mtb_amr&sort=rel&ssc=tab.m_clip.all"
+        - generic [ref=f1e351]:
+          - generic [ref=f1e352]: 클립
+          - generic [ref=f1e353]: 더보기
+    - generic [ref=f1e363]:
+      - generic [ref=f1e364]: 함께 많이 찾는
+      - button "정보 확인 도움말" [ref=f1e365] [cursor=pointer]
+    - generic [ref=f1e411]:
+      - generic [ref=f1e412]:
+        - generic [ref=f1e413]:
+          - generic [ref=f1e414]:
+            - link "서울교통공사 www.seoulmetro.co.kr›cyberStation" [ref=f1e415] [cursor=pointer]:
+              - /url: http://www.seoulmetro.co.kr/kr/cyberStation.do
+              - generic [ref=f1e417]:
+                - generic [ref=f1e421]: 서울교통공사
+                - generic [ref=f1e423]: www.seoulmetro.co.kr›cyberStation
+            - button "옵션 메뉴 열기" [ref=f1e428] [cursor=pointer]
+          - generic [ref=f1e433]:
+            - link "서울교통공사 사이버 스테이션" [ref=f1e435] [cursor=pointer]:
+              - /url: http://www.seoulmetro.co.kr/kr/cyberStation.do
+            - link "Ctrl+F 를 눌러서 역을 빠르게 검색할 수 있습니다." [ref=f1e437] [cursor=pointer]:
+              - /url: http://www.seoulmetro.co.kr/kr/cyberStation.do
+        - generic [ref=f1e439]:
+          - generic [ref=f1e441]:
+            - link "서울교통공사" [ref=f1e442] [cursor=pointer]:
+              - /url: http://www.seoulmetro.co.kr/kr/page.do?menuIdx=359
+            - generic [ref=f1e444]: 서울교통공사
+          - link "관련문서 더보기" [ref=f1e447] [cursor=pointer]:
+            - /url: "?page=2&query=%EC%A7%80%ED%95%98%EC%B2%A0%EB%85%B8%EC%84%A0%EB%8F%84+site%3Awww.seoulmetro.co.kr&qvt=0&where=m_web"
+      - generic [ref=f1e451]:
+        - generic [ref=f1e452]:
+          - generic [ref=f1e453]:
+            - link "부산교통공사 www.humetro.busan.kr›homepage" [ref=f1e454] [cursor=pointer]:
+              - /url: https://www.humetro.busan.kr/homepage/cyberstation/map.do
+              - generic [ref=f1e456]:
+                - generic [ref=f1e460]: 부산교통공사
+                - generic [ref=f1e462]: www.humetro.busan.kr›homepage
+            - button "옵션 메뉴 열기" [ref=f1e467] [cursor=pointer]
+          - generic [ref=f1e472]:
+            - link [ref=f1e474] [cursor=pointer]:
+              - /url: https://www.humetro.busan.kr/homepage/cyberstation/map.do
+              - generic [ref=f1e475]:
+                - mark [ref=f1e476]: 노선
+                - text: 검색 - 부산교통공사
+            - link "다대포해수욕장 · 다대포항 · 낫개 · 신장림 · 장림 · 동매 · 신평 · 하단 · 당리 · 사하 · 괴정 · 대티 · 서대신 · 동대신 · 토성 · 자갈치 · 남포 · 중앙 · 부산역 · 초량 · 부산진 · 좌천 · 범일 · 범내골 · 서면 · 부전 · 양정 · 시청 · 연산 · 교대 · 동래 · 명륜 · 온천장 · 부산대 · 장전 · 구서 · 두실 · 남산 · 범어사 · 노포" [ref=f1e478] [cursor=pointer]:
+              - /url: https://www.humetro.busan.kr/homepage/cyberstation/map.do
+        - generic [ref=f1e480]:
+          - generic [ref=f1e482]:
+            - link [ref=f1e483] [cursor=pointer]:
+              - /url: https://www.humetro.busan.kr/homepage/chs/page/subLocation.do?menu_no=1001010102
+              - img "<mark>노선도</mark> 다운로드 &gt; <mark>노선도</mark> &gt; 이용안내의 이미지" [ref=f1e485]
+            - link [ref=f1e487] [cursor=pointer]:
+              - /url: https://www.humetro.busan.kr/homepage/chs/page/subLocation.do?menu_no=1001010102
+              - generic [ref=f1e488]:
+                - mark [ref=f1e489]: 노선도
+                - text: 다운로드 >
+                - mark [ref=f1e490]: 노선도
+                - text: "> 이용안내"
+            - generic [ref=f1e492]:
+              - mark [ref=f1e493]: 노선도
+              - text: 이미지 클릭 시 큰 이미지로 보실 수 있습니다. 열차 운행 관련 문의는 1544-5005로 연락해주시면 친절히 답변드리겠습니다.
+          - link "관련문서 더보기" [ref=f1e495] [cursor=pointer]:
+            - /url: "?page=2&query=%EC%A7%80%ED%95%98%EC%B2%A0%EB%85%B8%EC%84%A0%EB%8F%84+site%3Awww.humetro.busan.kr&qvt=0&where=m_web"
+    - generic [ref=f1e501]:
+      - button "이전페이지" [disabled] [ref=f1e502]
+      - generic [ref=f1e504]:
+        - button "1" [ref=f1e505] [cursor=pointer]
+        - button "2" [ref=f1e506] [cursor=pointer]
+        - button "3" [ref=f1e507] [cursor=pointer]
+        - button "4" [ref=f1e508] [cursor=pointer]
+        - button "5" [ref=f1e509] [cursor=pointer]
+      - button "다음페이지" [ref=f1e510]
+  - contentinfo [ref=f1e512]:
+    - generic [ref=f1e513]:
+      - generic [ref=f1e514]:
+        - generic [ref=f1e515]:
+          - button "가 폰트작게보기" [ref=f1e517] [cursor=pointer]:
+            - text: 가
+            - generic [ref=f1e518]: 폰트작게보기
+          - button "가 폰트크게보기" [ref=f1e520] [cursor=pointer]:
+            - text: 가
+            - generic [ref=f1e521]: 폰트크게보기
+        - generic [ref=f1e522]:
+          - button "공유하기" [ref=f1e524] [cursor=pointer]
+          - button "맨위로" [ref=f1e527] [cursor=pointer]
+      - generic [ref=f1e530]:
+        - link "로그인" [ref=f1e532] [cursor=pointer]:
+          - /url: https://nid.naver.com/nidlogin.login?svctype=262144&url=https%3A%2F%2Fm.search.naver.com%2Fsearch.naver%3Fquery%3D%25EC%25A7%2580%25ED%2595%2598%25EC%25B2%25A0%25EB%2585%25B8%25EC%2584%25A0%25EB%258F%2584
+        - link "전체서비스" [ref=f1e534] [cursor=pointer]:
+          - /url: https://m.naver.com/services.html?f=svc.search
+        - link "PC버전" [ref=f1e536] [cursor=pointer]:
+          - /url: https://search.naver.com/search.naver?query=%EC%A7%80%ED%95%98%EC%B2%A0%EB%85%B8%EC%84%A0%EB%8F%84&sm=mtb_pcv&ssc=tab.nx.all&where=nexearch
+      - generic [ref=f1e537]:
+        - generic [ref=f1e538]:
+          - link "이용약관" [ref=f1e540] [cursor=pointer]:
+            - /url: https://policy.naver.com/policy-mobile/term.html
+          - link "개인정보처리방침" [ref=f1e542] [cursor=pointer]:
+            - /url: https://policy.naver.com/policy-mobile/privacy.html
+          - link "검색 고객센터" [ref=f1e544] [cursor=pointer]:
+            - /url: https://help.naver.com/alias/search/integration/main.naver
+        - link "NAVER" [ref=f1e545] [cursor=pointer]:
+          - /url: https://www.navercorp.com/

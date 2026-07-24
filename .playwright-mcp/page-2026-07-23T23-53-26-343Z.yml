@@ -1,0 +1,1119 @@
+- generic [ref=f1e1]:
+  - link "본문 바로가기" [ref=f1e2] [cursor=pointer]:
+    - /url: "#ct"
+  - banner:
+    - generic [ref=f1e6]:
+      - heading [level=1] [ref=f1e7]:
+        - link "Naver" [ref=f1e8] [cursor=pointer]:
+          - /url: https://m.naver.com/
+        - link "이전페이지":
+          - /url: "#"
+      - search [ref=f1e10]:
+        - generic [ref=f1e11]:
+          - generic [ref=f1e13]:
+            - textbox "검색어를 입력해 주세요." [ref=f1e14]: 지하철노선도
+            - button "입력 내용 삭제" [ref=f1e15]
+          - generic [ref=f1e17]:
+            - button "음성검색" [ref=f1e18]
+            - button "검색"
+    - tablist [ref=f1e22]:
+      - tab "AI new" [ref=f1e23] [cursor=pointer]:
+        - text: AI
+        - generic [ref=f1e24]: new
+      - tab "블로그" [ref=f1e26] [cursor=pointer]
+      - tab "카페" [ref=f1e27] [cursor=pointer]
+      - tab "클립" [ref=f1e28] [cursor=pointer]
+      - tab "이미지" [ref=f1e29] [cursor=pointer]
+      - tab "지식iN" [ref=f1e30] [cursor=pointer]
+      - tab "동영상" [ref=f1e31] [cursor=pointer]
+      - tab "쇼핑" [ref=f1e32] [cursor=pointer]
+      - tab "뉴스" [ref=f1e33] [cursor=pointer]
+      - tab "어학사전" [ref=f1e34] [cursor=pointer]
+      - tab "지도" [ref=f1e35] [cursor=pointer]
+      - tab "인플루언서" [ref=f1e36] [cursor=pointer]
+      - tab "검색옵션" [ref=f1e37] [cursor=pointer]
+  - generic [ref=f1e39]:
+    - generic [ref=f1e44]:
+      - heading [level=2] [ref=f1e45]:
+        - text: 지하철 노선도
+        - button "문서 저장하기" [ref=f1e47] [cursor=pointer]
+      - list [ref=f1e50]:
+        - listitem [ref=f1e51]:
+          - button [ref=f1e52] [cursor=pointer]
+        - listitem [ref=f1e57]:
+          - button [ref=f1e58] [cursor=pointer]
+        - listitem [ref=f1e63]:
+          - button "급행" [ref=f1e64] [cursor=pointer]
+      - generic [ref=f1e65]:
+        - button "노선도 확대" [active] [pressed] [ref=f1e548] [cursor=pointer]
+        - img [ref=f1e3234]:
+          - generic [ref=f1e3251]: 동탄
+          - generic [ref=f1e3253]: 킨텍스
+          - generic [ref=f1e3255]: 운정중앙
+          - generic [ref=f1e3309]: 관악산
+          - generic [ref=f1e3311]: 서울대벤처타운
+          - generic [ref=f1e3313]: 서원
+          - generic [ref=f1e3315]: 당곡
+          - generic [ref=f1e3317]: 보라매병원
+          - generic [ref=f1e3319]: 보라매공원
+          - generic [ref=f1e3321]: 서울지방병무청
+          - generic [ref=f1e3339]: 고촌
+          - generic [ref=f1e3341]: 풍무
+          - generic [ref=f1e3343]: 사우
+          - generic [ref=f1e3345]: 걸포북변
+          - generic [ref=f1e3347]: 운양
+          - generic [ref=f1e3349]: 장기
+          - generic [ref=f1e3351]: 마산
+          - generic [ref=f1e3353]: 구래
+          - generic [ref=f1e3355]: 양촌
+          - generic [ref=f1e3381]: 북한산우이
+          - generic [ref=f1e3383]: 솔밭공원
+          - generic [ref=f1e3385]: 4.19민주묘지
+          - generic [ref=f1e3387]: 가오리
+          - generic [ref=f1e3389]: 화계
+          - generic [ref=f1e3391]: 삼양
+          - generic [ref=f1e3393]: 삼양사거리
+          - generic [ref=f1e3395]: 솔샘
+          - generic [ref=f1e3397]: 북한산보국문
+          - generic [ref=f1e3399]: 정릉
+          - generic [ref=f1e3417]: 여주
+          - generic [ref=f1e3419]: 세종대왕릉
+          - generic [ref=f1e3421]: 부발
+          - generic [ref=f1e3423]: 이천
+          - generic [ref=f1e3425]: 신둔도예촌
+          - generic [ref=f1e3427]: 곤지암
+          - generic [ref=f1e3429]: 초월
+          - generic [ref=f1e3431]: 경기광주
+          - generic [ref=f1e3433]: 삼동
+          - generic [ref=f1e3461]: 전대·에버랜드
+          - generic [ref=f1e3463]: 둔전
+          - generic [ref=f1e3465]: 보평
+          - generic [ref=f1e3467]: 고진
+          - generic [ref=f1e3469]: 용인중앙시장
+          - generic [ref=f1e3471]: 김량장
+          - generic [ref=f1e3473]: 명지대
+          - generic [ref=f1e3475]: 시청·용인대
+          - generic [ref=f1e3477]: 삼가
+          - generic [ref=f1e3479]: 초당
+          - generic [ref=f1e3481]: 동백
+          - generic [ref=f1e3483]: 어정
+          - generic [ref=f1e3485]: 지석
+          - generic [ref=f1e3487]: 강남대
+          - generic [ref=f1e3515]: 발곡
+          - generic [ref=f1e3517]: 범골
+          - generic [ref=f1e3519]: 경전철의정부
+          - generic [ref=f1e3521]: 의정부시청
+          - generic [ref=f1e3523]: 흥선
+          - generic [ref=f1e3525]: 의정부중앙
+          - generic [ref=f1e3527]: 동오
+          - generic [ref=f1e3529]: 새말
+          - generic [ref=f1e3531]: 경기도청북부청사
+          - generic [ref=f1e3533]: 효자
+          - generic [ref=f1e3535]: 곤제
+          - generic [ref=f1e3537]: 어룡
+          - generic [ref=f1e3539]: 송산
+          - generic [ref=f1e3541]: 탑석
+          - generic [ref=f1e3558]: 인천공항2터미널
+          - generic [ref=f1e3560]: 인천공항1터미널
+          - generic [ref=f1e3562]: 공항화물청사
+          - generic [ref=f1e3564]: 운서
+          - generic [ref=f1e3566]: 영종
+          - generic [ref=f1e3568]: 청라국제도시
+          - generic [ref=f1e3592]: 춘천
+          - generic [ref=f1e3594]: 남춘천
+          - generic [ref=f1e3596]: 김유정
+          - generic [ref=f1e3598]: 강촌
+          - generic [ref=f1e3600]: 백양리
+          - generic [ref=f1e3602]: 굴봉산
+          - generic [ref=f1e3604]: 가평
+          - generic [ref=f1e3606]: 상천
+          - generic [ref=f1e3608]: 청평
+          - generic [ref=f1e3610]: 대성리
+          - generic [ref=f1e3612]: 마석
+          - generic [ref=f1e3614]: 천마산
+          - generic [ref=f1e3616]: 평내호평
+          - generic [ref=f1e3618]: 금곡
+          - generic [ref=f1e3620]: 사릉
+          - generic [ref=f1e3622]: 퇴계원
+          - generic [ref=f1e3624]: 갈매
+          - generic [ref=f1e3676]: 지평
+          - generic [ref=f1e3678]: 용문
+          - generic [ref=f1e3680]: 원덕
+          - generic [ref=f1e3682]: 양평
+          - generic [ref=f1e3684]: 오빈
+          - generic [ref=f1e3686]: 아신
+          - generic [ref=f1e3688]: 국수
+          - generic [ref=f1e3690]: 신원
+          - generic [ref=f1e3692]: 양수
+          - generic [ref=f1e3694]: 운길산
+          - generic [ref=f1e3696]: 팔당
+          - generic [ref=f1e3698]: 도심
+          - generic [ref=f1e3700]: 덕소
+          - generic [ref=f1e3702]: 양정
+          - generic [ref=f1e3704]: 도농
+          - generic [ref=f1e3706]: 양원
+          - generic [ref=f1e3708]: 응봉
+          - generic [ref=f1e3710]: 한남
+          - generic [ref=f1e3712]: 서빙고
+          - generic [ref=f1e3714]: 서강대
+          - generic [ref=f1e3716]: 신촌(경의중앙선)
+          - generic [ref=f1e3718]: 수색
+          - generic [ref=f1e3720]: 한국항공대
+          - generic [ref=f1e3722]: 강매
+          - generic [ref=f1e3724]: 행신
+          - generic [ref=f1e3726]: 탄현
+          - generic [ref=f1e3728]: 야당
+          - generic [ref=f1e3730]: 운정
+          - generic [ref=f1e3732]: 금릉
+          - generic [ref=f1e3734]: 금촌
+          - generic [ref=f1e3736]: 월롱
+          - generic [ref=f1e3738]: 파주
+          - generic [ref=f1e3740]: 운천
+          - generic [ref=f1e3742]: 임진강
+          - generic [ref=f1e3789]: 운연
+          - generic [ref=f1e3791]: 인천대공원
+          - generic [ref=f1e3793]: 남동구청
+          - generic [ref=f1e3795]: 만수
+          - generic [ref=f1e3797]: 모래내시장
+          - generic [ref=f1e3799]: 석천사거리
+          - generic [ref=f1e3801]: 석바위시장
+          - generic [ref=f1e3803]: 시민공원
+          - generic [ref=f1e3805]: 주안국가산단
+          - generic [ref=f1e3807]: 가재울
+          - generic [ref=f1e3809]: 인천가좌
+          - generic [ref=f1e3811]: 서부여성회관
+          - generic [ref=f1e3813]: 가정중앙시장
+          - generic [ref=f1e3815]: 가정
+          - generic [ref=f1e3817]: 서해구청
+          - generic [ref=f1e3819]: 아시아드경기장
+          - generic [ref=f1e3821]: 검바위
+          - generic [ref=f1e3823]: 독정
+          - generic [ref=f1e3825]: 완정
+          - generic [ref=f1e3827]: 마전
+          - generic [ref=f1e3829]: 검단사거리
+          - generic [ref=f1e3831]: 왕길
+          - generic [ref=f1e3833]: 검단오류
+          - generic [ref=f1e3861]: 검단호수공원
+          - generic [ref=f1e3863]: 신검단중앙
+          - generic [ref=f1e3865]: 아라
+          - generic [ref=f1e3867]: 귤현
+          - generic [ref=f1e3869]: 박촌
+          - generic [ref=f1e3871]: 임학
+          - generic [ref=f1e3873]: 계산
+          - generic [ref=f1e3875]: 경인교대입구
+          - generic [ref=f1e3877]: 작전
+          - generic [ref=f1e3879]: 갈산
+          - generic [ref=f1e3881]: 부평시장
+          - generic [ref=f1e3883]: 동수
+          - generic [ref=f1e3885]: 부평삼거리
+          - generic [ref=f1e3887]: 간석오거리
+          - generic [ref=f1e3889]: 예술회관
+          - generic [ref=f1e3891]: 인천터미널
+          - generic [ref=f1e3893]: 문학경기장
+          - generic [ref=f1e3895]: 선학
+          - generic [ref=f1e3897]: 신연수
+          - generic [ref=f1e3899]: 동춘
+          - generic [ref=f1e3901]: 동막
+          - generic [ref=f1e3903]: 캠퍼스타운
+          - generic [ref=f1e3905]: 테크노파크
+          - generic [ref=f1e3907]: 지식정보단지
+          - generic [ref=f1e3909]: 인천대입구
+          - generic [ref=f1e3911]: 센트럴파크
+          - generic [ref=f1e3913]: 국제업무지구
+          - generic [ref=f1e3915]: 송도달빛축제공원
+          - generic [ref=f1e3934]: 광교
+          - generic [ref=f1e3936]: 광교중앙
+          - generic [ref=f1e3938]: 상현
+          - generic [ref=f1e3940]: 성복
+          - generic [ref=f1e3942]: 수지구청
+          - generic [ref=f1e3944]: 동천
+          - generic [ref=f1e3946]: 청계산입구
+          - generic [ref=f1e3948]: 양재시민의숲
+          - generic [ref=f1e4009]: 서울숲
+          - generic [ref=f1e4011]: 압구정로데오
+          - generic [ref=f1e4013]: 한티
+          - generic [ref=f1e4015]: 구룡
+          - generic [ref=f1e4017]: 개포동
+          - generic [ref=f1e4019]: 대모산입구
+          - generic [ref=f1e4021]: 가천대
+          - generic [ref=f1e4023]: 태평
+          - generic [ref=f1e4025]: 야탑
+          - generic [ref=f1e4027]: 서현
+          - generic [ref=f1e4029]: 수내
+          - generic [ref=f1e4031]: 오리
+          - generic [ref=f1e4033]: 죽전
+          - generic [ref=f1e4035]: 보정
+          - generic [ref=f1e4037]: 신갈
+          - generic [ref=f1e4039]: 상갈
+          - generic [ref=f1e4041]: 청명
+          - generic [ref=f1e4043]: 영통
+          - generic [ref=f1e4045]: 망포
+          - generic [ref=f1e4047]: 매탄권선
+          - generic [ref=f1e4049]: 수원시청
+          - generic [ref=f1e4051]: 매교
+          - generic [ref=f1e4053]: 고색
+          - generic [ref=f1e4055]: 오목천
+          - generic [ref=f1e4057]: 어천
+          - generic [ref=f1e4059]: 야목
+          - generic [ref=f1e4061]: 사리
+          - generic [ref=f1e4063]: 달월
+          - generic [ref=f1e4065]: 월곶
+          - generic [ref=f1e4067]: 소래포구
+          - generic [ref=f1e4069]: 인천논현
+          - generic [ref=f1e4071]: 호구포
+          - generic [ref=f1e4073]: 남동인더스파크
+          - generic [ref=f1e4075]: 연수
+          - generic [ref=f1e4077]: 송도
+          - generic [ref=f1e4079]: 인하대
+          - generic [ref=f1e4081]: 숭의
+          - generic [ref=f1e4083]: 신포
+          - generic [ref=f1e4119]: 원시
+          - generic [ref=f1e4121]: 시우
+          - generic [ref=f1e4123]: 선부
+          - generic [ref=f1e4125]: 달미
+          - generic [ref=f1e4127]: 시흥능곡
+          - generic [ref=f1e4129]: 시흥시청
+          - generic [ref=f1e4131]: 신현
+          - generic [ref=f1e4133]: 신천
+          - generic [ref=f1e4135]: 시흥대야
+          - generic [ref=f1e4137]: 소새울
+          - generic [ref=f1e4139]: 원종
+          - generic [ref=f1e4166]: 중앙보훈병원
+          - generic [ref=f1e4168]: 둔촌오륜
+          - generic [ref=f1e4170]: 한성백제
+          - generic [ref=f1e4172]: 송파나루
+          - generic [ref=f1e4174]: 석촌고분
+          - generic [ref=f1e4176]: 삼전
+          - generic [ref=f1e4178]: 봉은사
+          - generic [ref=f1e4180]: 삼성중앙
+          - generic [ref=f1e4182]: 언주
+          - generic [ref=f1e4184]: 사평
+          - generic [ref=f1e4186]: 신반포
+          - generic [ref=f1e4188]: 구반포
+          - generic [ref=f1e4190]: 흑석
+          - generic [ref=f1e4192]: 노들
+          - generic [ref=f1e4194]: 국회의사당
+          - generic [ref=f1e4196]: 선유도
+          - generic [ref=f1e4198]: 신목동
+          - generic [ref=f1e4200]: 염창
+          - generic [ref=f1e4202]: 등촌
+          - generic [ref=f1e4204]: 증미
+          - generic [ref=f1e4206]: 가양
+          - generic [ref=f1e4208]: 양천향교
+          - generic [ref=f1e4210]: 신방화
+          - generic [ref=f1e4212]: 공항시장
+          - generic [ref=f1e4214]: 개화
+          - generic [ref=f1e4242]: 다산
+          - generic [ref=f1e4244]: 동구릉
+          - generic [ref=f1e4246]: 장자호수공원
+          - generic [ref=f1e4248]: 암사역사공원
+          - generic [ref=f1e4250]: 암사
+          - generic [ref=f1e4252]: 강동구청
+          - generic [ref=f1e4254]: 몽촌토성
+          - generic [ref=f1e4256]: 송파
+          - generic [ref=f1e4258]: 문정
+          - generic [ref=f1e4260]: 장지
+          - generic [ref=f1e4262]: 남위례
+          - generic [ref=f1e4264]: 산성
+          - generic [ref=f1e4266]: 남한산성입구
+          - generic [ref=f1e4268]: 단대오거리
+          - generic [ref=f1e4270]: 신흥
+          - generic [ref=f1e4272]: 수진
+          - generic [ref=f1e4310]: 산곡
+          - generic [ref=f1e4312]: 굴포천
+          - generic [ref=f1e4314]: 삼산체육관
+          - generic [ref=f1e4316]: 상동
+          - generic [ref=f1e4318]: 부천시청
+          - generic [ref=f1e4320]: 신중동
+          - generic [ref=f1e4322]: 춘의
+          - generic [ref=f1e4324]: 까치울
+          - generic [ref=f1e4326]: 천왕
+          - generic [ref=f1e4328]: 광명사거리
+          - generic [ref=f1e4330]: 철산
+          - generic [ref=f1e4332]: 남구로
+          - generic [ref=f1e4334]: 신풍
+          - generic [ref=f1e4336]: 신대방삼거리
+          - generic [ref=f1e4338]: 장승배기
+          - generic [ref=f1e4340]: 상도
+          - generic [ref=f1e4342]: 숭실대입구
+          - generic [ref=f1e4344]: 남성
+          - generic [ref=f1e4346]: 내방
+          - generic [ref=f1e4348]: 반포
+          - generic [ref=f1e4350]: 학동
+          - generic [ref=f1e4352]: 청담
+          - generic [ref=f1e4354]: 자양
+          - generic [ref=f1e4356]: 어린이대공원
+          - generic [ref=f1e4358]: 중곡
+          - generic [ref=f1e4360]: 용마산
+          - generic [ref=f1e4362]: 사가정
+          - generic [ref=f1e4364]: 면목
+          - generic [ref=f1e4366]: 중화
+          - generic [ref=f1e4368]: 먹골
+          - generic [ref=f1e4370]: 공릉
+          - generic [ref=f1e4372]: 하계
+          - generic [ref=f1e4374]: 중계
+          - generic [ref=f1e4376]: 마들
+          - generic [ref=f1e4378]: 수락산
+          - generic [ref=f1e4380]: 장암
+          - generic [ref=f1e4420]: 응암
+          - generic [ref=f1e4422]: 역촌
+          - generic [ref=f1e4424]: 독바위
+          - generic [ref=f1e4426]: 구산
+          - generic [ref=f1e4428]: 새절
+          - generic [ref=f1e4430]: 증산
+          - generic [ref=f1e4432]: 월드컵경기장
+          - generic [ref=f1e4434]: 마포구청
+          - generic [ref=f1e4436]: 망원
+          - generic [ref=f1e4438]: 상수
+          - generic [ref=f1e4440]: 광흥창
+          - generic [ref=f1e4442]: 대흥
+          - generic [ref=f1e4444]: 녹사평
+          - generic [ref=f1e4446]: 이태원
+          - generic [ref=f1e4448]: 한강진
+          - generic [ref=f1e4450]: 버티고개
+          - generic [ref=f1e4452]: 창신
+          - generic [ref=f1e4454]: 안암
+          - generic [ref=f1e4456]: 고려대
+          - generic [ref=f1e4458]: 월곡
+          - generic [ref=f1e4460]: 상월곡
+          - generic [ref=f1e4462]: 돌곶이
+          - generic [ref=f1e4464]: 화랑대
+          - generic [ref=f1e4466]: 봉화산
+          - generic [ref=f1e4510]: 마천
+          - generic [ref=f1e4512]: 거여
+          - generic [ref=f1e4514]: 개롱
+          - generic [ref=f1e4516]: 방이
+          - generic [ref=f1e4518]: 둔촌동
+          - generic [ref=f1e4520]: 하남검단산
+          - generic [ref=f1e4522]: 하남시청
+          - generic [ref=f1e4524]: 하남풍산
+          - generic [ref=f1e4526]: 미사
+          - generic [ref=f1e4528]: 강일
+          - generic [ref=f1e4530]: 상일동
+          - generic [ref=f1e4532]: 고덕
+          - generic [ref=f1e4534]: 명일
+          - generic [ref=f1e4536]: 굽은다리
+          - generic [ref=f1e4538]: 길동
+          - generic [ref=f1e4540]: 광나루
+          - generic [ref=f1e4542]: 아차산
+          - generic [ref=f1e4544]: 장한평
+          - generic [ref=f1e4546]: 답십리
+          - generic [ref=f1e4548]: 마장
+          - generic [ref=f1e4550]: 행당
+          - generic [ref=f1e4552]: 신금호
+          - generic [ref=f1e4554]: 광화문
+          - generic [ref=f1e4556]: 서대문
+          - generic [ref=f1e4558]: 애오개
+          - generic [ref=f1e4560]: 마포
+          - generic [ref=f1e4562]: 여의나루
+          - generic [ref=f1e4564]: 영등포시장
+          - generic [ref=f1e4566]: 양평
+          - generic [ref=f1e4568]: 오목교
+          - generic [ref=f1e4570]: 목동
+          - generic [ref=f1e4572]: 신정
+          - generic [ref=f1e4574]: 화곡
+          - generic [ref=f1e4576]: 우장산
+          - generic [ref=f1e4578]: 발산
+          - generic [ref=f1e4580]: 마곡
+          - generic [ref=f1e4582]: 송정
+          - generic [ref=f1e4584]: 개화산
+          - generic [ref=f1e4586]: 방화
+          - generic [ref=f1e4622]: 상록수
+          - generic [ref=f1e4624]: 반월
+          - generic [ref=f1e4626]: 대야미
+          - generic [ref=f1e4628]: 수리산
+          - generic [ref=f1e4630]: 산본
+          - generic [ref=f1e4632]: 범계
+          - generic [ref=f1e4634]: 평촌
+          - generic [ref=f1e4636]: 인덕원
+          - generic [ref=f1e4638]: 정부과천청사
+          - generic [ref=f1e4640]: 과천
+          - generic [ref=f1e4642]: 대공원
+          - generic [ref=f1e4644]: 선바위
+          - generic [ref=f1e4646]: 경마공원
+          - generic [ref=f1e4648]: 남태령
+          - generic [ref=f1e4650]: 신용산
+          - generic [ref=f1e4652]: 숙대입구
+          - generic [ref=f1e4654]: 회현
+          - generic [ref=f1e4656]: 명동
+          - generic [ref=f1e4658]: 혜화
+          - generic [ref=f1e4660]: 한성대입구
+          - generic [ref=f1e4662]: 길음
+          - generic [ref=f1e4664]: 미아사거리
+          - generic [ref=f1e4666]: 미아
+          - generic [ref=f1e4668]: 수유
+          - generic [ref=f1e4670]: 쌍문
+          - generic [ref=f1e4672]: 상계
+          - generic [ref=f1e4674]: 불암산
+          - generic [ref=f1e4676]: 별내별가람
+          - generic [ref=f1e4678]: 오남
+          - generic [ref=f1e4680]: 진접
+          - generic [ref=f1e4722]: 대화
+          - generic [ref=f1e4724]: 주엽
+          - generic [ref=f1e4726]: 정발산
+          - generic [ref=f1e4728]: 마두
+          - generic [ref=f1e4730]: 백석
+          - generic [ref=f1e4732]: 화정
+          - generic [ref=f1e4734]: 원당
+          - generic [ref=f1e4736]: 원흥
+          - generic [ref=f1e4738]: 삼송
+          - generic [ref=f1e4740]: 지축
+          - generic [ref=f1e4742]: 구파발
+          - generic [ref=f1e4744]: 녹번
+          - generic [ref=f1e4746]: 홍제
+          - generic [ref=f1e4748]: 무악재
+          - generic [ref=f1e4750]: 독립문
+          - generic [ref=f1e4752]: 경복궁
+          - generic [ref=f1e4754]: 안국
+          - generic [ref=f1e4756]: 동대입구
+          - generic [ref=f1e4758]: 금호
+          - generic [ref=f1e4760]: 압구정
+          - generic [ref=f1e4762]: 잠원
+          - generic [ref=f1e4764]: 남부터미널
+          - generic [ref=f1e4766]: 매봉
+          - generic [ref=f1e4768]: 대치
+          - generic [ref=f1e4770]: 학여울
+          - generic [ref=f1e4772]: 대청
+          - generic [ref=f1e4774]: 일원
+          - generic [ref=f1e4776]: 경찰병원
+          - generic [ref=f1e4808]: 구의
+          - generic [ref=f1e4810]: 강변
+          - generic [ref=f1e4812]: 잠실나루
+          - generic [ref=f1e4814]: 잠실새내
+          - generic [ref=f1e4816]: 삼성
+          - generic [ref=f1e4818]: 역삼
+          - generic [ref=f1e4820]: 서초
+          - generic [ref=f1e4822]: 방배
+          - generic [ref=f1e4824]: 낙성대
+          - generic [ref=f1e4826]: 서울대입구
+          - generic [ref=f1e4828]: 봉천
+          - generic [ref=f1e4830]: 신대방
+          - generic [ref=f1e4832]: 구로디지털단지
+          - generic [ref=f1e4834]: 신정네거리
+          - generic [ref=f1e4836]: 양천구청
+          - generic [ref=f1e4838]: 도림천
+          - generic [ref=f1e4840]: 문래
+          - generic [ref=f1e4842]: 신촌
+          - generic [ref=f1e4844]: 이대
+          - generic [ref=f1e4846]: 아현
+          - generic [ref=f1e4848]: 을지로입구
+          - generic [ref=f1e4850]: 상왕십리
+          - generic [ref=f1e4852]: 한양대
+          - generic [ref=f1e4854]: 뚝섬
+          - generic [ref=f1e4856]: 용두
+          - generic [ref=f1e4858]: 신답
+          - generic [ref=f1e4860]: 용답
+          - generic [ref=f1e4907]: 신창
+          - generic [ref=f1e4909]: 온양온천
+          - generic [ref=f1e4911]: 배방
+          - generic [ref=f1e4913]: 탕정
+          - generic [ref=f1e4915]: 아산
+          - generic [ref=f1e4917]: 쌍용
+          - generic [ref=f1e4919]: 봉명
+          - generic [ref=f1e4921]: 천안
+          - generic [ref=f1e4923]: 두정
+          - generic [ref=f1e4925]: 직산
+          - generic [ref=f1e4927]: 성환
+          - generic [ref=f1e4929]: 평택
+          - generic [ref=f1e4931]: 평택지제
+          - generic [ref=f1e4933]: 서정리
+          - generic [ref=f1e4935]: 송탄
+          - generic [ref=f1e4937]: 진위
+          - generic [ref=f1e4939]: 오산
+          - generic [ref=f1e4941]: 오산대
+          - generic [ref=f1e4943]: 세마
+          - generic [ref=f1e4945]: 서동탄
+          - generic [ref=f1e4947]: 세류
+          - generic [ref=f1e4949]: 화서
+          - generic [ref=f1e4951]: 성균관대
+          - generic [ref=f1e4953]: 의왕
+          - generic [ref=f1e4955]: 당정
+          - generic [ref=f1e4957]: 군포
+          - generic [ref=f1e4959]: 명학
+          - generic [ref=f1e4961]: 안양
+          - generic [ref=f1e4963]: 관악
+          - generic [ref=f1e4965]: 석수
+          - generic [ref=f1e4967]: 광명
+          - generic [ref=f1e4969]: 독산
+          - generic [ref=f1e4971]: 동인천
+          - generic [ref=f1e4973]: 도원
+          - generic [ref=f1e4975]: 제물포
+          - generic [ref=f1e4977]: 도화
+          - generic [ref=f1e4979]: 간석
+          - generic [ref=f1e4981]: 동암
+          - generic [ref=f1e4983]: 백운
+          - generic [ref=f1e4985]: 부개
+          - generic [ref=f1e4987]: 송내
+          - generic [ref=f1e4989]: 중동
+          - generic [ref=f1e4991]: 부천
+          - generic [ref=f1e4993]: 역곡
+          - generic [ref=f1e4995]: 오류동
+          - generic [ref=f1e4997]: 개봉
+          - generic [ref=f1e4999]: 구일
+          - generic [ref=f1e5001]: 영등포
+          - generic [ref=f1e5003]: 남영
+          - generic [ref=f1e5005]: 종각
+          - generic [ref=f1e5007]: 종로5가
+          - generic [ref=f1e5009]: 제기동
+          - generic [ref=f1e5011]: 외대앞
+          - generic [ref=f1e5013]: 신이문
+          - generic [ref=f1e5015]: 월계
+          - generic [ref=f1e5017]: 녹천
+          - generic [ref=f1e5019]: 방학
+          - generic [ref=f1e5021]: 도봉
+          - generic [ref=f1e5023]: 망월사
+          - generic [ref=f1e5025]: 의정부
+          - generic [ref=f1e5027]: 가능
+          - generic [ref=f1e5029]: 녹양
+          - generic [ref=f1e5031]: 양주
+          - generic [ref=f1e5033]: 덕계
+          - generic [ref=f1e5035]: 덕정
+          - generic [ref=f1e5037]: 지행
+          - generic [ref=f1e5039]: 동두천중앙
+          - generic [ref=f1e5041]: 보산
+          - generic [ref=f1e5043]: 동두천
+          - generic [ref=f1e5045]: 소요산
+          - generic [ref=f1e5047]: 청산
+          - generic [ref=f1e5049]: 전곡
+          - generic [ref=f1e5051]: 연천
+          - generic [ref=f1e5097]: 망우
+          - generic [ref=f1e5102]: 중랑
+          - generic [ref=f1e5107]: 가좌
+          - generic [ref=f1e5112]: 문산
+          - generic [ref=f1e5117]: 검암
+          - generic [ref=f1e5122]: 원인재
+          - generic [ref=f1e5127]: 인천시청
+          - generic [ref=f1e5132]: 계양
+          - generic [ref=f1e5137]: 기흥
+          - generic [ref=f1e5142]: 이매
+          - generic [ref=f1e5147]: 미금
+          - generic [ref=f1e5152]: 정자
+          - generic [ref=f1e5157]: 판교
+          - generic [ref=f1e5162]: 선정릉
+          - generic [ref=f1e5167]: 신논현
+          - generic [ref=f1e5172]: 샛강
+          - generic [ref=f1e5177]: 마곡나루
+          - generic [ref=f1e5182]: 모란
+          - generic [ref=f1e5187]: 복정
+          - generic [ref=f1e5192]: 석촌
+          - generic [ref=f1e5197]: 석남
+          - generic [ref=f1e5202]: 부평구청
+          - generic [ref=f1e5207]: 보라매
+          - generic [ref=f1e5212]: 논현
+          - generic [ref=f1e5217]: 강남구청
+          - generic [ref=f1e5223]: 상봉
+          - generic [ref=f1e5229]: 디지털미디어시티
+          - generic [ref=f1e5234]: 효창공원앞
+          - generic [ref=f1e5239]: 보문
+          - generic [ref=f1e5244]: 태릉입구
+          - generic [ref=f1e5249]: 신내
+          - generic [ref=f1e5254]: 올림픽공원
+          - generic [ref=f1e5259]: 강동
+          - generic [ref=f1e5264]: 천호
+          - generic [ref=f1e5269]: 군자
+          - generic [ref=f1e5274]: 청구
+          - generic [ref=f1e5281]: 공덕
+          - generic [ref=f1e5286]: 여의도
+          - generic [ref=f1e5294]: 김포공항
+          - generic [ref=f1e5299]: 오이도
+          - generic [ref=f1e5304]: 정왕
+          - generic [ref=f1e5309]: 신길온천
+          - generic [ref=f1e5314]: 안산
+          - generic [ref=f1e5320]: 초지
+          - generic [ref=f1e5325]: 고잔
+          - generic [ref=f1e5330]: 중앙
+          - generic [ref=f1e5335]: 한대앞
+          - generic [ref=f1e5340]: 총신대입구(이수)
+          - generic [ref=f1e5345]: 동작
+          - generic [ref=f1e5350]: 이촌
+          - generic [ref=f1e5355]: 삼각지
+          - generic [ref=f1e5360]: 성신여대입구
+          - generic [ref=f1e5365]: 노원
+          - generic [ref=f1e5370]: 오금
+          - generic [ref=f1e5375]: 가락시장
+          - generic [ref=f1e5381]: 수서
+          - generic [ref=f1e5386]: 도곡
+          - generic [ref=f1e5391]: 양재
+          - generic [ref=f1e5397]: 고속터미널
+          - generic [ref=f1e5402]: 신사
+          - generic [ref=f1e5407]: 옥수
+          - generic [ref=f1e5412]: 약수
+          - generic [ref=f1e5417]: 충무로
+          - generic [ref=f1e5422]: 건대입구
+          - generic [ref=f1e5427]: 잠실
+          - generic [ref=f1e5432]: 종합운동장
+          - generic [ref=f1e5437]: 선릉
+          - generic [ref=f1e5442]: 강남
+          - generic [ref=f1e5447]: 교대
+          - generic [ref=f1e5452]: 사당
+          - generic [ref=f1e5457]: 신림
+          - generic [ref=f1e5462]: 대림
+          - generic [ref=f1e5467]: 까치산
+          - generic [ref=f1e5472]: 영등포구청
+          - generic [ref=f1e5477]: 당산
+          - generic [ref=f1e5482]: 합정
+          - generic [ref=f1e5488]: 홍대입구
+          - generic [ref=f1e5493]: 충정로
+          - generic [ref=f1e5498]: 을지로3가
+          - generic [ref=f1e5503]: 을지로4가
+          - generic [ref=f1e5509]: 동대문역사문화공원
+          - generic [ref=f1e5514]: 신당
+          - generic [ref=f1e5521]: 왕십리
+          - generic [ref=f1e5526]: 성수
+          - generic [ref=f1e5531]: 병점
+          - generic [ref=f1e5536]: 수원
+          - generic [ref=f1e5541]: 금정
+          - generic [ref=f1e5546]: 금천구청
+          - generic [ref=f1e5551]: 가산디지털단지
+          - generic [ref=f1e5556]: 인천
+          - generic [ref=f1e5561]: 주안
+          - generic [ref=f1e5566]: 부평
+          - generic [ref=f1e5571]: 소사
+          - generic [ref=f1e5576]: 온수
+          - generic [ref=f1e5581]: 구로
+          - generic [ref=f1e5587]: 신도림
+          - generic [ref=f1e5592]: 신길
+          - generic [ref=f1e5597]: 대방
+          - generic [ref=f1e5602]: 노량진
+          - generic [ref=f1e5607]: 용산
+          - generic [ref=f1e5612]: 시청
+          - generic [ref=f1e5618]: 종로3가
+          - generic [ref=f1e5623]: 동대문
+          - generic [ref=f1e5628]: 동묘앞
+          - generic [ref=f1e5634]: 신설동
+          - generic [ref=f1e5641]: 청량리
+          - generic [ref=f1e5647]: 회기
+          - generic [ref=f1e5652]: 석계
+          - generic [ref=f1e5657]: 광운대
+          - generic [ref=f1e5662]: 창동
+          - generic [ref=f1e5667]: 도봉산
+          - generic [ref=f1e5672]: 회룡
+          - generic [ref=f1e5677]: 부천종합운동장
+          - generic [ref=f1e5682]: 성남
+          - generic [ref=f1e5687]: 구성
+          - generic [ref=f1e5692]: 구리
+          - generic [ref=f1e5697]: 별내
+          - generic [ref=f1e5702]: 불광
+          - generic [ref=f1e5708]: 연신내
+          - generic [ref=f1e5715]: 대곡
+          - generic [ref=f1e5723]: 서울역
+          - generic [ref=f1e5728]: 능곡
+          - generic [ref=f1e5733]: 곡산
+          - generic [ref=f1e5738]: 백마
+          - generic [ref=f1e5743]: 풍산
+          - generic [ref=f1e5748]: 일산
+      - generic [ref=f1e74]:
+        - button "출발지 출발역 입력" [ref=f1e75] [cursor=pointer]:
+          - generic [ref=f1e76]: 출발지
+          - generic [ref=f1e81]: 출발역 입력
+        - button "출발지와 도착지 전환" [ref=f1e82] [cursor=pointer]
+        - button "도착지 도착역 입력" [ref=f1e88] [cursor=pointer]:
+          - generic [ref=f1e89]: 도착지
+          - generic [ref=f1e94]: 도착역 입력
+      - generic [ref=f1e96]:
+        - term [ref=f1e97]: 관련
+        - definition [ref=f1e98]:
+          - link "빠른길찾기" [ref=f1e99] [cursor=pointer]
+          - link "기차승차권예매" [ref=f1e100] [cursor=pointer]
+          - link "시외/고속버스시간조회" [ref=f1e101] [cursor=pointer]
+      - button [ref=f1e103] [cursor=pointer]
+    - generic [ref=f1e112]:
+      - generic [ref=f1e113]:
+        - generic [ref=f1e114]:
+          - link "서울시청 news.seoul.go.kr›지하철-노선도" [ref=f1e115] [cursor=pointer]:
+            - /url: https://news.seoul.go.kr/culture/archives/tag/%EC%A7%80%ED%95%98%EC%B2%A0-%EB%85%B8%EC%84%A0%EB%8F%84
+            - generic [ref=f1e117]:
+              - generic [ref=f1e121]: 서울시청
+              - generic [ref=f1e123]: news.seoul.go.kr›지하철-노선도
+          - button "옵션 메뉴 열기" [ref=f1e128] [cursor=pointer]
+        - generic [ref=f1e133]:
+          - link [ref=f1e135] [cursor=pointer]:
+            - /url: https://news.seoul.go.kr/culture/archives/tag/%EC%A7%80%ED%95%98%EC%B2%A0-%EB%85%B8%EC%84%A0%EB%8F%84
+            - generic [ref=f1e136]:
+              - mark [ref=f1e137]: 지하철 노선도
+              - text: < 문화
+          - link [ref=f1e139] [cursor=pointer]:
+            - /url: https://news.seoul.go.kr/culture/archives/tag/%EC%A7%80%ED%95%98%EC%B2%A0-%EB%85%B8%EC%84%A0%EB%8F%84
+            - generic [ref=f1e140]:
+              - text: 시민의 발, 디자인을 입다...서울시,
+              - mark [ref=f1e141]: 지하철 노선도
+              - text: 40년 만에 변경 ; 서울시의
+              - mark [ref=f1e142]: 지하철 노선도
+              - text: 가 40년 만에 바뀐다.
+              - mark [ref=f1e143]: 지하철 노선
+              - text: 이 1980년대 4개
+              - mark [ref=f1e144]: 노선
+              - text: (106개 역)에서 2000년대 9개
+              - mark [ref=f1e145]: 노선
+              - text: (338개 역)을 거쳐 현재 23개
+              - mark [ref=f1e146]: 노선
+              - text: (624개 역)으로 계속 증가하고 있지만,
+              - mark [ref=f1e147]: 노선도
+              - text: 는 1980년대의 형태를 유지한 채
+              - mark [ref=f1e148]: 노선
+              - text: 만 추가되어 다양한...
+      - generic [ref=f1e149]:
+        - generic [ref=f1e151]:
+          - link [ref=f1e152] [cursor=pointer]:
+            - /url: https://news.seoul.go.kr/culture/archives/520933
+            - generic [ref=f1e153]:
+              - text: 시민의 발, 디자인을 입다…서울시,
+              - mark [ref=f1e154]: 지하철 노선도
+              - text: 40년 만에 변경 < 문화
+          - generic [ref=f1e156]:
+            - text: 서울시의
+            - mark [ref=f1e157]: 지하철 노선도
+            - text: 가 40년 만에 바뀐다.
+            - mark [ref=f1e158]: 지하철 노선
+            - text: 이 1980년대 4개
+            - mark [ref=f1e159]: 노선
+            - text: (106개 역)에서 2000년대 9개
+            - mark [ref=f1e160]: 노선
+            - text: (338개 역)을 거쳐 현재 23개
+            - mark [ref=f1e161]: 노선
+            - text: (624개 역)으로 계속 증가하고 있지만,
+            - mark [ref=f1e162]: 노선도
+            - text: 는 1980년대의 형태를 유지한 채
+            - mark [ref=f1e163]: 노선
+            - text: 만 추가되어 다양한 형태로 혼용되고 있어 추가 확장
+            - mark [ref=f1e164]: 노선
+            - text: 의 적용이 어려운 상황이다.
+        - link "관련문서 더보기" [ref=f1e166] [cursor=pointer]:
+          - /url: "?page=2&query=%EC%A7%80%ED%95%98%EC%B2%A0%EB%85%B8%EC%84%A0%EB%8F%84+site%3Anews.seoul.go.kr&qvt=0&where=m_web"
+    - list [ref=f1e174]:
+      - listitem [ref=f1e175]:
+        - generic [ref=f1e176]:
+          - link "favicon6 쿠팡 m.coupang.com 광고 전철노선표 쿠팡 양면코팅 선명한 지도 지금 바로 확인해요" [ref=f1e179] [cursor=pointer]:
+            - /url: https://ader.naver.com/v1/2PtYbIBsC1u890MVGdN1aY5N_DlkIhS65swnRdCMvKQlKW6_yur31yBdtAhBRud2w255a_58dcBdj0WQb77aJeYJx0YVe2YWOBZMoHgt7k05Wy5__dsc9JzYCaBhtGarSYFaujEGp12Tsfv06lf41VMY60SjCQdYOuzsQ3NQ0Lmg-KSquaX3uRTqF01IsesKKVhBl5kbdzVZ6vcccqSD1NXGTs6peaOdVGlb7JsYmgbRxmCDmNY6K4Fv4ZGl9MvL8xdpYIIdBAqSptMkbRgkveuP-fR2eKdrxXLQe4EmUDeil5oXY6lLLAm_16aaZyOXjQ_TIrKSOhi6ULdwPuykuaO93gtPtEUMzqZbZLwcwITgRoeB6DQ3ljHsrINlNowClN9vp5qcYwyE4ZMjHRGnJbm7dweFqYTFvKQXTbskCiIUsJBVx8UstiATC8SUhFpqnqauhA9_qQ9V-ajBw0PGWHjAwsODZ5bOzPN5XbeTgwMgpbaiaerPrxlfDkA67BtGtHchYcdqlQ2cwWroHopevb7efHqyvYHxxG5tk_hrMn7drLqt4Xt7Q-fg9GnZeLcTqMzYi9NWf8GkKC0fX1v6Dw==?c=mnaver.search.plsearch&t=0
+            - generic [ref=f1e181]:
+              - img "favicon6" [ref=f1e183]
+              - generic [ref=f1e184]: 쿠팡
+              - generic [ref=f1e185]: m.coupang.com
+              - link "광고" [ref=f1e186]
+            - generic [ref=f1e192]:
+              - generic [ref=f1e193]:
+                - text: 전철
+                - mark [ref=f1e194]: 노선
+                - mark [ref=f1e195]: 표
+                - text: 쿠팡
+              - text: 양면코팅 선명한 지도 지금 바로 확인해요
+          - link [ref=f1e199] [cursor=pointer]:
+            - /url: https://ader.naver.com/v1/2PtYbIBsC1u890MVGdN1aY5N_DlkIhS65swnRdCMvKQlKW6_yur31yBdtAhBRud2w255a_58dcBdj0WQb77aJeYJx0YVe2YWOBZMoHgt7k05Wy5__dsc9JzYCaBhtGarSYFaujEGp12Tsfv06lf41VMY60SjCQdYOuzsQ3NQ0Lmg-KSquaX3uRTqF01IsesKKVhBl5kbdzVZ6vcccqSD1NXGTs6peaOdVGlb7JsYmgbRxmCDmNY6K4Fv4ZGl9MvL8xdpYIIdBAqSptMkbRgkveuP-fR2eKdrxXLQe4EmUDeil5oXY6lLLAm_16aaZyOXjQ_TIrKSOhi6ULdwPuykuaO93gtPtEUMzqZbZLwcwITgRoeB6DQ3ljHsrINlNowClN9vp5qcYwyE4ZMjHRGnJbm7dweFqYTFvKQXTbskCiIUsJBVx8UstiATC8SUhFpqnqauhA9_qQ9V-ajBw0PGWHjAwsODZ5bOzPN5XbeTgwMgpbaiaerPrxlfDkA67BtGtHchYcdqlQ2cwWroHopevb7efHqyvYHxxG5tk_hrMn7drLqt4Xt7Q-fg9GnZeLcTqMzYi9NWf8GkKC0fX1v6Dw==?c=mnaver.search.plsearch&t=0
+            - mark [ref=f1e200]: 지하
+            - text: 철 여행 계획! 온 가족이 즐기는
+            - mark [ref=f1e201]: 노선
+            - mark [ref=f1e202]: 표
+            - text: 를 쿠팡에서.
+          - link "오늘주문 내일도착 로켓배송 더보기" [ref=f1e203] [cursor=pointer]:
+            - /url: https://ader.naver.com/v1/fKaI0E3W-vQGxEiuowAQOJt5u4uQEL-tBWBcdgF82quwjtkgskXxGsWJsuLvOc8SxmVvCxwgTh75JJB7cyCTSktwHPrZa_oovC8WswXhzt0klM9UVgQapEN_M4cB1KOtZhIqhCwelRq3rGak8iwkaienMCWYiU9hiVrODNbw6R5qGZnNVFBZO19kv4_ocoW5LR_BMk3dQlcmnrBe1if10tNG8tBQ5QbDF0U7nQKZYfMsNkiwW05xHCpMcx1YztwRysW2pbDuslT5fsI_lpvlPjA4GpUP7laUgjOQPrR3c4PAp3fqiIelkVgmgVO5r8RHC6yQa58zcOOAnYY82DzLdSWMMJymV6c43Lwmw5J8tj4DDWimmBOUS0_-FfEqRz7a0E2Ykfufwpoln6KlJEs_ek8G5s4-sA9d05mjBPVfqHGzfxBRrW0daew2QFWbWaM6j_qPAfmSrLa7I8zVLK3pFNLXYdN7EnAwYZk-o6-7Z2LRjHYoW4v77ICbrG0_zBVTKrtDEMoNB6oBXyWf_Y1OswuEuchy7m8FxOv463f_bp48wo-n9f8Cltamlvy5N-HQ-vv0CD31wt0FIFb6eglaIXz_yp8B0UKnGP8wuYnPtlg=?c=mnaver.search.plsearch&t=0
+            - generic [ref=f1e207]: 오늘주문 내일도착 로켓배송
+            - img "더보기" [ref=f1e208]
+          - list [ref=f1e212]:
+            - listitem [ref=f1e213]:
+              - link "전철노선표" [ref=f1e214] [cursor=pointer]:
+                - /url: https://ader.naver.com/v1/-KDQap1JVL6OzjClhm8oFv7xfXYur_A8cp8UoPRMjc6-psG_U5cDK8T3_A_EGE22X7SkCBmAyotrdCQR7_n6G1KLQKYi93_v5pG0zmEDBqhHkoEMvJELXrMe_SWipKyTZEaU0VL8wC1599mD6QCcp3lAQAVkWtHwgosSyhg_uzFE9ZMOfDcy3D8jRihoUbvMEBsTMNqAP2NBRzHAkXCgpkzm0MlpqoCyKQOtBtvCqKrvSa_7LHROkw_Sf66a0PTrHCtnKDPPJR_5XdljrlfCFrYH4_XodaDpBWXv_Ds7vKwJl6yjoywOO_1h0aWpgEG6ms2h-D7O1NTQFSsQfZqvsoTYRdx_3A3cb8tftCkXWSMWHQCdtgo9WlgJSgTb1jBqP_mX6RHvZ-1xxDdZCBZUedE79BU12FsDCA_-NyXFn-q2ZdBrPQrunCiN4bb-eKD_XYIFW7ewQQWLdIGAq5L9VgZ35CEAIvtdmek7CSGUnaS5MtlfZIlVAwSYu5dttIqZ76byEv0YvCwZXUcEf4nelMLs6sxgaXk6swLCRjpKkZueq5zfGYWX1_i8lWZFrnvUu3XarpS6LzjR-OG5qw0qhbVMJeRXbujjq6VqF6jbSQ8g6vm0Cr5QnA--9LI8zbdY?c=mnaver.search.plsearch&t=0
+            - listitem [ref=f1e216]:
+              - link "지하철노선표" [ref=f1e217] [cursor=pointer]:
+                - /url: https://ader.naver.com/v1/1RdpfVgGr81THpBvvnG6EGi9qr_ZvdSDiiM0QMdCn4AH_kh93XDsN68ibTblTSSdnvuHaVwjZTfitPUPjXeTrJjeqqbHNzTxVfDTmjyetp9xcKJ_mwUBf2ubhyfNwtJ0I6cx3UNEU-9S786eDjZCdDJ8o7luQntcv4X5jLqHe2HcIh47oDbAiu2cwN_gMIsIYp9wSUq82lZhVwPwDbgeIUwB-K7gUwsN__U_3X_ACkMBLRVoipZnJELedYtD_RV9BOP03Icu8pAwQROxm9vAmoUng0YmF6R1LYcm7KtzM1BfgpGhC8iwNizTcMZhUplqRvSClbvfxJ_sKNKmJjVgkyv58ZXHhaZp99VT1nEtS6lqw2pxQP1ADxKG8Vr9LCQU4piN8EeMtOfM8-cMSrjE_bU7q_HMHVI8Z1dq5oj7kvFpFmyKxh_xCHojC9tQ1ZIm4G4vZKx330omMTWI4kYEjPNq2enr-mnCg9EZa-xgR9UC_Quy48AJJXWXSfVX-l9XIpOvoiS-wUSpoUotP5G2qg7cSCT1qmKvHd3OrFlVNzSUgKFNzDvvl4G_giZDCylztb6jgs1MMFXloH9mpDfC_auN9XDRSMvcoi_TPzcuBtbqQt8MSHc5rItL10NUZWnf?c=mnaver.search.plsearch&t=0
+            - listitem [ref=f1e219]:
+              - link "지하철노선" [ref=f1e220] [cursor=pointer]:
+                - /url: https://ader.naver.com/v1/2VXHdVqP8h_6ApnWK6IwtE7lus_x-iYClRkFub6CvX1LanYeKWVQE7nU0A9KkCpIcf_bx2xn_NdLqDIjEAwAMIcHYnEcVRaYEAYZ7fldRdzkSfF-lHTlGfDTiz9BPJacUdpKkwxqwW17erLE1YAIrd5hqiX8UFi_7yZdao3Ohnmi2gVD0Jf-wdn81WPIFsKUWbeFcmancQhZi8CCYb_7MWOTBMC0pLgsRMlpNZgfILEz8tnItXTkKiBDlM8vl1kGNJOXgR43yR2Azzwmguw9NLbXXSB4XeqjaptQefF95oZvqjQhEsU-1334l-2wDjl4_liiUKyL-qd5CEEimWNy-yYwK4xnTQ4i_9Yl_BtCwII94Tkqjyveimru2dYzDy9EUxe2qKmkNLc0Q5no11jkBxsj5px_Ps5E9GJVJcte5pnESnJ2TwIU7NCqF_5lKp-RCqogsLdppjU5fTSKUScZg6nY1MhvQsrsjEasEyXHQP5wntzHNY5SQrBI6A8-vTlfQNP8l5SucxAKjmp5mpcoVwncPTmYTprduzGLE8Oo1BTvbo79qzgSyzZ4mYYhRlAhFH1p1iZfj0a9XKdc7Aj0CRyHMcYSICPgktamfh5w9cFjgnWnYSzyXv4q3fEQNhzC?c=mnaver.search.plsearch&t=0
+            - listitem [ref=f1e222]:
+              - link "철도노선표" [ref=f1e223] [cursor=pointer]:
+                - /url: https://ader.naver.com/v1/-KDQap1JVL6OzjClhm8oFrpVQtc9w-YIvEL5ELVXJuodSn3_1rxwf_y2MXbBNSmLtcAsns0dFyMnbfxqS3SQOQ_7E6ZbvHmTa2TfkJZOgYoDSl0TJiUmLLeE3iV_k2x0xCCKmv7Fs4zZVDfA_P8tHLrl8vOe80JUuHVy2elSVTNWTm98Mjbj1mOAMOmnUe4W7wzLxI_PCEvI06fgcovOSlpGCrcAOk8vsNErKzzfUGVEiIrWhIY2YYeGIuk1gHblG4vUOs1UsOWSJhYJeMABI5h0HCehZBF2kKJ9OdSPgIUw9w-3LiFa0_dnag4zXaLsRotcs7uRELQqpwGbJjYsZkP-4V-K8YLRjuBZkQl4V88TGzX9AjUh23eAt6nCfDoQNPtNlR2IIMvZKC7ty1cBMV6srOy8zFUh9_B39BmZ6qbXc6DUdIrdYErph9yevg5dnrkfgG1Ku82mr7v1uL-qNxpltqu53hqFMiL8hBo3sDxZcq34_l7FbKPJZT8SA3GLQSjsoWeTJaomj_IyOb7DiX1BLBMrmnV0A327sbdfs2eVzqDlxpNON_uWVttECYdfOKVmkiTLIz-v_Glra4zK9siOWHRv2bQMUgNf1bAkcAvwYMCP519KaqBDAi2XwdQ1yJ3200XHDemdqdzGV5fJxA==?c=mnaver.search.plsearch&t=0
+          - generic [ref=f1e225]:
+            - link "전철노선표" [ref=f1e227] [cursor=pointer]:
+              - /url: https://ader.naver.com/v1/-KDQap1JVL6OzjClhm8oFhF-bbBFuywAEcQL7DxRFGfutDmFAqP77PAdrjhlVURsCkPLRCsD24oDsblrJM1lxfuduN2ED0J2WKhnEMH0pbg3h3haZtaYuWqd0xsxwKue_Zub-wM0dEszd65Ul78-Iq_HhO3WvTi-cb-rwqgvWDaL7yJElpKhKSZ_Om0RXC46nwP4iyj5muvOIiKqIhyuiI4Fm45-z6qaEeJVnO9xVdCx4gXeRARyo4CTUhPlNena6gIOFn4KafDVK0dcihL98YBe3Z47Gtysc7hEmYdlWeoM5yvF73_YMV7dHLwFJRgZt1cCcsMCcsvZwDn06-_dXFsuVbRbaTZu9hin1mequd-_AyQq92zBTI3RK0ofmUv0E-iK2-lD-govMjpcpUS_w0jXOJOvpbTgb4Nq1KkUME9ovRdXb0a9sytit0OQs5Am1PUVuFIB7G0Qcsq7WCABK4Ko2LTRaSZo4ckX3rKWSIOiZ8X7CfGeNrD_9UzcuxVs_0Eg7cSKzY42oE80aHTEzuYRxoP11zNWKg4Cj9Yo7DEvgYKiWL3h9PpKff0dHTdLQMUxhbBiUJJAoDCdA233u1t9Mjw_vNMOZxmyyZ2C6xc64xBNCM8OJKeQtxWaek7D?c=mnaver.search.plsearch&t=0
+            - link "지하철노선표" [ref=f1e232] [cursor=pointer]:
+              - /url: https://ader.naver.com/v1/1RdpfVgGr81THpBvvnG6EMmoMrZyCYc-Ob-0UJpth3Pjyfudm6mHaGT7_aFEVnQ0WV0-_OhHczJamrNHc4V3_KU9hJoNw3UQJOc6Sh5acK5CsiWxFewy3hR9eF2p3F5HdWlUQYoamHAVwUiaHy8KChPOVBb8sGNgtpFU0YT7CfDXQGoWfP9Wz9h63tJBslodr5tvYjrqmVl52PajR9L2EzPLSvCyzcXU3AnytF9Zotuymir9SSSauavRBwwBAwx2FOPRo-LjtRyxc6eUEkDUuNL9Da5hJ_tAQhPZ2e8DcTejtniFOmuElqHnpuayyZKhBtfkBHGQDnH0CWq46UI2OrKkWT59ZwraB_rXAkpQkgLqa4eyyNMfUdNTv6rKuVkk1WuGoiO8oNXBURgIK9BPcTyBwUOigQdx6VufRKE_PiaeIo84Jc-CLRAaVBDyPoUwgY_RiWvzau9wea4_DE9rXyxrBpv8c2V3_28kfMY1RS8vbXzOg2sjtGpB_1JN35fl0l5xA16uUf5lUNEI0WgQX2ATFiDVQ6d3swcjiLqsy_tv_2Xlti16JdGUIZoOp0GKWErGpzRhX36aAcsKtI-EDZoVL8KMCD7wtWiElnhdb6HHRg9mPUsFb8V5k0o1mu-w4Jw_fFQJg_SdG1JQivpwyQ==?c=mnaver.search.plsearch&t=0
+            - link "지하철노선" [ref=f1e237] [cursor=pointer]:
+              - /url: https://ader.naver.com/v1/2VXHdVqP8h_6ApnWK6IwtOy6FYAMl5VzQFqyqlZ8y0oYPxpIrUofvgqPq-jToBC5aa3Km1oqs2xQgC_PsFOwYNoYancQl2tbyM44XXG58QMGirsK1o_N60GutaUxj6rR9DGlMiOQLNzHsfoxjb2Of7ZUomwMjCKE0XL5LSAyBGGviGUNfad-3gk9KWK_q1-feV0ZXQnqOTGN6eSzxg8O1SG03SJDWrWcy4RsQUaJhnIKTlLYCYjfdRbgSejqy9vjMAM8jU7ig5OeZatHEh21WitTV2y9ksj6EvLbUFbQS4FsdIZLwZL0XpewzZJMuZXLL2xzjBxl4NAoxTl29So-ArjDQ9veItOgEs6J05yY6cX9-2h6pD0sr-Ok1fPYyutEyvu4GxJSA9jS5gdHbw6cNkzPRRpQAKXWEAe4H6rukuJkUr1uilEhw6qmmr0oWEVdVLjwu22kEDXJG_P_ECz-QX1JBV6l9IWqwapDIV6Fx_Ukvb8z5KnKhx1oBptYyS8mvAWCXrOGyU_oqirh1Qiji8jfU3mTdf_fcEvBCaySfW1GqpENUGC0jkUGMu4e2xhJ3bPIYaNF5qQ3pPXATIGCYo0DwtIT1QbL6n9vsZFjjZXZcFFf3yQYaFWodTJEAevoreJCcWAd2uNHYZH3MzZ05Q==?c=mnaver.search.plsearch&t=0
+    - generic [ref=f1e243]:
+      - generic [ref=f1e246]:
+        - heading "네이버 클립" [level=2] [ref=f1e247]
+        - button "정보 확인 도움말" [ref=f1e248] [cursor=pointer]
+      - generic [ref=f1e253]:
+        - generic [ref=f1e254]:
+          - generic [ref=f1e256]:
+            - generic [ref=f1e258]:
+              - link [ref=f1e259] [cursor=pointer]:
+                - /url: https://clip.naver.com/contents?serviceType=CLIP&seedMediaId=6a4ed24dd47f0657ffbe9f3f&recType=CLIP_PC&recId=%7B%22targetProfileId%22:%22hoq3WCSJulDOC46w60Hy%22,%22open%22:true%7D
+                - img "클립 이미지" [ref=f1e261]
+              - link [ref=f1e262] [cursor=pointer]:
+                - /url: https://clip.naver.com/contents?serviceType=CLIP&seedMediaId=6a4ed24dd47f0657ffbe9f3f&recType=CLIP_PC&recId=%7B%22targetProfileId%22:%22hoq3WCSJulDOC46w60Hy%22,%22open%22:true%7D
+                - generic [ref=f1e263]:
+                  - text: "#"
+                  - mark [ref=f1e264]: 지하철노선도
+            - link "프로필 이미지 Mobius58 2주 전" [ref=f1e265] [cursor=pointer]:
+              - /url: https://clip.naver.com/@33s33s33
+              - generic [ref=f1e266]:
+                - img "프로필 이미지" [ref=f1e268]
+                - generic [ref=f1e269]:
+                  - generic [ref=f1e270]: Mobius58
+                  - generic [ref=f1e272]: 2주 전
+          - generic [ref=f1e275]:
+            - generic [ref=f1e277]:
+              - link [ref=f1e278] [cursor=pointer]:
+                - /url: https://m.naver.com/shorts?serviceType=CLIP&mediaType=VOD&seedMediaId=EEF34B7964F284D4A2D2BC0618BB1F8A6417&recType=CLIP_PC&recId=%7B%22targetProfileId%22%3A%22c88ms7uDz2lBadMkKNte%22%2C%22open%22%3Atrue%7D
+                - img "클립 이미지" [ref=f1e280]
+              - link [ref=f1e281] [cursor=pointer]:
+                - /url: https://m.naver.com/shorts?serviceType=CLIP&mediaType=VOD&seedMediaId=EEF34B7964F284D4A2D2BC0618BB1F8A6417&recType=CLIP_PC&recId=%7B%22targetProfileId%22%3A%22c88ms7uDz2lBadMkKNte%22%2C%22open%22%3Atrue%7D
+                - generic [ref=f1e282]:
+                  - mark [ref=f1e283]: 지하철
+                  - text: 덕후라면 뉴욕...
+                  - mark [ref=f1e284]: 지하철
+                  - text: 박물관#뉴욕여행#미국여행#미국
+                  - mark [ref=f1e285]: 지하철
+            - link "프로필 이미지 황가지 05.20 조회 1.9천" [ref=f1e286] [cursor=pointer]:
+              - /url: https://clip.naver.com/@aa__jiiiii
+              - generic [ref=f1e287]:
+                - img "프로필 이미지" [ref=f1e289]
+                - generic [ref=f1e290]:
+                  - generic [ref=f1e291]: 황가지
+                  - generic [ref=f1e293]:
+                    - generic [ref=f1e294]: "05.20"
+                    - generic [ref=f1e296]: 조회 1.9천
+        - generic [ref=f1e297]:
+          - generic [ref=f1e299]:
+            - generic [ref=f1e301]:
+              - link [ref=f1e302] [cursor=pointer]:
+                - /url: https://m.naver.com/shorts?serviceType=CLIP&mediaType=VOD&seedMediaId=B855EEDA86D4CEAEB49F3AD312FFE8099B55&recType=CLIP_PC&recId=%7B%22targetProfileId%22%3A%22rPDucz1VoGk7gyssUQnN%22%2C%22open%22%3Atrue%7D
+                - img "클립 이미지" [ref=f1e304]
+              - link [ref=f1e305] [cursor=pointer]:
+                - /url: https://m.naver.com/shorts?serviceType=CLIP&mediaType=VOD&seedMediaId=B855EEDA86D4CEAEB49F3AD312FFE8099B55&recType=CLIP_PC&recId=%7B%22targetProfileId%22%3A%22rPDucz1VoGk7gyssUQnN%22%2C%22open%22%3Atrue%7D
+                - generic [ref=f1e306]:
+                  - text: "#"
+                  - mark [ref=f1e307]: 지하철노선도
+            - link "cccjs79 05.08 조회 3.1천" [ref=f1e308] [cursor=pointer]:
+              - /url: https://clip.naver.com/@cccjs79
+              - generic [ref=f1e314]:
+                - generic [ref=f1e315]: cccjs79
+                - generic [ref=f1e317]:
+                  - generic [ref=f1e318]: "05.08"
+                  - generic [ref=f1e320]: 조회 3.1천
+          - generic [ref=f1e322]:
+            - generic [ref=f1e324]:
+              - link [ref=f1e325] [cursor=pointer]:
+                - /url: https://m.naver.com/shorts?serviceType=MOMENT&mediaType=VOD&seedMediaId=6C3EE2A720DB5B268DC7C90867F79A36B0D8&recType=CLIP_PC&recId=%7B%22targetProfileId%22%3A%22aon04YSL4h2TAXhvMeAx%22%2C%22open%22%3Atrue%7D
+                - img "클립 이미지" [ref=f1e327]
+              - link [ref=f1e328] [cursor=pointer]:
+                - /url: https://m.naver.com/shorts?serviceType=MOMENT&mediaType=VOD&seedMediaId=6C3EE2A720DB5B268DC7C90867F79A36B0D8&recType=CLIP_PC&recId=%7B%22targetProfileId%22%3A%22aon04YSL4h2TAXhvMeAx%22%2C%22open%22%3Atrue%7D
+                - generic [ref=f1e329]:
+                  - text: 현재
+                  - mark [ref=f1e330]: 지하철
+                  - text: "역 위치는? #"
+                  - mark [ref=f1e331]: 지하철
+                  - text: "#"
+                  - mark [ref=f1e332]: 지하철
+                  - text: "역 #"
+                  - mark [ref=f1e333]: 노선도
+                  - text: "#"
+                  - mark [ref=f1e334]: 지하철노선도
+            - link "프로필 이미지 인터랙티브 뉴스 03.30 조회 1.4만" [ref=f1e335] [cursor=pointer]:
+              - /url: https://clip.naver.com/@woomuleconomy
+              - generic [ref=f1e336]:
+                - img "프로필 이미지" [ref=f1e338]
+                - generic [ref=f1e339]:
+                  - generic [ref=f1e340]: 인터랙티브 뉴스
+                  - generic [ref=f1e342]:
+                    - generic [ref=f1e343]: "03.30"
+                    - generic [ref=f1e345]: 조회 1.4만
+      - link "클립 더보기" [ref=f1e347] [cursor=pointer]:
+        - /url: "?nso=&query=%EC%A7%80%ED%95%98%EC%B2%A0%EB%85%B8%EC%84%A0%EB%8F%84&sm=mtb_amr&sort=rel&ssc=tab.m_clip.all"
+        - generic [ref=f1e351]:
+          - generic [ref=f1e352]: 클립
+          - generic [ref=f1e353]: 더보기
+    - generic [ref=f1e360]:
+      - generic [ref=f1e363]:
+        - generic [ref=f1e364]: 함께 많이 찾는
+        - button "정보 확인 도움말" [ref=f1e365] [cursor=pointer]
+      - generic [ref=f1e3073]:
+        - generic [ref=f1e3075]:
+          - generic [ref=f1e3078]:
+            - link "부산지하철노선도" [ref=f1e3079] [cursor=pointer]:
+              - /url: "?where=m&sm=mtb_clk.ndT&query=%EB%B6%80%EC%82%B0%EC%A7%80%ED%95%98%EC%B2%A0%EB%85%B8%EC%84%A0%EB%8F%84"
+              - generic [ref=f1e3082]:
+                - mark [ref=f1e3083]: 부산
+                - text: 지하철노선도
+            - link [ref=f1e3089] [cursor=pointer]:
+              - /url: "?where=m&sm=mtb_clk.ndT&query=%EC%9D%B8%EC%B2%9C%EC%A7%80%ED%95%98%EC%B2%A0%20%EB%85%B8%EC%84%A0%EB%8F%84"
+              - generic [ref=f1e3092]:
+                - mark [ref=f1e3093]: 인천
+                - text: 지하철 노선도
+            - link [ref=f1e3098] [cursor=pointer]:
+              - /url: "?where=m&sm=mtb_clk.ndT&query=%EC%84%9C%EC%9A%B8%EC%A7%80%ED%95%98%EC%B2%A0%EB%85%B8%EC%84%A0%EB%8F%84%20%ED%81%AC%EA%B2%8C%EB%B3%B4%EA%B8%B0"
+              - generic [ref=f1e3101]:
+                - mark [ref=f1e3102]: 서울
+                - text: 지하철노선도
+                - mark [ref=f1e3103]: 크게보기
+            - link [ref=f1e3108] [cursor=pointer]:
+              - /url: "?where=m&sm=mtb_clk.ndT&query=%EC%88%98%EB%8F%84%EA%B6%8C%EC%A7%80%ED%95%98%EC%B2%A0%EB%85%B8%EC%84%A0%EB%8F%84"
+              - generic [ref=f1e3111]:
+                - mark [ref=f1e3112]: 수도권
+                - text: 지하철노선도
+            - link [ref=f1e3117] [cursor=pointer]:
+              - /url: "?where=m&sm=mtb_clk.ndT&query=%EC%A7%80%ED%95%98%EC%B2%A0%EC%97%AD%20%EB%85%B8%EC%84%A0%EB%8F%84"
+              - generic [ref=f1e3120]:
+                - text: 지하철
+                - mark [ref=f1e3121]: 역
+                - text: 노선도
+          - generic [ref=f1e3128]:
+            - link [ref=f1e3129] [cursor=pointer]:
+              - /url: "?where=m&sm=mtb_clk.ndT&query=%EC%A7%80%ED%95%98%EC%B2%A0%202%ED%98%B8%EC%84%A0%20%EB%85%B8%EC%84%A0%EB%8F%84"
+              - generic [ref=f1e3132]:
+                - text: 지하철
+                - mark [ref=f1e3133]: 2호선
+                - text: 노선도
+            - link [ref=f1e3138] [cursor=pointer]:
+              - /url: "?where=m&sm=mtb_clk.ndT&query=%EB%8C%80%EC%A0%84%20%EC%A7%80%ED%95%98%EC%B2%A0%20%EB%85%B8%EC%84%A0%EB%8F%84"
+              - generic [ref=f1e3141]:
+                - mark [ref=f1e3142]: 대전
+                - text: 지하철 노선도
+            - link [ref=f1e3147] [cursor=pointer]:
+              - /url: "?where=m&sm=mtb_clk.ndT&query=%EC%A7%80%ED%95%98%EC%B2%A0%203%ED%98%B8%EC%84%A0%20%EB%85%B8%EC%84%A0%EB%8F%84"
+              - generic [ref=f1e3150]:
+                - text: 지하철
+                - mark [ref=f1e3151]: 3호선
+                - text: 노선도
+            - link [ref=f1e3156] [cursor=pointer]:
+              - /url: "?where=m&sm=mtb_clk.ndT&query=%EC%A7%80%ED%95%98%EC%B2%A01%ED%98%B8%EC%84%A0%EB%85%B8%EC%84%A0%EB%8F%84"
+              - generic [ref=f1e3159]:
+                - text: 지하철
+                - mark [ref=f1e3160]: 1호선
+                - text: 노선도
+            - link [ref=f1e3165] [cursor=pointer]:
+              - /url: "?where=m&sm=mtb_clk.ndT&query=%EC%84%9C%EC%9A%B8%20%EC%A7%80%ED%95%98%EC%B2%A0%201%ED%98%B8%EC%84%A0%20%EB%85%B8%EC%84%A0%EB%8F%84"
+              - generic [ref=f1e3168]:
+                - mark [ref=f1e3169]: 서울
+                - text: 지하철
+                - mark [ref=f1e3170]: 1호선
+                - text: 노선도
+          - generic [ref=f1e3177]:
+            - link [ref=f1e3178] [cursor=pointer]:
+              - /url: "?where=m&sm=mtb_clk.ndT&query=%EC%A7%80%ED%95%98%EC%B2%A0%209%ED%98%B8%EC%84%A0%20%EB%85%B8%EC%84%A0%EB%8F%84"
+              - generic [ref=f1e3181]:
+                - text: 지하철
+                - mark [ref=f1e3182]: 9호선
+                - text: 노선도
+            - link [ref=f1e3187] [cursor=pointer]:
+              - /url: "?where=m&sm=mtb_clk.ndT&query=%EC%A7%80%ED%95%98%EC%B2%A0%204%ED%98%B8%EC%84%A0%20%EB%85%B8%EC%84%A0%EB%8F%84"
+              - generic [ref=f1e3190]:
+                - text: 지하철
+                - mark [ref=f1e3191]: 4호선
+                - text: 노선도
+            - link [ref=f1e3196] [cursor=pointer]:
+              - /url: "?where=m&sm=mtb_clk.ndT&query=%EC%A7%80%ED%95%98%EC%B2%A05%ED%98%B8%EC%84%A0%EB%85%B8%EC%84%A0%EB%8F%84"
+              - generic [ref=f1e3199]:
+                - text: 지하철
+                - mark [ref=f1e3200]: 5호선
+                - text: 노선도
+            - link [ref=f1e3205] [cursor=pointer]:
+              - /url: "?where=m&sm=mtb_clk.ndT&query=%EC%A7%80%ED%95%98%EC%B2%A0%207%ED%98%B8%EC%84%A0%20%EB%85%B8%EC%84%A0%EB%8F%84"
+              - generic [ref=f1e3208]:
+                - text: 지하철
+                - mark [ref=f1e3209]: 7호선
+                - text: 노선도
+            - link [ref=f1e3214] [cursor=pointer]:
+              - /url: "?where=m&sm=mtb_clk.ndT&query=%EC%A7%80%ED%95%98%EC%B2%A0%EB%85%B8%EC%84%A0%EB%8F%84%20%EC%84%9C%EC%9A%B8"
+              - generic [ref=f1e3217]:
+                - text: 지하철노선도
+                - mark [ref=f1e3218]: 서울
+        - navigation "페이지 네비게이션" [ref=f1e3223]:
+          - generic "페이지 1" [ref=f1e3224]: "1"
+          - generic "페이지 2" [ref=f1e3226]: "2"
+          - generic "페이지 3" [ref=f1e3228]: "3"
+    - generic [ref=f1e411]:
+      - generic [ref=f1e412]:
+        - generic [ref=f1e413]:
+          - generic [ref=f1e414]:
+            - link "서울교통공사 www.seoulmetro.co.kr›cyberStation" [ref=f1e415] [cursor=pointer]:
+              - /url: http://www.seoulmetro.co.kr/kr/cyberStation.do
+              - generic [ref=f1e417]:
+                - generic [ref=f1e421]: 서울교통공사
+                - generic [ref=f1e423]: www.seoulmetro.co.kr›cyberStation
+            - button "옵션 메뉴 열기" [ref=f1e428] [cursor=pointer]
+          - generic [ref=f1e433]:
+            - link "서울교통공사 사이버 스테이션" [ref=f1e435] [cursor=pointer]:
+              - /url: http://www.seoulmetro.co.kr/kr/cyberStation.do
+            - link "Ctrl+F 를 눌러서 역을 빠르게 검색할 수 있습니다." [ref=f1e437] [cursor=pointer]:
+              - /url: http://www.seoulmetro.co.kr/kr/cyberStation.do
+        - generic [ref=f1e439]:
+          - generic [ref=f1e441]:
+            - link "서울교통공사" [ref=f1e442] [cursor=pointer]:
+              - /url: http://www.seoulmetro.co.kr/kr/page.do?menuIdx=359
+            - generic [ref=f1e444]: 서울교통공사
+          - link "관련문서 더보기" [ref=f1e447] [cursor=pointer]:
+            - /url: "?page=2&query=%EC%A7%80%ED%95%98%EC%B2%A0%EB%85%B8%EC%84%A0%EB%8F%84+site%3Awww.seoulmetro.co.kr&qvt=0&where=m_web"
+      - generic [ref=f1e451]:
+        - generic [ref=f1e452]:
+          - generic [ref=f1e453]:
+            - link "부산교통공사 www.humetro.busan.kr›homepage" [ref=f1e454] [cursor=pointer]:
+              - /url: https://www.humetro.busan.kr/homepage/cyberstation/map.do
+              - generic [ref=f1e456]:
+                - generic [ref=f1e460]: 부산교통공사
+                - generic [ref=f1e462]: www.humetro.busan.kr›homepage
+            - button "옵션 메뉴 열기" [ref=f1e467] [cursor=pointer]
+          - generic [ref=f1e472]:
+            - link [ref=f1e474] [cursor=pointer]:
+              - /url: https://www.humetro.busan.kr/homepage/cyberstation/map.do
+              - generic [ref=f1e475]:
+                - mark [ref=f1e476]: 노선
+                - text: 검색 - 부산교통공사
+            - link "다대포해수욕장 · 다대포항 · 낫개 · 신장림 · 장림 · 동매 · 신평 · 하단 · 당리 · 사하 · 괴정 · 대티 · 서대신 · 동대신 · 토성 · 자갈치 · 남포 · 중앙 · 부산역 · 초량 · 부산진 · 좌천 · 범일 · 범내골 · 서면 · 부전 · 양정 · 시청 · 연산 · 교대 · 동래 · 명륜 · 온천장 · 부산대 · 장전 · 구서 · 두실 · 남산 · 범어사 · 노포" [ref=f1e478] [cursor=pointer]:
+              - /url: https://www.humetro.busan.kr/homepage/cyberstation/map.do
+        - generic [ref=f1e480]:
+          - generic [ref=f1e482]:
+            - link [ref=f1e483] [cursor=pointer]:
+              - /url: https://www.humetro.busan.kr/homepage/chs/page/subLocation.do?menu_no=1001010102
+              - img "<mark>노선도</mark> 다운로드 &gt; <mark>노선도</mark> &gt; 이용안내의 이미지" [ref=f1e485]
+            - link [ref=f1e487] [cursor=pointer]:
+              - /url: https://www.humetro.busan.kr/homepage/chs/page/subLocation.do?menu_no=1001010102
+              - generic [ref=f1e488]:
+                - mark [ref=f1e489]: 노선도
+                - text: 다운로드 >
+                - mark [ref=f1e490]: 노선도
+                - text: "> 이용안내"
+            - generic [ref=f1e492]:
+              - mark [ref=f1e493]: 노선도
+              - text: 이미지 클릭 시 큰 이미지로 보실 수 있습니다. 열차 운행 관련 문의는 1544-5005로 연락해주시면 친절히 답변드리겠습니다.
+          - link "관련문서 더보기" [ref=f1e495] [cursor=pointer]:
+            - /url: "?page=2&query=%EC%A7%80%ED%95%98%EC%B2%A0%EB%85%B8%EC%84%A0%EB%8F%84+site%3Awww.humetro.busan.kr&qvt=0&where=m_web"
+    - generic [ref=f1e501]:
+      - button "이전페이지" [disabled] [ref=f1e502]
+      - generic [ref=f1e504]:
+        - button "1" [ref=f1e505] [cursor=pointer]
+        - button "2" [ref=f1e506] [cursor=pointer]
+        - button "3" [ref=f1e507] [cursor=pointer]
+        - button "4" [ref=f1e508] [cursor=pointer]
+        - button "5" [ref=f1e509] [cursor=pointer]
+      - button "다음페이지" [ref=f1e510]
+  - contentinfo [ref=f1e512]:
+    - generic [ref=f1e513]:
+      - generic [ref=f1e514]:
+        - generic [ref=f1e515]:
+          - button "가 폰트작게보기" [ref=f1e517] [cursor=pointer]:
+            - text: 가
+            - generic [ref=f1e518]: 폰트작게보기
+          - button "가 폰트크게보기" [ref=f1e520] [cursor=pointer]:
+            - text: 가
+            - generic [ref=f1e521]: 폰트크게보기
+        - generic [ref=f1e522]:
+          - button "공유하기" [ref=f1e524] [cursor=pointer]
+          - button "맨위로" [ref=f1e527] [cursor=pointer]
+      - generic [ref=f1e530]:
+        - link "로그인" [ref=f1e532] [cursor=pointer]:
+          - /url: https://nid.naver.com/nidlogin.login?svctype=262144&url=https%3A%2F%2Fm.search.naver.com%2Fsearch.naver%3Fquery%3D%25EC%25A7%2580%25ED%2595%2598%25EC%25B2%25A0%25EB%2585%25B8%25EC%2584%25A0%25EB%258F%2584
+        - link "전체서비스" [ref=f1e534] [cursor=pointer]:
+          - /url: https://m.naver.com/services.html?f=svc.search
+        - link "PC버전" [ref=f1e536] [cursor=pointer]:
+          - /url: https://search.naver.com/search.naver?query=%EC%A7%80%ED%95%98%EC%B2%A0%EB%85%B8%EC%84%A0%EB%8F%84&sm=mtb_pcv&ssc=tab.nx.all&where=nexearch
+      - generic [ref=f1e537]:
+        - generic [ref=f1e538]:
+          - link "이용약관" [ref=f1e540] [cursor=pointer]:
+            - /url: https://policy.naver.com/policy-mobile/term.html
+          - link "개인정보처리방침" [ref=f1e542] [cursor=pointer]:
+            - /url: https://policy.naver.com/policy-mobile/privacy.html
+          - link "검색 고객센터" [ref=f1e544] [cursor=pointer]:
+            - /url: https://help.naver.com/alias/search/integration/main.naver
+        - link "NAVER" [ref=f1e545] [cursor=pointer]:
+          - /url: https://www.navercorp.com/
