@@ -1,10 +1,27 @@
 const { onRequest } = require('firebase-functions/v2/https');
+const { onSchedule } = require('firebase-functions/v2/scheduler');
 const { defineSecret } = require('firebase-functions/params');
+const admin = require('firebase-admin');
+
+admin.initializeApp();
+const db = admin.firestore();
+const FieldValue = admin.firestore.FieldValue;
 
 const seoulOpenDataKey = defineSecret('SEOUL_OPEN_DATA_KEY');
 const seoulFastExitKey = defineSecret('SEOUL_FAST_EXIT_KEY');
 const PAGE_SIZE = 1000;
 const MAX_ROWS = 3000; // 서울 전역 엘리베이터/에스컬레이터 총량을 넉넉히 덮는 상한
+
+// 서울 열린데이터광장 인증키는 계정당 일일 호출 한도가 있고, 매 요청마다
+// 전체 데이터(최대 3000건, 3페이지)를 새로 긁어오면 응답도 느리고(약 11초)
+// 실사용자 트래픽이 늘수록 한도 소진 위험도 커진다. 그래서 하루 두 번
+// [refreshFacilitiesCache]가 미리 받아 역별로 Firestore에 저장해두고,
+// [facilities] 요청은 원칙적으로 이 캐시만 읽는다. 캐시가 아직 한 번도
+// 갱신되지 않은 경우(최초 배포 직후)에만 예전처럼 라이브로 조회한다.
+const FACILITY_TYPES = [
+  { type: 'elevator', service: 'getFcElvtr', collection: 'facilitiesCache_elevator' },
+  { type: 'escalator', service: 'getFcEsctr', collection: 'facilitiesCache_escalator' },
+];
 
 async function fetchPage(service, key, start, end) {
   const url = new URL(`http://openapi.seoul.go.kr:8088/${key}/json/${service}/${start}/${end}/`);
@@ -36,10 +53,80 @@ async function fetchPage(service, key, start, end) {
   return { rows, totalCount };
 }
 
+// 첫 페이지로 totalCount를 안 뒤, 나머지 페이지는 순차가 아니라 병렬로 받는다
+// (라이브 폴백 시 응답시간을 페이지 수만큼 줄이기 위함).
+async function fetchAllRows(service, key) {
+  const first = await fetchPage(service, key, 1, PAGE_SIZE);
+  const total = Math.min(first.totalCount, MAX_ROWS);
+  const tasks = [];
+  for (let start = PAGE_SIZE + 1; start <= total; start += PAGE_SIZE) {
+    const end = Math.min(start + PAGE_SIZE - 1, total);
+    tasks.push(fetchPage(service, key, start, end));
+  }
+  const pages = await Promise.all(tasks);
+  let rows = first.rows;
+  for (const page of pages) rows = rows.concat(page.rows);
+  return rows;
+}
+
 function filterByStation(rows, stationName) {
   if (!stationName) return rows;
   const exact = rows.filter(row => row.stnNm === stationName);
   return exact.length ? exact : rows.filter(row => row.stnNm?.includes(stationName));
+}
+
+// Firestore 문서ID는 '/'를 쓸 수 없고 너무 길면 안 되니 안전하게 치환.
+function stationDocId(stnNm) {
+  return (stnNm || '(unknown)').replace(/\//g, '_').slice(0, 300);
+}
+
+async function refreshOneType({ service, collection }, key) {
+  const rows = await fetchAllRows(service, key);
+  const byStation = new Map();
+  for (const row of rows) {
+    const docId = stationDocId(row.stnNm);
+    if (!byStation.has(docId)) byStation.set(docId, []);
+    byStation.get(docId).push(row);
+  }
+
+  const entries = [...byStation.entries()];
+  const BATCH_SIZE = 400; // Firestore 배치 쓰기 한도(500) 아래로 여유있게
+  for (let i = 0; i < entries.length; i += BATCH_SIZE) {
+    const batch = db.batch();
+    for (const [docId, stationRows] of entries.slice(i, i + BATCH_SIZE)) {
+      batch.set(db.collection(collection).doc(docId), {
+        rows: stationRows,
+        updatedAt: FieldValue.serverTimestamp(),
+      });
+    }
+    await batch.commit();
+  }
+
+  await db.collection('facilitiesIndex').doc(collection).set({
+    keys: entries.map(([docId]) => docId),
+    updatedAt: FieldValue.serverTimestamp(),
+    totalRows: rows.length,
+  });
+
+  return { stationCount: entries.length, totalRows: rows.length };
+}
+
+// 캐시에서 역 이름으로 조회. 반환값 의미:
+//  - 배열: 캐시 적중(빈 배열이면 "이 역엔 해당 설비가 없다"는 뜻, 원본 데이터 기준 정상)
+//  - null: 캐시가 아직 한 번도 갱신되지 않음 → 호출부에서 라이브 폴백 필요
+async function readFromCache(facilityType, stationName) {
+  const exactDoc = await db.collection(facilityType.collection).doc(stationDocId(stationName)).get();
+  if (exactDoc.exists) return exactDoc.data().rows ?? [];
+
+  const indexDoc = await db.collection('facilitiesIndex').doc(facilityType.collection).get();
+  if (!indexDoc.exists) return null;
+
+  const keys = indexDoc.data().keys || [];
+  const matched = keys.filter(k => k.includes(stationName));
+  if (matched.length === 0) return [];
+
+  const docs = await Promise.all(matched.map(k => db.collection(facilityType.collection).doc(k).get()));
+  return docs.filter(d => d.exists).flatMap(d => d.data().rows ?? []);
 }
 
 exports.facilities = onRequest(
@@ -48,20 +135,19 @@ exports.facilities = onRequest(
     if (request.method !== 'GET') return response.status(405).json({ error: 'Method not allowed' });
 
     const type = request.query.type === 'escalator' ? 'escalator' : 'elevator';
-    const service = type === 'elevator' ? 'getFcElvtr' : 'getFcEsctr';
+    const facilityType = FACILITY_TYPES.find(f => f.type === type);
     const stationName = typeof request.query.stnNm === 'string' ? request.query.stnNm.trim() : '';
-    const key = seoulOpenDataKey.value();
 
     try {
-      // 역명 경로/쿼리 필터가 상위 API에서 안정적으로 동작하지 않아, 전체를 페이지네이션으로 받아 서버에서 직접 필터링한다.
-      let { rows, totalCount } = await fetchPage(service, key, 1, PAGE_SIZE);
-      while (rows.length < Math.min(totalCount, MAX_ROWS)) {
-        const start = rows.length + 1;
-        const end = Math.min(rows.length + PAGE_SIZE, MAX_ROWS);
-        const page = await fetchPage(service, key, start, end);
-        if (page.rows.length === 0) break;
-        rows = rows.concat(page.rows);
+      if (stationName) {
+        const cached = await readFromCache(facilityType, stationName);
+        if (cached !== null) return response.json({ rows: cached });
       }
+
+      // 캐시 미스(최초 배포 직후, 아직 한 번도 갱신 전) 또는 stnNm 없이
+      // 전체 조회하는 드문 경우에만 예전처럼 라이브로 받아온다.
+      const key = seoulOpenDataKey.value();
+      const rows = await fetchAllRows(facilityType.service, key);
       return response.json({ rows: filterByStation(rows, stationName) });
     } catch (error) {
       if (error.raw !== undefined) {
@@ -75,6 +161,46 @@ exports.facilities = onRequest(
       console.error('Seoul Open Data request error:', error.message);
       return response.status(503).json({ error: '시설 정보를 불러오지 못했습니다.' });
     }
+  }
+);
+
+// 하루 두 번(00시/12시, 서울시각) 엘리베이터·에스컬레이터 전체 데이터를 받아
+// 역별로 Firestore에 캐싱한다. [facilities] 요청은 이 캐시를 우선 사용한다.
+exports.refreshFacilitiesCache = onSchedule(
+  {
+    schedule: 'every 12 hours',
+    timeZone: 'Asia/Seoul',
+    region: 'asia-northeast3',
+    secrets: [seoulOpenDataKey],
+    timeoutSeconds: 300,
+    memory: '256MiB',
+  },
+  async () => {
+    const key = seoulOpenDataKey.value();
+    for (const facilityType of FACILITY_TYPES) {
+      const result = await refreshOneType(facilityType, key);
+      console.log(
+        `Refreshed ${facilityType.type} cache: ${result.stationCount} stations, ${result.totalRows} rows`
+      );
+    }
+  }
+);
+
+// 배포 직후나 데이터 갱신이 급할 때 12시간 스케줄을 기다리지 않고 즉시
+// 캐시를 채우기 위한 수동 트리거. 공개 데이터라 노출 위험은 낮지만,
+// 무의미한 외부 API 남용을 막기 위해 최소한의 토큰 확인만 둔다.
+exports.refreshFacilitiesNow = onRequest(
+  { region: 'asia-northeast3', secrets: [seoulOpenDataKey], timeoutSeconds: 300, memory: '256MiB' },
+  async (request, response) => {
+    if (request.query.token !== 'wheelway-manual-refresh') {
+      return response.status(403).json({ error: 'forbidden' });
+    }
+    const key = seoulOpenDataKey.value();
+    const results = {};
+    for (const facilityType of FACILITY_TYPES) {
+      results[facilityType.type] = await refreshOneType(facilityType, key);
+    }
+    return response.json({ ok: true, results });
   }
 );
 
