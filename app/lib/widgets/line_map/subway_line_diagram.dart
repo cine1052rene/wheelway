@@ -94,17 +94,40 @@ class _StationNode extends StatelessWidget {
                         bottom: 0,
                         child: Container(width: 3, color: lineColor),
                       ),
-                    Container(
-                      width: isTransfer ? 16 : 11,
-                      height: isTransfer ? 16 : 11,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: isTransfer ? cs.surface : lineColor,
-                        border: isTransfer
-                            ? Border.all(color: lineColor, width: 3)
-                            : null,
+                    if (isTransfer)
+                      // 환승역 = "점 + 바깥 원"(과녁 모양). 일반역의 채운 점을
+                      // 그대로 가운데 두고 링만 하나 더 두르는 구조라, 일반역
+                      // ↔ 환승역이 "같은 기호의 확장"으로 읽혀 통일성이 높고,
+                      // 작은 크기에서도 알약+점 조합보다 또렷하게 보인다
+                      // (사용자와 논의 후 결정 — 다른 후보: 흰 알약+점, 겹친
+                      // 원 2개는 3개 이상 환승역에서 표현이 안 돼 기각).
+                      Container(
+                        width: 16,
+                        height: 16,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: cs.surface,
+                          border: Border.all(color: lineColor, width: 2.5),
+                        ),
+                        child: Container(
+                          width: 6,
+                          height: 6,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: lineColor,
+                          ),
+                        ),
+                      )
+                    else
+                      Container(
+                        width: 11,
+                        height: 11,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: lineColor,
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),
