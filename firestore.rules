@@ -1,19 +1,9 @@
 rules_version = '2';
 
-// ⚠️ 이 Firebase 프로젝트(emeraldworks)는 WheelWay와 Emerald Works 포트폴리오
-// 사이트(C:\project\emerald-works-ttapp)가 함께 쓰고 있다 (이 저장소 .firebaserc의
-// default가 처음부터 emeraldworks였음 — WheelWay 전용 프로젝트가 아니었음).
-// 2026-07-24, 여기서 이 파일(당시 WheelWay 규칙만 있던 버전)을 배포하면서
-// Emerald Works의 worklog/journal 규칙을 통째로 덮어써 6일간 그 사이트의 데이터가
-// 전부 안 보이는 장애가 있었다 (2026-07-30 발견 및 복구).
-//
-// 재발 방지: 이 프로젝트에서 `firebase deploy`(또는 --only firestore)를 실행하면
-// 반드시 이 통합 규칙 전체가 배포된다. emerald-works-ttapp의 firestore.rules와
-// 항상 동일하게 유지할 것. 근본 해결책은 WheelWay를 별도 Firebase 프로젝트로
-// 분리하는 것 — 다음 기회에 검토.
+// WheelWay 전용 Firebase 프로젝트 (2026-07-30, emeraldworks 공유 프로젝트에서
+// 완전히 분리 완료 — 더 이상 다른 프로젝트와 이 파일을 공유하지 않는다).
 service cloud.firestore {
   match /databases/{database}/documents {
-    // ── WheelWay ──
     // Cloud Functions는 Admin SDK로 이 규칙을 무시하고 항상 접근 가능하다.
     // 여기서는 클라이언트(앱)가 이 캐시 컬렉션에 직접 읽기/쓰기하는 걸 막기만 하면 된다 —
     // 앱은 항상 /api/facilities HTTP 엔드포인트를 통해서만 데이터를 받는다.
@@ -25,20 +15,6 @@ service cloud.firestore {
     }
     match /facilitiesIndex/{docId} {
       allow read, write: if false;
-    }
-
-    // ── Emerald Works 포트폴리오 ──
-    // worklog: 읽기 공개, 쓰기는 관리자만
-    match /worklog/{docId} {
-      allow read: if true;
-      allow write: if request.auth != null
-                   && request.auth.token.email == 'cine1052rene@gmail.com';
-    }
-
-    // journal: 읽기/쓰기 모두 관리자만 (비공개 작업일지)
-    match /journal/{docId} {
-      allow read, write: if request.auth != null
-                          && request.auth.token.email == 'cine1052rene@gmail.com';
     }
 
     // 그 외 모든 컬렉션은 기본 차단

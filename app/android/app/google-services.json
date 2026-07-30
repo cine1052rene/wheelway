@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "150993049675",
+    "project_id": "project-6fefd9b9-c49e-4398-ada",
+    "storage_bucket": "project-6fefd9b9-c49e-4398-ada.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150993049675:android:38e1bc25e454eb1ae3d5ce",
+        "android_client_info": {
+          "package_name": "com.emeraldworks.wheelway"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOJdjT9N8arFx7WkKGb_4khii_IteqllU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

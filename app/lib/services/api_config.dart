@@ -10,7 +10,7 @@
 class ApiConfig {
   ApiConfig._();
 
-  static const String baseUrl = 'https://emeraldworks.web.app';
+  static const String baseUrl = 'https://project-6fefd9b9-c49e-4398-ada.web.app';
 
   static const String facilities = '/api/facilities';
   static const String quickExit = '/api/quickExit';
