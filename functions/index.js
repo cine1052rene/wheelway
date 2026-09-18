@@ -10,6 +10,8 @@ const FieldValue = admin.firestore.FieldValue;
 const seoulOpenDataKey = defineSecret('SEOUL_OPEN_DATA_KEY');
 const seoulFastExitKey = defineSecret('SEOUL_FAST_EXIT_KEY');
 const PAGE_SIZE = 1000;
+const UPSTREAM_TIMEOUT_MS = 6000; // 공공데이터 서버가 응답 없을 때 앱이 오래 멈추지 않도록
+const QUICK_EXIT_CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 const MAX_ROWS = 3000; // 서울 전역 엘리베이터/에스컬레이터 총량을 넉넉히 덮는 상한
 
 // 서울 열린데이터광장 인증키는 계정당 일일 호출 한도가 있고, 매 요청마다
@@ -214,6 +216,28 @@ exports.quickExit = onRequest(
     const stationName = typeof request.query.stnNm === 'string' ? request.query.stnNm.trim() : '';
     if (!stationName) return response.status(400).json({ error: '역명(stnNm)을 입력하세요.' });
 
+    const lineNm = typeof request.query.lineNm === 'string' ? request.query.lineNm.trim() : '';
+    // 환승역(같은 역명을 여러 노선이 공유)은 이 API가 노선 구분 없이 전체를
+    // 섞어서 돌려준다 — 그대로 쓰면 "5호선 승차" 화면에 2호선 칸번호가
+    // 섞여 나오는 오류가 생긴다(실사용자 피드백으로 발견). lineNm이 오면
+    // 그 노선 것만 남긴다.
+    const send = rows => response.json({ rows: lineNm ? rows.filter(row => row.lineNm === lineNm) : rows });
+
+    // 빠른하차 정보는 거의 바뀌지 않는 정적 데이터라 역별로 Firestore에
+    // 캐싱한다. data.go.kr가 Cloud Functions에서 간헐적으로 연결 지연(20초+)
+    // 되는 문제가 있어, 캐시가 신선하면 업스트림을 아예 호출하지 않고,
+    // 업스트림이 실패하면 오래된 캐시라도 돌려준다.
+    const cacheRef = db.collection('quickExitCache').doc(encodeURIComponent(stationName));
+    let cached = null;
+    try {
+      const snap = await cacheRef.get();
+      if (snap.exists) cached = snap.data();
+    } catch (error) {
+      console.error('Fast exit cache read error:', error.message);
+    }
+    const cachedAt = cached?.updatedAt?.toMillis?.() ?? 0;
+    if (cached && Date.now() - cachedAt < QUICK_EXIT_CACHE_TTL_MS) return send(cached.rows ?? []);
+
     const url = new URL('https://apis.data.go.kr/B553766/inout/getFstExit');
     url.searchParams.set('serviceKey', seoulFastExitKey.value());
     url.searchParams.set('dataType', 'JSON');
@@ -221,11 +245,14 @@ exports.quickExit = onRequest(
     url.searchParams.set('pageNo', '1');
     url.searchParams.set('stnNm', stationName);
 
+    const fallback = (status, message) =>
+      cached ? send(cached.rows ?? []) : response.status(status).json({ error: message });
+
     try {
-      const upstream = await fetch(url);
+      const upstream = await fetch(url, { signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS) });
       if (!upstream.ok) {
         console.error('Fast exit response status:', upstream.status);
-        return response.status(502).json({ error: '공공데이터 서버 응답 오류' });
+        return fallback(502, '공공데이터 서버 응답 오류');
       }
       const raw = await upstream.text();
       let data;
@@ -233,27 +260,24 @@ exports.quickExit = onRequest(
         data = JSON.parse(raw);
       } catch {
         console.error('Fast exit returned non-JSON response:', raw.slice(0, 300));
-        return response.status(502).json({ error: '공공데이터 인증 또는 서비스 설정을 확인하세요.' });
+        return fallback(502, '공공데이터 인증 또는 서비스 설정을 확인하세요.');
       }
       // Swagger 예시 문서는 {header,body} 최상위 구조로 보이지만, 실제 응답은 {response:{header,body}}로 감싸져 온다.
       const items = data.response?.body?.items?.item;
-      let rows = Array.isArray(items) ? items : items ? [items] : [];
+      const rows = Array.isArray(items) ? items : items ? [items] : [];
       const resultCode = data.response?.header?.resultCode;
       const isErrorCode = resultCode !== undefined && resultCode !== null && !['00', '0', 0].includes(resultCode);
       if (isErrorCode && rows.length === 0) {
         console.error('Fast exit non-normal result:', resultCode, data.response?.header?.resultMsg);
-        return response.status(502).json({ error: '공공데이터 인증 또는 서비스 설정을 확인하세요.' });
+        return fallback(502, '공공데이터 인증 또는 서비스 설정을 확인하세요.');
       }
-      // 환승역(같은 역명을 여러 노선이 공유)은 이 API가 노선 구분 없이 전체를
-      // 섞어서 돌려준다 — 그대로 쓰면 "5호선 승차" 화면에 2호선 칸번호가
-      // 섞여 나오는 오류가 생긴다(실사용자 피드백으로 발견). lineNm이 오면
-      // 그 노선 것만 남긴다.
-      const lineNm = typeof request.query.lineNm === 'string' ? request.query.lineNm.trim() : '';
-      if (lineNm) rows = rows.filter(row => row.lineNm === lineNm);
-      return response.json({ rows });
+      cacheRef
+        .set({ stationName, rows, updatedAt: FieldValue.serverTimestamp() })
+        .catch(error => console.error('Fast exit cache write error:', error.message));
+      return send(rows);
     } catch (error) {
-      console.error('Fast exit request error:', error.message);
-      return response.status(503).json({ error: '빠른하차 정보를 불러오지 못했습니다.' });
+      console.error('Fast exit request error:', error.name, error.message, error.cause?.code ?? error.cause?.message ?? '');
+      return fallback(503, '빠른하차 정보를 불러오지 못했습니다.');
     }
   }
 );
